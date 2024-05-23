@@ -36,7 +36,8 @@ def get_author_list(rec):
         else:
             full = auth['name']
         if 'ORCID' in auth:
-            full = f"<a href='{auth['ORCID']}' target='_blank'>{full}</a>"
+            full = f"<a href='{auth['ORCID']}' target='_blank'>{full}" \
+                   + '<img alt="ORCID logo" src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16" /></a>'
         auth_list.append(full)
     last = auth_list.pop()
     if last[-1] != '.':
