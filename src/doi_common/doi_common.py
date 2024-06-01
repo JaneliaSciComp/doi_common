@@ -5,6 +5,7 @@
       get_journal
       get_publishing_date
       get_title
+      is_datacite
 '''
 
 
