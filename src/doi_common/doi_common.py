@@ -37,7 +37,8 @@ def get_author_list(rec):
             full = auth['name']
         if 'ORCID' in auth:
             full = f"<a href='{auth['ORCID']}' target='_blank'>{full}" \
-                   + '<img alt="ORCID logo" src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16" /></a>'
+                   + '<img alt="ORCID logo" ' \
+                   + 'src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16" /></a>'
         auth_list.append(full)
     last = auth_list.pop()
     if last[-1] != '.':
@@ -132,3 +133,15 @@ def get_title(rec):
     if 'titles' in rec and rec['titles'] and 'title' in rec['titles'][0]:
         return rec['titles'][0]['title']
     return None
+
+
+def is_datacite(doi):
+    ''' Determine if a DOI is from DataCite or not.
+        Keyword arguments:
+          doi: DOI
+        Returns:
+          True or False
+    '''
+    doilc = doi.lower()
+    return bool("/janelia" in doilc or "/arxiv" in doilc or "/d1." in doilc \
+                or "/zenodo" in doilc)
