@@ -48,10 +48,11 @@ def get_author_list(rec, orcid=False, style='dis'):
                    + f"src='{ORCID_LOGO}' width='16' height='16' /></a>"
         auth_list.append(full)
     last = auth_list.pop()
-    if last[-1] != '.':
+    if last[-1] != '.' and style == 'flylight':
         last += '.'
+    punc = ' & ' if style == 'flylight' else ', '
     if auth_list:
-        return  ', '.join(auth_list) + ' & ' + last
+        return  ', '.join(auth_list) + punc + last
     return None
 
 
