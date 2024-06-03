@@ -8,11 +8,13 @@
       is_datacite
 '''
 
+ORCID_LOGO = "https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
 
-def get_author_list(rec):
+def get_author_list(rec, orcid=False):
     ''' Generate a text author list
         Keyword arguments:
           data: data record
+          orcid: generate ORCID links
         Returns:
           Text author list
     '''
@@ -36,10 +38,10 @@ def get_author_list(rec):
             full = auth[family]
         else:
             full = auth['name']
-        if 'ORCID' in auth:
+        if 'ORCID' in auth and orcid:
             full = f"<a href='{auth['ORCID']}' target='_blank'>{full}" \
-                   + '<img alt="ORCID logo" ' \
-                   + 'src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16" /></a>'
+                   + "<img alt='ORCID logo' " \
+                   + f"src=a{ORCID_LOGO}'' width='16' height='16' /></a>"
         auth_list.append(full)
     last = auth_list.pop()
     if last[-1] != '.':
