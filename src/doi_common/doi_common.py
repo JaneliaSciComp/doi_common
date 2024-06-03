@@ -153,4 +153,4 @@ def is_datacite(doi):
     '''
     doilc = doi.lower()
     return bool("/janelia" in doilc or "/arxiv" in doilc or "/d1." in doilc \
-                or "/zenodo" in doilc)
+                or "/micropub.biology" in doilc or "/zenodo" in doilc)
