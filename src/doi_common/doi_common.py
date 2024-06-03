@@ -41,7 +41,7 @@ def get_author_list(rec, orcid=False):
         if 'ORCID' in auth and orcid:
             full = f"<a href='{auth['ORCID']}' target='_blank'>{full}" \
                    + "<img alt='ORCID logo' " \
-                   + f"src=a{ORCID_LOGO}'' width='16' height='16' /></a>"
+                   + f"src='{ORCID_LOGO}' width='16' height='16' /></a>"
         auth_list.append(full)
     last = auth_list.pop()
     if last[-1] != '.':
