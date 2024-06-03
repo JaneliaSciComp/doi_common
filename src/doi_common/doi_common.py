@@ -10,7 +10,7 @@
 
 ORCID_LOGO = "https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
 
-def get_author_list(rec, orcid=False):
+def get_author_list(rec, orcid=False, style='dis'):
     ''' Generate a text author list
         Keyword arguments:
           data: data record
@@ -27,13 +27,17 @@ def get_author_list(rec, orcid=False):
         given = 'givenName'
         family = 'familyName'
     author = rec['creators' if datacite else 'author']
+    punc = '.' if style == 'flylight' else ''
     for auth in author:
         if given in auth:
             initials = auth[given].split()
             first = []
             for gvn in initials:
-                first.append(gvn[0] + '.')
-            full = ', '.join([auth[family], ' '.join(first)])
+                first.append(gvn[0] + punc)
+            if style == 'flylight':
+                full = ', '.join([auth[family], ' '.join(first)])
+            else:
+                full = ', '.join([auth[family], ''.join(first)])
         elif family in auth:
             full = auth[family]
         else:
