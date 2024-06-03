@@ -15,6 +15,7 @@ def get_author_list(rec, orcid=False, style='dis'):
         Keyword arguments:
           data: data record
           orcid: generate ORCID links
+          style: list style (dis or flylight)
         Returns:
           Text author list
     '''
