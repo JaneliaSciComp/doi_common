@@ -10,12 +10,13 @@
 
 ORCID_LOGO = "https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
 
-def get_author_list(rec, orcid=False, style='dis'):
+def get_author_list(rec, orcid=False, style='dis', return='text'):
     ''' Generate a text author list
         Keyword arguments:
           data: data record
           orcid: generate ORCID links
           style: list style (dis or flylight)
+          return: return type (text or list)
         Returns:
           Text author list
     '''
@@ -52,9 +53,11 @@ def get_author_list(rec, orcid=False, style='dis'):
         auth_list.append(full)
     if not auth_list:
         return None
-    last = auth_list.pop()
     if not auth_list:
         return last
+    if return == 'list':
+        return auth_list
+    last = auth_list.pop()
     if last[-1] != '.':
         last += '.'
     punc = ' & ' if style == 'flylight' else ', '
