@@ -41,8 +41,10 @@ def get_author_list(rec, orcid=False, style='dis'):
                 full = ', '.join([auth[family], ''.join(first)])
         elif family in auth:
             full = auth[family]
-        else:
+        elif 'name' in auth:
             full = auth['name']
+        else:
+            continue
         if 'ORCID' in auth and orcid:
             full = f"<a href='{auth['ORCID']}' target='_blank'>{full}" \
                    + "<img alt='ORCID logo' " \
