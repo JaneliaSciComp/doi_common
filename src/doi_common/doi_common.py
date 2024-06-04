@@ -53,11 +53,11 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text'):
         auth_list.append(full)
     if not auth_list:
         return None
-    if not auth_list:
-        return last
     if returntype == 'list':
         return auth_list
     last = auth_list.pop()
+    if not auth_list:
+        return last
     if last[-1] != '.':
         last += '.'
     punc = ' & ' if style == 'flylight' else ', '
