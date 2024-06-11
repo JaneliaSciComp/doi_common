@@ -27,7 +27,10 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text'):
     if datacite:
         given = 'givenName'
         family = 'familyName'
-    author = rec['creators' if datacite else 'author']
+    field = 'creators' if datacite else 'author'
+    if field not in rec:
+        return None
+    author = rec[field]
     punc = '.' if style == 'flylight' else ''
     for auth in author:
         if given in auth:
@@ -102,6 +105,7 @@ def get_journal(rec):
         return None
     if 'publisher' in rec and rec['publisher']:
         return f"{rec['publisher']}, {year.split('-')[0]}"
+    return None
 
 
 def get_publishing_date(rec):
