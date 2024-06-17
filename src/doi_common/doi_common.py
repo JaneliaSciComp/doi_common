@@ -11,10 +11,42 @@
 
 ORCID_LOGO = "https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
 
-def get_author_details(rec):
+
+def _add_single_author_jrc(payload, coll):
+    ''' Update groups and affiliations in author detail
+        Keyword arguments:
+          payload: data record from author detail
+          coll: orcid collection
+        Returns:
+          None
+    '''
+    if 'orcid' in payload:
+        try:
+            row = coll.find_one({"orcid": payload['orcid']})
+        except Exception as err:
+            raise err
+        if row and 'alumni' not in row:
+            if 'group' in row:
+                payload['group'] = row['group']
+            if 'affiliation' in row:
+                payload['tags'] = row['affiliations']
+    else:
+        try:
+            row = coll.find_one({"given": payload['given'], "family": payload['family']})
+        except Exception as err:
+            raise err
+        if row and 'alumni' not in row:
+            if 'group' in row:
+                payload['group'] = row['group']
+            if 'affiliation' in row:
+                payload['tags'] = row['affiliations']
+
+
+def get_author_details(rec, coll=None):
     ''' Generate a detailed author list
         Keyword arguments:
           data: data record
+          coll: optional orcid collection
         Returns:
           Detailed author list
     '''
@@ -32,11 +64,11 @@ def get_author_details(rec):
     for auth in author:
         payload = {}
         if family in auth:
-            payload['family'] = auth[family]
+            payload['family'] = auth[family].replace('\xa0', ' ')
         else:
             continue
         if given in auth:
-            payload['given'] = auth[given]
+            payload['given'] = auth[given].replace('\xa0', ' ')
         else:
             payload['given'] = ''
         if 'ORCID' in auth:
@@ -48,6 +80,11 @@ def get_author_details(rec):
                     affiliations.append(aff['name'])
         if affiliations:
             payload['affiliations'] = affiliations
+        if coll is not None:
+            try:
+                _add_single_author_jrc(payload, coll)
+            except Exception as err:
+                raise err
         auth_list.append(payload)
     if not auth_list:
         return None
