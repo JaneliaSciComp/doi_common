@@ -28,7 +28,7 @@ def _add_single_author_jrc(payload, coll):
         if row and 'alumni' not in row:
             if 'group' in row:
                 payload['group'] = row['group']
-            if 'affiliation' in row:
+            if 'affiliations' in row:
                 payload['tags'] = row['affiliations']
     else:
         try:
@@ -38,7 +38,7 @@ def _add_single_author_jrc(payload, coll):
         if row and 'alumni' not in row:
             if 'group' in row:
                 payload['group'] = row['group']
-            if 'affiliation' in row:
+            if 'affiliations' in row:
                 payload['tags'] = row['affiliations']
 
 
