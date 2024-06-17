@@ -1,6 +1,7 @@
 ''' doi_lib.py
     Library of routines for parsing and interpreting DOI records.
     Callable functions:
+      get_author_details
       get_author_list
       get_journal
       get_publishing_date
@@ -9,6 +10,49 @@
 '''
 
 ORCID_LOGO = "https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
+
+def get_author_details(rec):
+    ''' Generate a detailed author list
+        Keyword arguments:
+          data: data record
+        Returns:
+          Detailed author list
+    '''
+    auth_list = []
+    datacite = bool('DOI' not in rec)
+    given = 'given'
+    family = 'family'
+    if datacite:
+        given = 'givenName'
+        family = 'familyName'
+    field = 'creators' if datacite else 'author'
+    if field not in rec:
+        return None
+    author = rec[field]
+    for auth in author:
+        payload = {}
+        if family in auth:
+            payload['family'] = auth[family]
+        else:
+            continue
+        if given in auth:
+            payload['given'] = auth[given]
+        else:
+            payload['given'] = ''
+        if 'ORCID' in auth:
+            payload['orcid'] = auth['ORCID'].split("/")[-1]
+        affiliations = []
+        if 'affiliation' in auth and auth['affiliation']:
+            for aff in auth['affiliation']:
+                if 'name' in aff and aff['name']:
+                    affiliations.append(aff['name'])
+        if affiliations:
+            payload['affiliations'] = affiliations
+        auth_list.append(payload)
+    if not auth_list:
+        return None
+    return auth_list
+
 
 def get_author_list(rec, orcid=False, style='dis', returntype='text'):
     ''' Generate a text author list
@@ -29,6 +73,7 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text'):
         family = 'familyName'
     field = 'creators' if datacite else 'author'
     if field not in rec:
+        print(rec)
         return None
     author = rec[field]
     punc = '.' if style == 'flylight' else ''
@@ -87,7 +132,7 @@ def get_journal(rec):
             else:
                 journal = rec['institution']['name']
         else:
-            return None
+            return "(No journal found)"
         year = get_publishing_date(rec)
         if year == 'unknown':
             return None
