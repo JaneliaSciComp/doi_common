@@ -31,8 +31,6 @@ def _adjust_payload(payload, row):
             payload['group'] = row['group']
         if 'affiliations' in row and payload['janelian']:
             payload['tags'] = row['affiliations']
-    else:
-        payload['janelian'] = False
 
 
 def _add_single_author_jrc(payload, coll):
@@ -44,6 +42,7 @@ def _add_single_author_jrc(payload, coll):
           None
     '''
     payload['in_database'] = False
+    payload['janelian'] = False
     payload['asserted'] = False
     payload['alumni'] = False
     payload['validated'] = False
@@ -53,7 +52,7 @@ def _add_single_author_jrc(payload, coll):
         except Exception as err:
             raise err
         _adjust_payload(payload, row)
-    else:
+    elif 'family' in payload:
         try:
             row = coll.find_one({"given": payload['given'], "family": payload['family']})
         except Exception as err:
@@ -83,15 +82,15 @@ def get_author_details(rec, coll=None):
         given = 'givenName'
         family = 'familyName'
     field = 'creators' if datacite else 'author'
-    if field not in rec:
+    if field not in rec and 'name' not in rec:
         return None
     author = rec[field]
     for auth in author:
         payload = {}
         if family in auth:
             payload['family'] = auth[family].replace('\xa0', ' ')
-        else:
-            continue
+        elif 'name' in auth:
+            payload['name'] = auth['name']
         if given in auth:
             payload['given'] = auth[given].replace('\xa0', ' ')
         else:
