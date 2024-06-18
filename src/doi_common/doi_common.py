@@ -11,6 +11,29 @@
 
 ORCID_LOGO = "https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
 
+def _adjust_payload(payload, row):
+    ''' Update author detail with additional attributes
+        Keyword arguments:
+          payload: data record from author detail
+          row: row from orcid collection
+        Returns:
+          None
+    '''
+    if row:
+        payload['orcid'] = row['orcid']
+        payload['in_database'] = True
+        if 'employeeId' in row:
+            payload['validated'] = True
+        payload['janelian'] = bool('alumni' not in row)
+        if 'alumni' in row:
+            payload['alumni'] = True
+        if 'group' in row and payload['janelian']:
+            payload['group'] = row['group']
+        if 'affiliations' in row and payload['janelian']:
+            payload['tags'] = row['affiliations']
+    else:
+        payload['janelian'] = False
+
 
 def _add_single_author_jrc(payload, coll):
     ''' Update groups and affiliations in author detail
@@ -20,26 +43,28 @@ def _add_single_author_jrc(payload, coll):
         Returns:
           None
     '''
+    payload['in_database'] = False
+    payload['asserted'] = False
+    payload['alumni'] = False
+    payload['validated'] = False
     if 'orcid' in payload:
         try:
             row = coll.find_one({"orcid": payload['orcid']})
         except Exception as err:
             raise err
-        if row and 'alumni' not in row:
-            if 'group' in row:
-                payload['group'] = row['group']
-            if 'affiliations' in row:
-                payload['tags'] = row['affiliations']
+        _adjust_payload(payload, row)
     else:
         try:
             row = coll.find_one({"given": payload['given'], "family": payload['family']})
         except Exception as err:
             raise err
-        if row and 'alumni' not in row:
-            if 'group' in row:
-                payload['group'] = row['group']
-            if 'affiliations' in row:
-                payload['tags'] = row['affiliations']
+        _adjust_payload(payload, row)
+    if 'affiliations' in payload and payload['affiliations']:
+        for aff in payload['affiliations']:
+            if 'Janelia' in aff:
+                payload['janelian'] = True
+                payload['asserted'] = True
+                break
 
 
 def get_author_details(rec, coll=None):
