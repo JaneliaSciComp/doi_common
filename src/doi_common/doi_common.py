@@ -1,5 +1,5 @@
-''' doi_lib.py
-    Library of routines for parsing and interpreting DOI records.
+''' doi_common.py
+    Library of routines for parsing and interpreting DOI/ORCID records.
     Callable functions:
       get_author_details
       get_author_list
@@ -31,6 +31,8 @@ def _adjust_payload(payload, row):
             payload['group'] = row['group']
         if 'affiliations' in row and payload['janelian']:
             payload['tags'] = row['affiliations']
+        if 'employeeId' in row and row['employeeId']:
+            payload['employeeId'] = row['employeeId']
 
 
 def _add_single_author_jrc(payload, coll):
