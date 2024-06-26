@@ -1,15 +1,23 @@
 ''' doi_common.py
     Library of routines for parsing and interpreting DOI/ORCID records.
     Callable functions:
+      get_affiliations
       get_author_details
       get_author_list
       get_journal
+      get_name_combinations
       get_publishing_date
       get_title
       is_datacite
 '''
 
+import re
+
 ORCID_LOGO = "https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
+
+# ******************************************************************************
+# * Internal functions                                                         *
+# ******************************************************************************
 
 def _adjust_payload(payload, row):
     ''' Update author detail with additional attributes
@@ -20,7 +28,7 @@ def _adjust_payload(payload, row):
           None
     '''
     if row:
-        payload['orcid'] = row['orcid']
+        payload['orcid'] = row['orcid'] if 'orcid' in row else ''
         payload['in_database'] = True
         if 'employeeId' in row:
             payload['validated'] = True
@@ -66,6 +74,63 @@ def _add_single_author_jrc(payload, coll):
                 payload['janelian'] = True
                 payload['asserted'] = True
                 break
+
+
+def _process_middle_initials(rec):
+    ''' Add name combinations for first names in the forms "F. M." or "F."
+        with or without the periods.
+        Keyword arguments:
+          rec: orcid collection record
+        Returns:
+          None
+    '''
+    for first in rec['given']:
+        if re.search(r"[A-Za-z]\. [A-Za-z]\.$", first):
+            continue
+        if re.search(r"[A-Za-z]\.[A-Za-z]\.$", first):
+            new = first.replace('.', ' ')
+            if new not in rec['given']:
+                rec['given'].append(new)
+        elif re.search(r" [A-Za-z]\.$", first):
+            new = first.rstrip('.')
+            if new not in rec['given']:
+                rec['given'].append(new)
+
+# ******************************************************************************
+# * Callable functions                                                         *
+# ******************************************************************************
+
+def get_affiliations(idrec, rec):
+    ''' Add affiliations
+        Keyword arguments:
+          idrec: record from HHMI's People service
+          rec: orcid collection record
+        Returns:
+          None
+    '''
+    if idrec:
+        if 'affiliations' in idrec and idrec['affiliations']:
+            rec['affiliations'] = []
+            for aff in idrec['affiliations']:
+                if aff['supOrgName'] not in rec['affiliations']:
+                    rec['affiliations'].append(aff['supOrgName'])
+        # Add ccDescr
+        if 'affiliations' not in rec:
+            if 'group' not in rec and 'ccDescr' in idrec and idrec['ccDescr']:
+                if 'affiliations' not in rec:
+                    rec['affiliations'] = []
+                rec['affiliations'].append(idrec['ccDescr'])
+        # Add managedTeams
+        if 'managedTeams' in idrec:
+            if 'affiliations' not in rec:
+                rec['affiliations'] = []
+            for mtr in idrec['managedTeams']:
+                if 'supOrgName' in mtr and mtr['supOrgName'] \
+                   and mtr['supOrgName'] not in rec['affiliations']:
+                    rec['affiliations'].append(mtr['supOrgName'])
+    if 'affiliations' in rec:
+        rec['affiliations'].sort()
+
 
 
 def get_author_details(rec, coll=None):
@@ -214,6 +279,36 @@ def get_journal(rec):
     if 'publisher' in rec and rec['publisher']:
         return f"{rec['publisher']}, {year.split('-')[0]}"
     return None
+
+
+def get_name_combinations(idrec, rec):
+    ''' Add name combinations
+        Keyword arguments:
+          idrec: record from HHMI's People service
+          rec: orcid collection record
+        Returns:
+          None
+    '''
+    if idrec:
+        for source in ('nameFirst', 'nameFirstPreferred'):
+            if source in idrec and idrec[source] and idrec[source] not in rec['given']:
+                rec['given'].append(idrec[source])
+        for source in ('nameLast', 'nameLastPreferred'):
+            if source in idrec and idrec[source] and idrec[source] not in rec['family']:
+                rec['family'].append(idrec[source])
+        for source in ('nameMiddle', 'nameMiddlePreferred'):
+            if source not in idrec or not idrec[source]:
+                continue
+            for first in rec['given']:
+                if ' ' in first:
+                    continue
+                new = f"{first} {idrec[source][0]}"
+                if new not in rec['given']:
+                    rec['given'].append(new)
+                new += '.'
+                if new not in rec['given']:
+                    rec['given'].append(new)
+    _process_middle_initials(rec)
 
 
 def get_publishing_date(rec):
