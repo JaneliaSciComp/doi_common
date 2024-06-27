@@ -35,10 +35,13 @@ def _adjust_payload(payload, row):
         payload['janelian'] = bool('alumni' not in row)
         if 'alumni' in row:
             payload['alumni'] = True
-        if 'group' in row and payload['janelian']:
-            payload['group'] = row['group']
-        if 'affiliations' in row and payload['janelian']:
-            payload['tags'] = row['affiliations']
+        if payload['janelian']:
+            if 'group' in row:
+                payload['group'] = row['group']
+            if 'group_code' in row:
+                payload['group_code'] = row['group_code']
+            if 'affiliations' in row:
+                payload['tags'] = row['affiliations']
         if 'employeeId' in row and row['employeeId']:
             payload['employeeId'] = row['employeeId']
 
