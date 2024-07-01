@@ -10,7 +10,10 @@
       get_supervisory_orgs
       get_title
       is_datacite
+      single_orcid_lookup
 '''
+
+# pylint: disable=broad-exception-raised
 
 import re
 import requests
@@ -355,7 +358,7 @@ def get_supervisory_orgs():
     '''
     orgs = {}
     try:
-        resp = requests.get(ORGS_URL)
+        resp = requests.get(ORGS_URL, timeout=10)
         results = resp.json()['result']
     except Exception as err:
         raise err
@@ -395,3 +398,21 @@ def is_datacite(doi):
     doilc = doi.lower()
     return bool("/janelia" in doilc or "/arxiv" in doilc or "/d1." in doilc \
                 or "/micropub.biology" in doilc or "/zenodo" in doilc)
+
+
+def single_orcid_lookup(val, coll, lookup_by='orcid'):
+    ''' Lookup a single row in the orcid collection
+        Keyword arguments:
+          val: ORCID or employeeId
+          coll: orcid collection
+          lookup_by: "orcid" or "employeeId"
+        Returns:
+          True or False
+    '''
+    if lookup_by not in ('orcid', 'employeeId'):
+        raise ValueError("Invalid lookup_by")
+    try:
+        row = coll.find_one({lookup_by: val})
+    except Exception as err:
+        raise err
+    return row
