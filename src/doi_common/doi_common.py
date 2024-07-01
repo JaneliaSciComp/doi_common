@@ -122,10 +122,10 @@ def get_affiliations(idrec, rec):
                 if aff['supOrgName'] not in rec['affiliations']:
                     rec['affiliations'].append(aff['supOrgName'])
         # Add ccDescr
-        if 'affiliations' not in rec:
-            if 'group' not in rec and 'ccDescr' in idrec and idrec['ccDescr']:
-                if 'affiliations' not in rec:
-                    rec['affiliations'] = []
+        if 'group' not in rec and 'ccDescr' in idrec and idrec['ccDescr']:
+            if 'affiliations' not in rec:
+                rec['affiliations'] = []
+            if idrec['ccDescr'] not in rec['affiliations']:
                 rec['affiliations'].append(idrec['ccDescr'])
         # Add managedTeams
         if 'managedTeams' in idrec:
