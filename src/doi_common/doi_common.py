@@ -7,13 +7,17 @@
       get_journal
       get_name_combinations
       get_publishing_date
+      get_supervisory_orgs
       get_title
       is_datacite
 '''
 
 import re
+import requests
 
 ORCID_LOGO = "https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
+ORGS_URL = "https://services.hhmi.org/IT/WD-hcm/supervisoryorgs"
+
 
 # ******************************************************************************
 # * Internal functions                                                         *
@@ -340,6 +344,27 @@ def get_publishing_date(rec):
         if 'registered' in rec:
             return rec['registered'].split('T')[0]
     return 'unknown'
+
+
+def get_supervisory_orgs():
+    ''' Get supervisory organizations
+        Keyword arguments:
+          None
+        Returns:
+          Dict of supervisory organizations
+    '''
+    orgs = {}
+    try:
+        resp = requests.get(ORGS_URL)
+        results = resp.json()['result']
+    except Exception as err:
+        raise err
+    if resp.status_code != 200:
+        raise Exception(f"Failed to get supervisory organizations: {resp.status_code}")
+    for org in results:
+        if 'Janelia' in org['LOCATIONCODE'] and 'SUPORGCODE' in org:
+            orgs[org['SUPORGNAME']] = org['SUPORGCODE']
+    return orgs
 
 
 def get_title(rec):
