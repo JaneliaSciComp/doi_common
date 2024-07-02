@@ -11,6 +11,7 @@
       get_title
       is_datacite
       single_orcid_lookup
+      update_existing_orcid
 '''
 
 # pylint: disable=broad-exception-raised
@@ -407,12 +408,45 @@ def single_orcid_lookup(val, coll, lookup_by='orcid'):
           coll: orcid collection
           lookup_by: "orcid" or "employeeId"
         Returns:
-          True or False
+          row from collection
     '''
     if lookup_by not in ('orcid', 'employeeId'):
-        raise ValueError("Invalid lookup_by")
+        raise ValueError("Invalid lookup_by in single_orcid_lookup")
     try:
         row = coll.find_one({lookup_by: val})
     except Exception as err:
         raise err
     return row
+
+
+def update_existing_orcid(lookup=None, add=None, coll=None, lookup_by='employeeId'):
+    ''' Update a single row in the orcid collection
+        Keyword arguments:
+          lookup: lookup value
+          add: data to insert/update
+          lookup_by: "orcid" or "employeeId"
+          coll: orcid collection
+        Returns:
+          row from collection (or None if update was not performed)
+    '''
+    if lookup_by not in ('orcid', 'employeeId'):
+        raise ValueError("Invalid lookup_by in update_existing_orcid")
+    try:
+        row = coll.find_one({lookup_by: lookup})
+    except Exception as err:
+        raise err
+    if not row:
+        raise ValueError(f"{lookup_by} {lookup} not found in update_existing_orcid")
+    field = 'employeeId' if lookup_by == 'orcid' else 'orcid'
+    payload = {"$set": {field: add}}
+    try:
+        result = coll.update_one({"_id": row['_id']}, payload)
+    except Exception as err:
+        raise err
+    if hasattr(result, 'matched_count') and result.matched_count:
+        try:
+            row = coll.find_one({lookup_by: lookup})
+        except Exception as err:
+            raise err
+        return row
+    return None
