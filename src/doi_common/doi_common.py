@@ -11,6 +11,7 @@
       get_title
       is_datacite
       single_orcid_lookup
+      add_orcid
       update_existing_orcid
       update_jrc_author
 '''
@@ -19,6 +20,7 @@
 
 import re
 import requests
+import jrc_common.jrc_common as JRC
 
 ORCID_LOGO = "https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
 ORGS_URL = "https://services.hhmi.org/IT/WD-hcm/supervisoryorgs"
@@ -418,6 +420,56 @@ def single_orcid_lookup(val, coll, lookup_by='orcid'):
     except Exception as err:
         raise err
     return row
+
+
+def add_orcid(eid, coll, given=None, family=None, orcid=None, write=True):
+    ''' Add a record to the orcid collection
+        Keyword arguments:
+          eid: employeeId
+          coll: orcid collection
+          given: list of given names
+          family: list of family names
+          orcid: ORCID
+          write: write to orcid collection
+        Returns:
+          None
+    '''
+    try:
+        row = coll.find_one({"employeeId": eid})
+    except Exception as err:
+        raise err
+    if row:
+        raise ValueError(f"EmployeeId {eid} already in orcid collection")
+    try:
+        resp = JRC.call_people_by_id(eid)
+    except Exception as err:
+        raise err
+    if not resp:
+        raise ValueError(f"EmployeeId {eid} is not in the People system")
+    payload = {"employeeId": eid,
+               "userIdO365": resp['userIdO365']
+              }
+    if orcid:
+        try:
+            oid = coll.find_one({"orcid": orcid})
+        except Exception as err:
+            raise err
+        if oid:
+            raise ValueError(f"ORCID {orcid} already in orcid collection")
+        payload['orcid'] = orcid
+    get_affiliations(resp, payload)
+    if not given or not family:
+        payload['given'] = []
+        payload['family'] = []
+        get_name_combinations(resp, payload)
+    if not write:
+        return payload
+    try:
+        result = coll.insert_one(payload)
+    except Exception as err:
+        raise err
+    payload["_id"] = str(result.inserted_id)
+    return payload
 
 
 def update_existing_orcid(lookup=None, add=None, coll=None, lookup_by='employeeId'):
