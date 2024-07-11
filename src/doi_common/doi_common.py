@@ -432,7 +432,7 @@ def add_orcid(eid, coll, given=None, family=None, orcid=None, write=True):
           orcid: ORCID
           write: write to orcid collection
         Returns:
-          None
+          New record
     '''
     try:
         row = coll.find_one({"employeeId": eid})
