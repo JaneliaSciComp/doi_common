@@ -528,7 +528,10 @@ def update_jrc_author(doi, doi_coll, orcid_coll, write=True):
         if auth['janelian'] and 'employeeId' in auth and auth['employeeId']:
             jrc_author.append(auth['employeeId'])
     if write:
-        payload = {"$set": {"jrc_author": jrc_author}}
+        if jrc_author:
+            payload = {"$set": {"jrc_author": jrc_author}}
+        else:
+            payload = {"$unset": {"jrc_author": 1}}
         try:
             _ = doi_coll.update_one({"doi": doi}, payload)
         except Exception as err:
