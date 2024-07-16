@@ -168,14 +168,19 @@ def get_author_details(rec, coll=None):
     author = rec[field]
     for auth in author:
         payload = {}
-        if family in auth:
-            payload['family'] = auth[family].replace('\xa0', ' ')
-        elif 'name' in auth:
-            payload['name'] = auth['name']
-        if given in auth:
-            payload['given'] = auth[given].replace('\xa0', ' ')
+        if datacite and (given not in auth or not auth[given]) \
+           and 'name' in auth and " " in auth['name']:
+            payload['given'] = auth['name'].split(" ")[0]
+            payload['family'] = auth['name'].split(" ")[-1]
         else:
-            payload['given'] = ''
+            if family in auth:
+                payload['family'] = auth[family].replace('\xa0', ' ')
+            elif 'name' in auth:
+                payload['name'] = auth['name']
+            if given in auth:
+                payload['given'] = auth[given].replace('\xa0', ' ')
+            else:
+                payload['given'] = ''
         if 'ORCID' in auth:
             payload['orcid'] = auth['ORCID'].split("/")[-1]
         affiliations = []
