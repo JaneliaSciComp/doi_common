@@ -7,6 +7,7 @@
       get_journal
       get_name_combinations
       get_publishing_date
+      get_single_author_details
       get_supervisory_orgs
       get_title
       is_datacite
@@ -148,9 +149,9 @@ def get_affiliations(idrec, rec):
 
 
 def get_author_details(rec, coll=None):
-    ''' Generate a detailed author list
+    ''' Generate a detailed author list from a DOI record
         Keyword arguments:
-          data: data record
+          data: DOI data record
           coll: optional orcid collection
         Returns:
           Detailed author list
@@ -199,6 +200,25 @@ def get_author_details(rec, coll=None):
     if not auth_list:
         return None
     return auth_list
+
+
+def get_single_author_details(rec, coll=None):
+    ''' Generate a detail dict for a single author from the orcid collection
+        Keyword arguments:
+          data: orcid data record
+          coll: optional orcid collection
+        Returns:
+          Detailed author list
+    '''
+    payload = rec
+    if coll is not None:
+        try:
+            _add_single_author_jrc(rec, coll)
+        except Exception as err:
+            raise err
+        payload['asserted'] = False
+        return payload
+    return None
 
 
 def get_author_list(rec, orcid=False, style='dis', returntype='text'):
