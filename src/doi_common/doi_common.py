@@ -239,6 +239,8 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text'):
         given = 'givenName'
         family = 'familyName'
     field = 'creators' if datacite else 'author'
+    if field not in rec and 'editor' in rec:
+        field = 'editor'
     if field not in rec:
         print(rec)
         return None
