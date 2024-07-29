@@ -19,6 +19,7 @@
 
 # pylint: disable=broad-exception-raised
 
+import logging
 import re
 import requests
 import jrc_common.jrc_common as JRC
@@ -26,6 +27,8 @@ import jrc_common.jrc_common as JRC
 ORCID_LOGO = "https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
 ORGS_URL = "https://services.hhmi.org/IT/WD-hcm/supervisoryorgs"
 
+# Logger
+LLOGGER = logging.getLogger(__name__)
 
 # ******************************************************************************
 # * Internal functions                                                         *
@@ -191,6 +194,7 @@ def get_author_details(rec, coll=None):
                     affiliations.append(aff['name'])
         if affiliations:
             payload['affiliations'] = affiliations
+        LLOGGER.debug(f"Payload: {payload}")
         if coll is not None:
             try:
                 _add_single_author_jrc(payload, coll)
@@ -473,6 +477,7 @@ def add_orcid(eid, coll, given=None, family=None, orcid=None, write=True):
         raise err
     if not resp:
         raise ValueError(f"EmployeeId {eid} is not in the People system")
+    LLOGGER.debug(f"People record: {resp}")
     payload = {"employeeId": eid,
                "userIdO365": resp['userIdO365']
               }
@@ -488,7 +493,11 @@ def add_orcid(eid, coll, given=None, family=None, orcid=None, write=True):
     if not given or not family:
         payload['given'] = []
         payload['family'] = []
-        get_name_combinations(resp, payload)
+    else:
+        payload['given'] = given
+        payload['family'] = family
+    get_name_combinations(resp, payload)
+    LLOGGER.debug(f"Payload: {payload}")
     if not write:
         return payload
     try:
@@ -499,7 +508,8 @@ def add_orcid(eid, coll, given=None, family=None, orcid=None, write=True):
     return payload
 
 
-def update_existing_orcid(lookup=None, add=None, coll=None, lookup_by='employeeId'):
+def update_existing_orcid(lookup=None, add=None, coll=None,
+                          lookup_by='employeeId', write=True):
     ''' Update a single row in the orcid collection
         Keyword arguments:
           lookup: lookup value
@@ -519,6 +529,9 @@ def update_existing_orcid(lookup=None, add=None, coll=None, lookup_by='employeeI
         raise ValueError(f"{lookup_by} {lookup} not found in update_existing_orcid")
     field = 'employeeId' if lookup_by == 'orcid' else 'orcid'
     payload = {"$set": {field: add}}
+    LLOGGER.debug(f"Payload: {payload}")
+    if not write:
+        return None
     try:
         result = coll.update_one({"_id": row['_id']}, payload)
     except Exception as err:
