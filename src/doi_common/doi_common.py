@@ -6,18 +6,20 @@
       get_author_list
       get_journal
       get_name_combinations
+      get_project_map
       get_publishing_date
       get_single_author_details
       get_supervisory_orgs
       get_title
       is_datacite
+      is_janelia_author
       single_orcid_lookup
       add_orcid
       update_existing_orcid
       update_jrc_author
 '''
 
-# pylint: disable=broad-exception-raised
+# pylint: disable=broad-exception-caught,broad-exception-raised,logging-fstring-interpolation
 
 import logging
 import re
@@ -190,8 +192,11 @@ def get_author_details(rec, coll=None):
         affiliations = []
         if 'affiliation' in auth and auth['affiliation']:
             for aff in auth['affiliation']:
-                if 'name' in aff and aff['name']:
-                    affiliations.append(aff['name'])
+                if datacite:
+                    affiliations.append(aff)
+                else:
+                    if 'name' in aff and aff['name']:
+                        affiliations.append(aff['name'])
         if affiliations:
             payload['affiliations'] = affiliations
         LLOGGER.debug(f"Payload: {payload}")
@@ -356,6 +361,23 @@ def get_name_combinations(idrec, rec):
     _process_middle_initials(rec)
 
 
+def get_project_map(coll):
+    ''' Get projects
+        Keyword arguments:
+          coll: project_map collection
+        Returns:
+          Project mapping dict
+    '''
+    project = {}
+    try:
+        rows = coll.find({})
+    except Exception as err:
+        raise err
+    for row in rows:
+        project[row['name']] = row['project']
+    return project
+
+
 def get_publishing_date(rec):
     """ Return the publication date
         published:
@@ -433,6 +455,64 @@ def is_datacite(doi):
     doilc = doi.lower()
     return bool("/janelia" in doilc or "/arxiv" in doilc or "/d1." in doilc \
                 or "/micropub.biology" in doilc or "/zenodo" in doilc)
+
+
+def is_janelia_author(auth, coll, project):
+    ''' Determine if an author is a Janelian or not
+        Keyword arguments:
+          auth: single author record from Crossref or DataCite
+          coll: orcid collection
+          project: project mapping dict
+        Returns:
+          Author name (if true) or None
+    '''
+    # Determine source
+    if 'familyName' in auth or 'nameIdentifiers' in auth:
+        datacite = True
+        family = 'familyName'
+        given = 'givenName'
+    else:
+        datacite = False
+        family = 'family'
+        given = 'given'
+    # Affiliation
+    if 'affiliation' in auth:
+        for aff in auth['affiliation']:
+            if datacite:
+                if "Janelia" in aff:
+                    return auth['name']
+            elif "Janelia" in aff['name']:
+                return " ".join([auth[given], auth[family]])
+    # Project name
+    if datacite:
+        if family in auth and 'name' in auth and auth['name'] == auth[family]:
+            if auth['name'] in project:
+                return project[auth['name']]
+            return None
+        if family not in auth and given not in auth and 'name' in auth:
+            if auth['name'] in project:
+                return project[auth['name']]
+            return None
+    elif 'name' in auth:
+        if auth['name'] in project:
+            return project[auth['name']]
+        LLOGGER.error(auth)
+        raise Exception(f"Unknown Crossref project: {auth['name']}")
+    # Name
+    try:
+        payload = {"family": auth[family], "given": auth[given]}
+    except Exception as err:
+        raise Exception(f"Missing name: {auth}") from err
+    if "ORCID" in auth:
+        payload['orcid'] = auth['ORCID'].split("/")[-1]
+    try:
+        _add_single_author_jrc(payload, coll)
+    except Exception as err:
+        LLOGGER.error("Failed _add_single_author_jrc")
+        raise err
+    if 'in_database' in payload and payload['in_database'] and not payload['alumni']:
+        return " ".join([auth[given], auth[family]])
+    return None
 
 
 def single_orcid_lookup(val, coll, lookup_by='orcid'):
