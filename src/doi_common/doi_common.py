@@ -172,8 +172,10 @@ def get_author_details(rec, coll=None):
     if field not in rec and 'name' not in rec:
         return None
     author = rec[field]
+    seq = 0
     for auth in author:
         payload = {}
+        seq += 1
         if datacite and (given not in auth or not auth[given]) \
            and 'name' in auth and " " in auth['name']:
             payload['given'] = auth['name'].split(" ")[0]
@@ -187,6 +189,10 @@ def get_author_details(rec, coll=None):
                 payload['given'] = auth[given].replace('\xa0', ' ')
             else:
                 payload['given'] = ''
+        if seq == 1 or ('sequence' in auth and auth['sequence'] == 'first'):
+            payload['is_first'] = True
+        if seq == len(author):
+            payload['is_last'] = True
         if 'ORCID' in auth:
             payload['orcid'] = auth['ORCID'].split("/")[-1]
         affiliations = []
