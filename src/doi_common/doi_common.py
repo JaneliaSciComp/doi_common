@@ -76,23 +76,30 @@ def _add_single_author_jrc(payload, coll):
     payload['asserted'] = False
     payload['alumni'] = False
     payload['validated'] = False
+    payload['match'] = 'None'
     if 'orcid' in payload:
         try:
             row = coll.find_one({"orcid": payload['orcid']})
         except Exception as err:
             raise err
+        if row:
+            payload['match'] = 'ORCID'
         _adjust_payload(payload, row)
     elif 'family' in payload:
         try:
             row = coll.find_one({"given": payload['given'], "family": payload['family']})
         except Exception as err:
             raise err
+        if row:
+            payload['match'] = 'name'
         _adjust_payload(payload, row)
     if 'affiliations' in payload and payload['affiliations']:
         for aff in payload['affiliations']:
             if 'Janelia' in aff:
                 payload['janelian'] = True
                 payload['asserted'] = True
+                if payload['match'] != 'ORCID':
+                    payload['match'] = 'asserted'
                 break
 
 
