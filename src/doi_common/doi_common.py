@@ -243,7 +243,7 @@ def get_single_author_details(rec, coll=None):
     return None
 
 
-def get_author_list(rec, orcid=False, style='dis', returntype='text'):
+def get_author_list(rec, orcid=False, style='dis', returntype='text', project_map=None):
     ''' Generate a text author list
         Keyword arguments:
           data: data record
@@ -269,21 +269,31 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text'):
     author = rec[field]
     punc = '.' if style == 'flylight' else ''
     for auth in author:
-        if given in auth:
-            initials = auth[given].split()
-            first = []
-            for gvn in initials:
-                first.append(gvn[0] + punc)
-            if style == 'flylight':
-                full = ', '.join([auth[family], ' '.join(first)])
+        full = ""
+        if (project_map is not None) and given in auth and family in auth:
+            full = f"{auth[given]} {auth[family]}"
+            try:
+                row = project_map.find_one({"name": full})
+            except Exception as err:
+                raise err
+            if not row:
+                full = ""
+        if not full:
+            if given in auth:
+                initials = auth[given].split()
+                first = []
+                for gvn in initials:
+                    first.append(gvn[0] + punc)
+                if style == 'flylight':
+                    full = ', '.join([auth[family], ' '.join(first)])
+                else:
+                    full = ', '.join([auth[family], ''.join(first)])
+            elif family in auth:
+                full = auth[family]
+            elif 'name' in auth:
+                full = auth['name']
             else:
-                full = ', '.join([auth[family], ''.join(first)])
-        elif family in auth:
-            full = auth[family]
-        elif 'name' in auth:
-            full = auth['name']
-        else:
-            continue
+                continue
         if 'ORCID' in auth and orcid:
             full = f"<a href='{auth['ORCID']}' target='_blank'>{full}" \
                    + "<img alt='ORCID logo' " \
