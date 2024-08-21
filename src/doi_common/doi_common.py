@@ -1,6 +1,7 @@
 ''' doi_common.py
     Library of routines for parsing and interpreting DOI/ORCID records.
     Callable functions:
+      add_orcid_name
       get_affiliations
       get_author_details
       get_author_list
@@ -612,14 +613,64 @@ def add_orcid(eid, coll, given=None, family=None, orcid=None, write=True):
     return payload
 
 
+def add_orcid_name(lookup_by='employeeId', lookup=None, family=None, given=None,
+                   coll=None, write=True):
+    ''' Add names to a record in the orcid collection
+        Keyword arguments:
+          lookup_by: "employeeId" or "orcid"
+          lookup: lookup value
+          family: list of family names
+          given: list of given names
+          coll: orcid collection
+          write: write record to orcid collection [True]
+        Returns:
+          Updated record
+    '''
+    if lookup_by not in ('orcid', 'employeeId'):
+        raise ValueError("Invalid lookup_by in update_existing_orcid")
+    try:
+        row = coll.find_one({lookup_by: lookup})
+    except Exception as err:
+        raise err
+    if not row:
+        raise ValueError(f"{lookup_by} {lookup} not found in update_existing_orcid")
+    changes = False
+    if family:
+        for name in family:
+            if name not in row['family']:
+                row['family'].append(name)
+                changes = True
+    if given:
+        for name in given:
+            if name not in row['given']:
+                row['given'].append(name)
+                changes = True
+    if (not changes) or (not write):
+        return None
+    payload = {"$set": {'family': row['family'], 'given': row['given']}}
+    LLOGGER.debug(f"Payload: {payload}")
+    try:
+        result = coll.update_one({"_id": row['_id']}, payload)
+    except Exception as err:
+        raise err
+    if hasattr(result, 'matched_count') and result.matched_count:
+        try:
+            row = coll.find_one({lookup_by: lookup})
+        except Exception as err:
+            raise err
+        return row
+    return None
+
+
 def update_existing_orcid(lookup=None, add=None, coll=None,
                           lookup_by='employeeId', write=True):
-    ''' Update a single row in the orcid collection
+    ''' Update a single row in the orcid collection with a new employeeId or ORCID
         Keyword arguments:
           lookup: lookup value
           add: data to insert/update
           lookup_by: "orcid" or "employeeId"
           coll: orcid collection
+          write: write record to orcid collection [True]
         Returns:
           row from collection (or None if update was not performed)
     '''
