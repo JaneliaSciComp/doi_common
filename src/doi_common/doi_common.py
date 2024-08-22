@@ -446,7 +446,7 @@ def get_supervisory_orgs():
     if resp.status_code != 200:
         raise Exception(f"Failed to get supervisory organizations: {resp.status_code}")
     for org in results:
-        if 'Janelia' in org['LOCATIONCODE'] and 'SUPORGCODE' in org:
+        if org['LOCATIONCODE'] and 'Janelia' in org['LOCATIONCODE'] and 'SUPORGCODE' in org:
             orgs[org['SUPORGNAME']] = org['SUPORGCODE']
     return orgs
 
