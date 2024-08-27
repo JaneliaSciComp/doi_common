@@ -17,6 +17,7 @@
       single_orcid_lookup
       add_orcid
       update_existing_orcid
+      update_dois_field
       update_jrc_author
 '''
 
@@ -698,6 +699,30 @@ def update_existing_orcid(lookup=None, add=None, coll=None,
             raise err
         return row
     return None
+
+def update_dois_field(doi, doi_coll, field, value, write=True):
+    ''' Update a fiend for a single DOI
+        Keyword arguments:
+          doi: DOI
+          doi_coll: dois collection
+          
+          write: write to dois collection
+        Returns:
+          list of Janelia authors
+    '''
+    try:
+        row = doi_coll.find_one({"doi": doi})
+    except Exception as err:
+        raise err
+    if not row:
+        return None
+    if write:
+        payload = {"$set": {field: value}}
+        try:
+            _ = doi_coll.update_one({"doi": doi}, payload)
+        except Exception as err:
+            raise err
+    return payload
 
 
 def update_jrc_author(doi, doi_coll, orcid_coll, write=True):
