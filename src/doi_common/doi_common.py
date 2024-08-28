@@ -5,6 +5,7 @@
       get_affiliations
       get_author_details
       get_author_list
+      get_doi_record
       get_journal
       get_name_combinations
       get_project_map
@@ -320,6 +321,21 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text', project_ma
     if auth_list:
         return  ', '.join(auth_list) + punc + last
     return None
+
+
+def get_doi_record(doi, coll):
+    ''' Return a record from the dois collection
+        Keyword arguments:
+          doi:: DOI
+          coll: dois collection
+        Returns:
+          None
+    '''
+    try:
+        row = coll.find_one({"doi": doi})
+    except Exception as err:
+        raise err
+    return row
 
 
 def get_journal(rec):
