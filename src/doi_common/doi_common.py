@@ -81,11 +81,14 @@ def _add_single_author_jrc(payload, coll):
     payload['match'] = 'None'
     if 'orcid' in payload:
         try:
+            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
             row = coll.find_one({"orcid": payload['orcid']})
         except Exception as err:
             raise err
         if row:
             payload['match'] = 'ORCID'
+            if cnt > 1:
+                payload['duplicate_name'] = True
         _adjust_payload(payload, row)
     elif 'family' in payload:
         try:
@@ -559,6 +562,13 @@ def single_orcid_lookup(val, coll, lookup_by='orcid'):
         row = coll.find_one({lookup_by: val})
     except Exception as err:
         raise err
+    if row:
+        try:
+            cnt = coll.count_documents({"given": row['given'], "family": row['family']})
+        except Exception as err:
+            raise err
+        if cnt > 1:
+            row['duplicate_name'] = True
     return row
 
 
