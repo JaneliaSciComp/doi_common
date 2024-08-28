@@ -89,11 +89,14 @@ def _add_single_author_jrc(payload, coll):
         _adjust_payload(payload, row)
     elif 'family' in payload:
         try:
+            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
             row = coll.find_one({"given": payload['given'], "family": payload['family']})
         except Exception as err:
             raise err
         if row:
             payload['match'] = 'name'
+            if cnt > 1:
+                payload['duplicate_name'] = True
         _adjust_payload(payload, row)
     if 'affiliations' in payload and payload['affiliations']:
         for aff in payload['affiliations']:
