@@ -168,6 +168,25 @@ def get_affiliations(idrec, rec):
         rec['affiliations'].sort()
 
 
+def _set_paper_orcid(auth, datacite, payload):
+    ''' Add an author's ORCID as specified in the paper
+        Keyword arguments:
+          auth: paper author record
+          datacite: True if DataCite record
+          payload: author detail record
+        Returns:
+          None
+    '''
+    if datacite:
+        if 'nameIdentifiers' in auth:
+            for nid in auth['nameIdentifiers']:
+                if 'nameIdentifier' in nid and 'nameIdentifierScheme' in nid:
+                    if nid['nameIdentifierScheme'] == 'ORCID':
+                        payload['paper_orcid'] = nid['nameIdentifier'].split("/")[-1]
+                        break
+    elif 'ORCID' in auth:
+        payload['paper_orcid'] = auth['ORCID'].split("/")[-1]
+
 
 def get_author_details(rec, coll=None):
     ''' Generate a detailed author list from a DOI record
@@ -191,6 +210,7 @@ def get_author_details(rec, coll=None):
     seq = 0
     for auth in author:
         payload = {}
+        _set_paper_orcid(auth, datacite, payload)
         seq += 1
         if datacite and (given not in auth or not auth[given]) \
            and 'name' in auth and " " in auth['name']:
@@ -236,7 +256,7 @@ def get_author_details(rec, coll=None):
 def get_single_author_details(rec, coll=None):
     ''' Generate a detail dict for a single author from the orcid collection
         Keyword arguments:
-          data: orcid data record
+          rec: orcid data record
           coll: optional orcid collection
         Returns:
           Detailed author list
