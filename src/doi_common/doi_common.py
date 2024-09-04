@@ -19,7 +19,7 @@
       add_orcid
       update_existing_orcid
       update_dois_field
-      update_jrc_author
+      update_jrc_author_from_doi
 '''
 
 # pylint: disable=broad-exception-caught,broad-exception-raised,logging-fstring-interpolation
@@ -774,7 +774,7 @@ def update_dois_field(doi, doi_coll, field, value, write=True):
     return payload
 
 
-def update_jrc_author(doi, doi_coll, orcid_coll, write=True):
+def update_jrc_author_from_doi(doi, doi_coll, orcid_coll, write=True):
     ''' Update jrc_author tag for a single DOI
         Keyword arguments:
           doi: DOI
