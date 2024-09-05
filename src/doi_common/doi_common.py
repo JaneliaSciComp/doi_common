@@ -1,7 +1,6 @@
 ''' doi_common.py
     Library of routines for parsing and interpreting DOI/ORCID records.
-    Callable functions:
-      add_orcid_name
+    Callable read functions:
       get_affiliations
       get_author_details
       get_author_list
@@ -16,9 +15,11 @@
       is_datacite
       is_janelia_author
       single_orcid_lookup
+    Callable write functions:
       add_orcid
+      add_orcid_name
       update_existing_orcid
-      update_dois_field
+      update_dois
       update_jrc_author_from_doi
 '''
 
@@ -132,8 +133,28 @@ def _process_middle_initials(rec):
             if new not in rec['given']:
                 rec['given'].append(new)
 
+
+def _set_paper_orcid(auth, datacite, payload):
+    ''' Add an author's ORCID as specified in the paper
+        Keyword arguments:
+          auth: paper author record
+          datacite: True if DataCite record
+          payload: author detail record
+        Returns:
+          None
+    '''
+    if datacite:
+        if 'nameIdentifiers' in auth:
+            for nid in auth['nameIdentifiers']:
+                if 'nameIdentifier' in nid and 'nameIdentifierScheme' in nid:
+                    if nid['nameIdentifierScheme'] == 'ORCID':
+                        payload['paper_orcid'] = nid['nameIdentifier'].split("/")[-1]
+                        break
+    elif 'ORCID' in auth:
+        payload['paper_orcid'] = auth['ORCID'].split("/")[-1]
+
 # ******************************************************************************
-# * Callable functions                                                         *
+# * Callable read functions                                                    *
 # ******************************************************************************
 
 def get_affiliations(idrec, rec):
@@ -166,26 +187,6 @@ def get_affiliations(idrec, rec):
                     rec['affiliations'].append(mtr['supOrgName'])
     if 'affiliations' in rec:
         rec['affiliations'].sort()
-
-
-def _set_paper_orcid(auth, datacite, payload):
-    ''' Add an author's ORCID as specified in the paper
-        Keyword arguments:
-          auth: paper author record
-          datacite: True if DataCite record
-          payload: author detail record
-        Returns:
-          None
-    '''
-    if datacite:
-        if 'nameIdentifiers' in auth:
-            for nid in auth['nameIdentifiers']:
-                if 'nameIdentifier' in nid and 'nameIdentifierScheme' in nid:
-                    if nid['nameIdentifierScheme'] == 'ORCID':
-                        payload['paper_orcid'] = nid['nameIdentifier'].split("/")[-1]
-                        break
-    elif 'ORCID' in auth:
-        payload['paper_orcid'] = auth['ORCID'].split("/")[-1]
 
 
 def get_author_details(rec, coll=None):
@@ -251,25 +252,6 @@ def get_author_details(rec, coll=None):
     if not auth_list:
         return None
     return auth_list
-
-
-def get_single_author_details(rec, coll=None):
-    ''' Generate a detail dict for a single author from the orcid collection
-        Keyword arguments:
-          rec: orcid data record
-          coll: optional orcid collection
-        Returns:
-          Detailed author list
-    '''
-    payload = rec
-    if coll is not None:
-        try:
-            _add_single_author_jrc(rec, coll)
-        except Exception as err:
-            raise err
-        payload['asserted'] = False
-        return payload
-    return None
 
 
 def get_author_list(rec, orcid=False, style='dis', returntype='text', project_map=None):
@@ -471,6 +453,26 @@ def get_publishing_date(rec):
         if 'registered' in rec:
             return rec['registered'].split('T')[0]
     return 'unknown'
+
+
+def get_single_author_details(rec, coll=None):
+    ''' Generate a detail dict for a single author from the orcid collection
+        Keyword arguments:
+          rec: orcid data record
+          coll: optional orcid collection
+        Returns:
+          Detailed author list
+    '''
+    payload = rec
+    if coll is not None:
+        try:
+            _add_single_author_jrc(rec, coll)
+        except Exception as err:
+            raise err
+        payload['asserted'] = False
+        return payload
+    return None
+
 
 
 def get_supervisory_orgs():
@@ -749,29 +751,36 @@ def update_existing_orcid(lookup=None, add=None, coll=None,
         return row
     return None
 
-def update_dois_field(doi, doi_coll, field, value, write=True):
-    ''' Update a fiend for a single DOI
+
+def update_dois(doi, doi_coll, payload, write=True):
+    ''' Update jrc_ fields in a single DOI
         Keyword arguments:
           doi: DOI
           doi_coll: dois collection
-          
+          payload: payload to update DOI with
           write: write to dois collection
         Returns:
-          list of Janelia authors
+          None or the number of rows updated
     '''
+    if (not doi) or (doi_coll is None) or (not payload):
+        raise Exception("Missing arguments in update_dois")
     try:
         row = doi_coll.find_one({"doi": doi})
     except Exception as err:
         raise err
     if not row:
+        raise Exception(f"DOI {doi} not found in update_dois")
+    for key in payload:
+        if not key.startswith("jrc_"):
+            raise Exception("All fields in payload must start with 'jrc_'")
+    if not write:
         return None
-    if write:
-        payload = {"$set": {field: value}}
-        try:
-            _ = doi_coll.update_one({"doi": doi}, payload)
-        except Exception as err:
-            raise err
-    return payload
+    payload = {"$set": payload}
+    try:
+        result = doi_coll.update_one({"doi": doi}, payload)
+    except Exception as err:
+        raise err
+    return result.matched_count if hasattr(result, 'matched_count') else None
 
 
 def update_jrc_author_from_doi(doi, doi_coll, orcid_coll, write=True):
