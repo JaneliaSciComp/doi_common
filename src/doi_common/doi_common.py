@@ -19,7 +19,7 @@
       add_orcid
       add_orcid_name
       update_existing_orcid
-      update_dois
+      update_jrc_fields
       update_jrc_author_from_doi
 '''
 
@@ -752,7 +752,7 @@ def update_existing_orcid(lookup=None, add=None, coll=None,
     return None
 
 
-def update_dois(doi, doi_coll, payload, write=True):
+def update_jrc_fields(doi, doi_coll, payload, write=True):
     ''' Update jrc_ fields in a single DOI
         Keyword arguments:
           doi: DOI
@@ -763,13 +763,13 @@ def update_dois(doi, doi_coll, payload, write=True):
           None or the number of rows updated
     '''
     if (not doi) or (doi_coll is None) or (not payload):
-        raise Exception("Missing arguments in update_dois")
+        raise Exception("Missing arguments in update_jrc_fields")
     try:
         row = doi_coll.find_one({"doi": doi})
     except Exception as err:
         raise err
     if not row:
-        raise Exception(f"DOI {doi} not found in update_dois")
+        raise Exception(f"DOI {doi} not found in update_jrc_fields")
     for key in payload:
         if not key.startswith("jrc_"):
             raise Exception("All fields in payload must start with 'jrc_'")
