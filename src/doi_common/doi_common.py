@@ -14,6 +14,7 @@
       get_title
       is_datacite
       is_janelia_author
+      is_preprint
       single_orcid_lookup
     Callable write functions:
       add_orcid
@@ -583,6 +584,23 @@ def is_janelia_author(auth, coll, project):
     if 'in_database' in payload and payload['in_database'] and not payload['alumni']:
         return " ".join([auth[given], auth[family]])
     return None
+
+
+def is_preprint(rec):
+    ''' Determine if a resource is a preprint or not
+        Keyword arguments:
+          rec: DOI record
+        Returns:
+          True or False
+    '''
+    # Crossref
+    if ('subtype' in rec) and (rec['subtype'] == 'preprint'):
+        return True
+    # DataCite
+    if ('types' in rec) and ('resourceTypeGeneral' in rec['types']) \
+       and (rec['types']['resourceTypeGeneral'] == 'Preprint'):
+        return True
+    return False
 
 
 def single_orcid_lookup(val, coll, lookup_by='orcid'):
