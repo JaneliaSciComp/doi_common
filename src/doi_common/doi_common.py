@@ -697,13 +697,13 @@ def add_orcid_name(lookup_by='employeeId', lookup=None, family=None, given=None,
           Updated record
     '''
     if lookup_by not in ('orcid', 'employeeId'):
-        raise ValueError("Invalid lookup_by in update_existing_orcid")
+        raise ValueError("Invalid lookup_by in add_orcid_name")
     try:
         row = coll.find_one({lookup_by: lookup})
     except Exception as err:
         raise err
     if not row:
-        raise ValueError(f"{lookup_by} {lookup} not found in update_existing_orcid")
+        raise ValueError(f"{lookup_by} {lookup} not found in add_orcid_name")
     changes = False
     if family:
         for name in family:
