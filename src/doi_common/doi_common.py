@@ -17,6 +17,7 @@
       is_preprint
       single_orcid_lookup
     Callable write functions:
+      add_doi_to_process
       add_orcid
       add_orcid_name
       update_existing_orcid
@@ -26,6 +27,7 @@
 
 # pylint: disable=broad-exception-caught,broad-exception-raised,logging-fstring-interpolation
 
+from datetime import datetime
 import logging
 import re
 import requests
@@ -626,6 +628,32 @@ def single_orcid_lookup(val, coll, lookup_by='orcid'):
         if cnt > 1:
             row['duplicate_name'] = True
     return row
+
+
+def add_doi_to_process(doi, coll, write=True):
+    ''' Add a DOI to the dois_to_process collection
+        Keyword arguments:
+          doi: DOI
+          coll: dois_to_process collection
+          write: write to dois_to_process collection
+        Returns:
+          row ID if written, payload if not. Will return None if DOI is already in collection.
+    '''
+    try:
+        row = coll.find_one({"doi": doi})
+    except Exception as err:
+        raise err
+    if row:
+        raise ValueError(f"DOI {doi} already in process collection")
+    payload = {"doi": doi,
+               "inserted": datetime.today().replace(microsecond=0)}
+    if not write:
+        return payload
+    try:
+        result = coll.insert_one(payload)
+    except Exception as err:
+        raise err
+    return result.inserted_id
 
 
 def add_orcid(eid, coll, given=None, family=None, orcid=None, write=True):
