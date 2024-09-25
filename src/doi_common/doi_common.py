@@ -68,6 +68,8 @@ def _adjust_payload(payload, row):
                 payload['tags'] = row['affiliations']
         if 'employeeId' in row and row['employeeId']:
             payload['employeeId'] = row['employeeId']
+        if 'userIdO365' in row and row['userIdO365']:
+            payload['userIdO365'] = row['userIdO365']
 
 
 def _add_single_author_jrc(payload, coll):
