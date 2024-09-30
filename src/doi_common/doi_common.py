@@ -15,6 +15,7 @@
       is_datacite
       is_janelia_author
       is_preprint
+      short_citation
       single_orcid_lookup
     Callable write functions:
       add_doi_to_process
@@ -605,6 +606,44 @@ def is_preprint(rec):
        and (rec['types']['resourceTypeGeneral'] == 'Preprint'):
         return True
     return False
+
+
+def short_citation(doi):
+    ''' Generate a short citation
+        Keyword arguments:
+          doi: DOI
+        Returns:
+          Short citation
+    '''
+    try:
+        if is_datacite(doi):
+            rec = JRC.call_datacite(doi)
+            if rec is None or 'data' not in rec:
+                return None
+            rec = rec['data']['attributes']
+            authors = rec['creators']
+        else:
+            rec = JRC.call_crossref(doi)
+            if rec is None or 'message' not in rec:
+                return None
+            rec = rec['message']
+            authors = rec['author']
+    except Exception as err:
+        raise err
+    pdate = get_publishing_date(rec).split('-')[0]
+    if is_datacite(doi):
+        return f"{authors[0]['familyName']} et al. {pdate}"
+    rec['DOI'] = doi
+    firsts = []
+    for auth in authors:
+        if 'sequence' not in auth:
+            break
+        if 'family' not in auth or auth['sequence'] != 'first':
+            break
+        if not firsts:
+            return f"{authors[0]['family']} et al. {pdate}"
+        return f"{', '.join(firsts)} et al. {pdate}"
+    return None
 
 
 def single_orcid_lookup(val, coll, lookup_by='orcid'):
