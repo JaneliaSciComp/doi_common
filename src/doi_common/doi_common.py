@@ -177,6 +177,12 @@ def get_affiliations(idrec, rec):
             for aff in idrec['affiliations']:
                 if aff['supOrgName'] not in rec['affiliations']:
                     rec['affiliations'].append(aff['supOrgName'])
+        # Add supOrgName
+        if 'supOrgName' in idrec and idrec['supOrgName']:
+            if 'affiliations' not in rec:
+                rec['affiliations'] = []
+            if idrec['supOrgName'] not in rec['affiliations']:
+                rec['affiliations'].append(idrec['supOrgName'])
         # Add ccDescr
         if 'group' not in rec and 'ccDescr' in idrec and idrec['ccDescr']:
             if 'affiliations' not in rec:
