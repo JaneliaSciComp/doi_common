@@ -487,14 +487,24 @@ def get_single_author_details(rec, coll=None):
 
 
 
-def get_supervisory_orgs():
-    ''' Get supervisory organizations
+def get_supervisory_orgs(coll=None):
+    ''' Get supervisory organizations from HQ (default) or MongoDB
         Keyword arguments:
-          None
+          coll: suporg collection object (optional)
         Returns:
           Dict of supervisory organizations
     '''
     orgs = {}
+    if coll is not None:
+        try:
+            rows = coll.find({})
+        except Exception as err:
+            raise err
+        for row in rows:
+            orgs[row['name']] = {'code': row['code']}
+            if 'active' in row:
+                orgs[row['name']]['active'] = True
+        return orgs
     try:
         resp = requests.get(ORGS_URL, timeout=10)
         results = resp.json()['result']
