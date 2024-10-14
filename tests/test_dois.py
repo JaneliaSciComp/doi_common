@@ -12,14 +12,6 @@ COLL_DOIS = DB['dis'].dois
 COLL_ORCID = DB['dis'].orcid
 
 
-def test_get_doi_record():
-    assert not get_doi_record('not a doi', COLL_DOIS)
-    rec = get_doi_record('10.7554/elife.98405', COLL_DOIS)
-    assert rec
-    assert isinstance(rec, dict)
-    assert rec['title'] == ['A split-GAL4 driver line resource for Drosophila CNS cell types']
-
-
 def test_get_author_details():
     rec = get_doi_record('10.7554/elife.98405', COLL_DOIS)
     auth_list = get_author_details(rec)
@@ -44,6 +36,14 @@ def test_get_author_list():
     auth_list = get_author_list(rec, returntype='list')
     assert isinstance(auth_list, list)
     assert auth_list[0] == 'Meissner, GW'
+
+
+def test_get_doi_record():
+    assert not get_doi_record('not a doi', COLL_DOIS)
+    rec = get_doi_record('10.7554/elife.98405', COLL_DOIS)
+    assert rec
+    assert isinstance(rec, dict)
+    assert rec['title'] == ['A split-GAL4 driver line resource for Drosophila CNS cell types']
 
 
 def test_get_journal():
