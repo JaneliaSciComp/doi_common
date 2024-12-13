@@ -155,6 +155,7 @@ def _set_paper_orcid(auth, datacite, payload):
                 if 'nameIdentifier' in nid and 'nameIdentifierScheme' in nid:
                     if nid['nameIdentifierScheme'] == 'ORCID':
                         payload['paper_orcid'] = nid['nameIdentifier'].split("/")[-1]
+                        payload['orcid'] = payload['paper_orcid']
                         break
     elif 'ORCID' in auth:
         payload['paper_orcid'] = auth['ORCID'].split("/")[-1]
