@@ -14,6 +14,7 @@
       get_title
       is_datacite
       is_janelia_author
+      is_journal
       is_preprint
       short_citation
       single_orcid_lookup
@@ -606,6 +607,24 @@ def is_janelia_author(auth, coll, project):
     if 'in_database' in payload and payload['in_database'] and not payload['alumni']:
         return " ".join([auth[given], auth[family]])
     return None
+
+
+def is_journal(rec):
+    ''' Determine if a resource is a journal article or not
+        Keyword arguments:
+          rec: DOI record
+        Returns:
+          True or False
+    '''
+    # Crossref
+    if ('type' in rec) and (rec['type'] == 'journal-article') \
+       and (('subtype' not in rec) or (not rec['subtype'])):
+        return True
+    # DataCite
+    if ('types' in rec) and ('resourceTypeGeneral' in rec['types']) \
+       and (rec['types']['resourceTypeGeneral'] == 'DataPaper'):
+        return True
+    return False
 
 
 def is_preprint(rec):
