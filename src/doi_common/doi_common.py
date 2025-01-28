@@ -73,6 +73,8 @@ def _adjust_payload(payload, row):
             payload['employeeId'] = row['employeeId']
         if 'userIdO365' in row and row['userIdO365']:
             payload['userIdO365'] = row['userIdO365']
+        if 'workerType' in row and row['workerType']:
+            payload['workerType'] = row['workerType']
 
 
 def _add_single_author_jrc(payload, coll):
