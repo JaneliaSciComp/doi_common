@@ -702,7 +702,10 @@ def short_citation(doi, journal=False):
             jour = ""
     if is_datacite(doi):
         if 'familyName' not in authors[0]:
-            authors[0]['familyName'] = 'Unknown author'
+            if 'name' in authors[0]:
+                authors[0]['familyName'] = authors[0]['name']
+            else:
+                authors[0]['familyName'] = 'Unknown author'
         return f"{authors[0]['familyName']} et al.{jour}{pdate}"
     rec['DOI'] = doi
     firsts = []
