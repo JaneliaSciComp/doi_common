@@ -1,6 +1,7 @@
 ''' doi_common.py
     Library of routines for parsing and interpreting DOI/ORCID records.
     Callable read functions:
+      get_abstract
       get_affiliations
       get_author_details
       get_author_list
@@ -167,6 +168,23 @@ def _set_paper_orcid(auth, datacite, payload):
 # ******************************************************************************
 # * Callable read functions                                                    *
 # ******************************************************************************
+
+def get_abstract(rec):
+    ''' Generate an abstract
+        Keyword arguments:
+          rec: data record
+        Returns:
+          Abstract
+    '''
+    if 'DOI' in rec:
+        if 'abstract' in rec:
+            return rec['abstract']
+    else:
+        if 'descriptions' in rec and 'descriptionType' in rec['descriptions'] \
+           and rec['descriptions']['descriptionType'] == 'Abstract' \
+           and 'description' in rec['descriptions']:
+            return rec['descriptions']['description']
+    return None
 
 def get_affiliations(idrec, rec):
     ''' Add affiliations
@@ -360,7 +378,7 @@ def get_doi_record(doi, coll):
 def get_journal(rec):
     ''' Generate a journal name
         Keyword arguments:
-          data: data record
+          rec: data record
         Returns:
           Journal name
     '''
