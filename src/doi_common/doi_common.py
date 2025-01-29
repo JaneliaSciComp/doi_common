@@ -179,12 +179,13 @@ def get_abstract(rec):
     if 'DOI' in rec:
         if 'abstract' in rec:
             return rec['abstract']
-    else:
-        if 'descriptions' in rec and 'descriptionType' in rec['descriptions'] \
-           and rec['descriptions']['descriptionType'] == 'Abstract' \
-           and 'description' in rec['descriptions']:
-            return rec['descriptions']['description']
+    elif 'descriptions' in rec:
+        for desc in rec['descriptions']:
+            if 'descriptionType' in desc and desc['descriptionType'] == 'Abstract' \
+               and 'description' in desc:
+                return desc['description']
     return None
+
 
 def get_affiliations(idrec, rec):
     ''' Add affiliations
