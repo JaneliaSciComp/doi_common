@@ -396,7 +396,7 @@ def get_journal(rec, full=True):
             else:
                 journal = rec['institution']['name']
         else:
-            return "(No journal found)"
+            return None
         year = get_publishing_date(rec)
         if year == 'unknown':
             return None
@@ -414,7 +414,7 @@ def get_journal(rec, full=True):
     if year == 'unknown':
         return None
     if 'publisher' in rec and rec['publisher']:
-        return f"{rec['publisher']}, {year.split('-')[0]}"
+        return f"{rec['publisher']}. {year.split('-')[0]}"
     return None
 
 
@@ -672,7 +672,7 @@ def short_citation(doi, journal=False):
     ''' Generate a short citation
         Keyword arguments:
           doi: DOI
-          journal: add journal name
+          journal: add journal
         Returns:
           Short citation
     '''
@@ -691,13 +691,17 @@ def short_citation(doi, journal=False):
             authors = rec['author']
     except Exception as err:
         raise err
-    pdate = get_publishing_date(rec).split('-')[0]
+    pdate = " " + get_publishing_date(rec).split('-')[0]
     jour = ""
     if journal:
         jour = get_journal(rec, False)
-        jour = f" {jour}" if jour else ""
+        if jour:
+            jour = f" {jour}"
+            pdate = ""
+        else:
+            jour = ""
     if is_datacite(doi):
-        return f"{authors[0]['familyName']} et al.{jour} {pdate}"
+        return f"{authors[0]['familyName']} et al.{jour}{pdate}"
     rec['DOI'] = doi
     firsts = []
     for auth in authors:
@@ -706,8 +710,8 @@ def short_citation(doi, journal=False):
         if 'family' not in auth or auth['sequence'] != 'first':
             break
         if not firsts:
-            return f"{authors[0]['family']} et al.{jour} {pdate}"
-        return f"{', '.join(firsts)} et al.{jour} {pdate}"
+            return f"{authors[0]['family']} et al.{jour}{pdate}"
+        return f"{', '.join(firsts)} et al.{jour}{pdate}"
     return None
 
 
