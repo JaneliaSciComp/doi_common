@@ -376,10 +376,11 @@ def get_doi_record(doi, coll):
     return row
 
 
-def get_journal(rec):
+def get_journal(rec, full=True):
     ''' Generate a journal name
         Keyword arguments:
           rec: data record
+          full: adds journal and page
         Returns:
           Journal name
     '''
@@ -400,12 +401,13 @@ def get_journal(rec):
         if year == 'unknown':
             return None
         journal += '. ' + year.split('-')[0]
-        if 'volume' in rec:
-            journal += '; ' + rec['volume']
-        if 'page' in rec:
-            journal += ': ' + rec['page']
-        else:
-            journal += ': ' + rec['DOI'].split('/')[-1]
+        if full:
+            if 'volume' in rec:
+                journal += '; ' + rec['volume']
+            if 'page' in rec:
+                journal += ': ' + rec['page']
+            else:
+                journal += ': ' + rec['DOI'].split('/')[-1]
         return journal
     # DataCite
     year = get_publishing_date(rec)
