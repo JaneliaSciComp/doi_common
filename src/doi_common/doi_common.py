@@ -668,10 +668,11 @@ def is_preprint(rec):
     return False
 
 
-def short_citation(doi):
+def short_citation(doi, journal=False):
     ''' Generate a short citation
         Keyword arguments:
           doi: DOI
+          journal: add journal name
         Returns:
           Short citation
     '''
@@ -691,8 +692,12 @@ def short_citation(doi):
     except Exception as err:
         raise err
     pdate = get_publishing_date(rec).split('-')[0]
+    jour = ""
+    if journal:
+        jour = get_journal(rec, False)
+        jour = f" {jour}" if jour else ""
     if is_datacite(doi):
-        return f"{authors[0]['familyName']} et al. {pdate}"
+        return f"{authors[0]['familyName']} et al.{jour} {pdate}"
     rec['DOI'] = doi
     firsts = []
     for auth in authors:
@@ -701,8 +706,8 @@ def short_citation(doi):
         if 'family' not in auth or auth['sequence'] != 'first':
             break
         if not firsts:
-            return f"{authors[0]['family']} et al. {pdate}"
-        return f"{', '.join(firsts)} et al. {pdate}"
+            return f"{authors[0]['family']} et al.{jour} {pdate}"
+        return f"{', '.join(firsts)} et al.{jour} {pdate}"
     return None
 
 
