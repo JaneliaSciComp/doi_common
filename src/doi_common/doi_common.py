@@ -676,11 +676,11 @@ def is_preprint(rec):
     return False
 
 
-def short_citation(doi, journal=False):
+def short_citation(doi, expanded=False):
     ''' Generate a short citation
         Keyword arguments:
           doi: DOI
-          journal: add journal
+          expanded: add title, journal, and PMID
         Returns:
           Short citation
     '''
@@ -701,20 +701,29 @@ def short_citation(doi, journal=False):
         raise err
     pdate = " " + get_publishing_date(rec).split('-')[0]
     jour = ""
-    if journal:
+    pmid = JRC.get_pmid(doi)
+    if pmid and 'status' in pmid and pmid['status'] == 'ok' \
+               and 'pmid' in pmid['records'][0]:
+        pmid = " " + pmid['records'][0]['pmid']
+    else:
+        pmid = ""
+    if expanded:
         jour = get_journal(rec, False)
         if jour:
             jour = f" {jour}"
             pdate = ""
         else:
             jour = ""
+        ttl = get_title(rec)
+        if ttl:
+            jour = f"{ttl}.{jour}"
     if is_datacite(doi):
         if 'familyName' not in authors[0]:
             if 'name' in authors[0]:
                 authors[0]['familyName'] = authors[0]['name']
             else:
                 authors[0]['familyName'] = 'Unknown author'
-        return f"{authors[0]['familyName']} et al.{jour}{pdate}"
+        return f"{authors[0]['familyName']} et al.{jour}{pdate}.{pmid}"
     rec['DOI'] = doi
     firsts = []
     for auth in authors:
@@ -723,8 +732,8 @@ def short_citation(doi, journal=False):
         if 'family' not in auth or auth['sequence'] != 'first':
             break
         if not firsts:
-            return f"{authors[0]['family']} et al.{jour}{pdate}"
-        return f"{', '.join(firsts)} et al.{jour}{pdate}"
+            return f"{authors[0]['family']} et al.{jour}{pdate}{pmid}"
+        return f"{', '.join(firsts)} et al.{jour}{pdate}{pmid}"
     return None
 
 
