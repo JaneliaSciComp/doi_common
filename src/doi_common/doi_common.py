@@ -703,7 +703,8 @@ def short_citation(doi, expanded=False):
     pmid = JRC.get_pmid(doi)
     if pmid and 'status' in pmid and pmid['status'] == 'ok' \
                and 'pmid' in pmid['records'][0]:
-        pmid = " " + pmid['records'][0]['pmid']
+        pmid = {pmid['records'][0]['pmid']
+        pmid = f"<a href='{JRC.NCBI_BASE}{pmid}'>{pmid}</a>"
     else:
         pmid = ""
     jour = ""
