@@ -700,17 +700,17 @@ def short_citation(doi, expanded=False):
     except Exception as err:
         raise err
     pdate = " " + get_publishing_date(rec).split('-')[0]
-    jour = ""
     pmid = JRC.get_pmid(doi)
     if pmid and 'status' in pmid and pmid['status'] == 'ok' \
                and 'pmid' in pmid['records'][0]:
         pmid = " " + pmid['records'][0]['pmid']
     else:
         pmid = ""
+    jour = ""
     if expanded:
         jour = get_journal(rec, False)
         if jour:
-            jour = f" {jour}"
+            jour = f" {jour}."
             pdate = ""
         else:
             jour = ""
@@ -732,8 +732,8 @@ def short_citation(doi, expanded=False):
         if 'family' not in auth or auth['sequence'] != 'first':
             break
         if not firsts:
-            return f"{authors[0]['family']} et al.{jour}{pdate}{pmid}"
-        return f"{', '.join(firsts)} et al.{jour}{pdate}{pmid}"
+            return f"{authors[0]['family']} et al.{jour}{pdate}.{pmid}"
+        return f"{', '.join(firsts)} et al.{jour}{pdate}.{pmid}"
     return None
 
 
