@@ -395,6 +395,8 @@ def get_journal(rec, full=True):
                 journal = rec['institution'][0]['name']
             else:
                 journal = rec['institution']['name']
+        elif 'osf.io' in rec['DOI']:
+            journal = 'osf.io'
         elif 'protocols.io' in rec['DOI']:
             journal = 'protocols.io'
         else:
