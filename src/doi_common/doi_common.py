@@ -395,6 +395,8 @@ def get_journal(rec, full=True):
                 journal = rec['institution'][0]['name']
             else:
                 journal = rec['institution']['name']
+        elif 'elife' in rec['DOI'] and rec['subtype'] == 'preprint':
+            journal = 'eLife'
         elif 'osf.io' in rec['DOI']:
             journal = 'osf.io'
         elif 'peerj.preprints' in rec['DOI']:
