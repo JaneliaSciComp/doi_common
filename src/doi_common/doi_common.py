@@ -3,6 +3,7 @@
     Callable read functions:
       get_abstract
       get_affiliations
+      get_author_counts
       get_author_details
       get_author_list
       get_doi_record
@@ -201,18 +202,18 @@ def get_affiliations(idrec, rec):
             for aff in idrec['affiliations']:
                 if aff['supOrgName'] not in rec['affiliations']:
                     rec['affiliations'].append(aff['supOrgName'])
-        # Add supOrgName
-        if 'supOrgName' in idrec and idrec['supOrgName']:
-            if 'affiliations' not in rec:
-                rec['affiliations'] = []
-            if idrec['supOrgName'] not in rec['affiliations']:
-                rec['affiliations'].append(idrec['supOrgName'])
         # Add ccDescr
         if 'group' not in rec and 'ccDescr' in idrec and idrec['ccDescr']:
             if 'affiliations' not in rec:
                 rec['affiliations'] = []
             if idrec['ccDescr'] not in rec['affiliations']:
                 rec['affiliations'].append(idrec['ccDescr'])
+        # Add supOrgName as a fallback
+        if 'supOrgName' in idrec and idrec['supOrgName'] and 'affiliations' not in rec:
+            if 'affiliations' not in rec:
+                rec['affiliations'] = []
+            if idrec['supOrgName'] not in rec['affiliations']:
+                rec['affiliations'].append(idrec['supOrgName'])
         # Add managedTeams
         if 'managedTeams' in idrec:
             if 'affiliations' not in rec:
@@ -223,6 +224,43 @@ def get_affiliations(idrec, rec):
                     rec['affiliations'].append(mtr['supOrgName'])
     if 'affiliations' in rec:
         rec['affiliations'].sort()
+
+
+def get_author_counts(tag, year, show, doi_coll, orcid_coll):
+    ''' Generate author counts
+        Keyword arguments:
+          tag: author tag
+          year: publication year
+          show: journal or all
+          doi_coll: dois collection
+          orcid_coll: orcid collection
+        Returns:
+          Author counts dictionary
+    '''
+    try:
+        rows = orcid_coll.find({"affiliations": tag})
+    except Exception as err:
+        raise err
+    author = {}
+    for auth in rows:
+        author[auth['employeeId']] = auth['family'][0] + ", " + auth['given'][0]
+    payload = [{"$unwind": "$jrc_author"},
+               {"$match": {"jrc_author": {"$in": list(author.keys())},
+                           "jrc_tag.name": tag}},
+               {"$group": {"_id": "$jrc_author", "count": {"$sum": 1}}}
+              ]
+    if year != 'All':
+            payload[1]['$match']['jrc_publishing_date'] = {"$regex": "^"+ year}
+    if show == 'journal':
+        payload[1]['$match']["$or"] = [{"type": "journal-article"}, {"subtype": "preprint"}]
+    try:
+        rows = doi_coll.aggregate(payload)
+    except Exception as err:
+        raise err
+    counts = {}
+    for row in rows:
+        counts[author[row['_id']]] = row['count']
+    return counts
 
 
 def get_author_details(rec, coll=None):
