@@ -599,7 +599,7 @@ def get_title(rec):
     '''
     if 'DOI' in rec:
         # Crossref
-        if 'title' in rec and rec['title'][0]:
+        if 'title' in rec and rec['title'] and rec['title'][0]:
             return rec['title'][0]
         return 'No title'
     # DataCite
