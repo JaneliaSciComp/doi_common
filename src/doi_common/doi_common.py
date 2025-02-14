@@ -601,11 +601,11 @@ def get_title(rec):
         # Crossref
         if 'title' in rec and rec['title'][0]:
             return rec['title'][0]
-        return None
+        return 'No title'
     # DataCite
     if 'titles' in rec and rec['titles'] and 'title' in rec['titles'][0]:
         return rec['titles'][0]['title']
-    return None
+    return 'No title'
 
 
 def is_datacite(doi):
