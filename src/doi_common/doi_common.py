@@ -734,7 +734,10 @@ def short_citation(doi, expanded=False):
             if rec is None or 'message' not in rec:
                 return None
             rec = rec['message']
-            authors = rec['author']
+            if 'author' in rec:
+                authors = rec['author']
+            else:
+                authors = rec['editor']
     except Exception as err:
         raise err
     pdate = " " + get_publishing_date(rec).split('-')[0]
