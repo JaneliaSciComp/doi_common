@@ -812,7 +812,10 @@ def short_citation(doi, expanded=False):
                 authors[0]['familyName'] = authors[0]['name']
             else:
                 authors[0]['familyName'] = 'Unknown author'
-        return f"{authors[0]['familyName']} et al.{jour}{pdate}{pmid}"
+        if len(authors) > 1:
+            return f"{authors[0]['familyName']} et al.{jour}{pdate}{pmid}"
+        else:
+            return f"{authors[0]['familyName']}.{jour}{pdate}{pmid}"
     rec['DOI'] = doi
     firsts = []
     for auth in authors:
@@ -821,7 +824,7 @@ def short_citation(doi, expanded=False):
         if len(authors) > 1:
             return f"{authors[0]['family']} et al.{jour}{pdate}{pmid}"
         else:
-            return f"{authors[0]['family']}{jour}{pdate}{pmid}"
+            return f"{authors[0]['family']}.{jour}{pdate}{pmid}"
     return None
 
 
