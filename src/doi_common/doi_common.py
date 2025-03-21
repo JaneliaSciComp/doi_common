@@ -816,13 +816,12 @@ def short_citation(doi, expanded=False):
     rec['DOI'] = doi
     firsts = []
     for auth in authors:
-        if 'sequence' not in auth:
-            break
         if 'family' not in auth or auth['sequence'] != 'first':
             break
-        if not firsts:
+        if len(authors) > 1:
             return f"{authors[0]['family']} et al.{jour}{pdate}{pmid}"
-        return f"{', '.join(firsts)} et al.{jour}{pdate}{pmid}"
+        else:
+            return f"{authors[0]['family']}{jour}{pdate}{pmid}"
     return None
 
 
