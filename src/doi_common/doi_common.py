@@ -40,7 +40,7 @@ import jrc_common.jrc_common as JRC
 
 ORCID_LOGO = "https://dis.int.janelia.org/static/images/ORCID-iD_icon_16x16.png"
 ORGS_URL = "https://services.hhmi.org/IT/WD-hcm/supervisoryorgs"
-
+JANELIA_ROR = "013sk6x84"
 # Logger
 LLOGGER = logging.getLogger(__name__)
 
@@ -692,8 +692,15 @@ def is_janelia_author(auth, coll, project):
             if datacite:
                 if "Janelia" in aff:
                     return auth['name']
-            elif "Janelia" in aff['name']:
-                return " ".join([auth[given], auth[family]])
+            elif 'name' in aff:
+                if "Janelia" in aff['name']:
+                    return " ".join([auth[given], auth[family]])
+            elif 'id' in aff:
+                # If there's no name in the record, see if we can process an ROR ID
+                for aid in aff['id']:
+                    if 'id-type' in aid and aid['id-type'] == 'ROR' \
+                       and 'id' in aid and aid['id'].endswith(f"/{JANELIA_ROR}"):
+                        return " ".join([auth[given], auth[family]])
     # Project name
     if datacite:
         if family in auth and 'name' in auth and auth['name'] == auth[family]:
