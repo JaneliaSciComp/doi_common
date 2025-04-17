@@ -7,6 +7,7 @@
       get_author_details
       get_author_list
       get_doi_record
+      get_first_last_author_payload
       get_journal
       get_name_combinations
       get_project_map
@@ -34,13 +35,16 @@
 
 from datetime import datetime
 import logging
+import os
 import re
 import requests
 import jrc_common.jrc_common as JRC
 
+DIS_URL = "https://dis.int.janelia.org/"
+JANELIA_ROR = "013sk6x84"
 ORCID_LOGO = "https://dis.int.janelia.org/static/images/ORCID-iD_icon_16x16.png"
 ORGS_URL = "https://services.hhmi.org/IT/WD-hcm/supervisoryorgs"
-JANELIA_ROR = "013sk6x84"
+
 # Logger
 LLOGGER = logging.getLogger(__name__)
 
@@ -249,7 +253,7 @@ def get_author_counts(tag, year, show, doi_coll, orcid_coll):
                {"$group": {"_id": "$jrc_author", "count": {"$sum": 1}}}
               ]
     if year != 'All':
-            payload[1]['$match']['jrc_publishing_date'] = {"$regex": "^"+ year}
+        payload[1]['$match']['jrc_publishing_date'] = {"$regex": "^"+ year}
     if show == 'journal':
         payload[1]['$match']["$or"] = [{"type": "journal-article"}, {"subtype": "preprint"}]
     try:
@@ -411,6 +415,53 @@ def get_doi_record(doi, coll):
     except Exception as err:
         raise err
     return row
+
+
+def get_first_last_author_payload(doi):
+    ''' Get the first and last author payload for a DOI
+        Keyword arguments:
+          doi: DOI
+        Returns:
+          First and last author payload
+    '''
+    try:
+        headers = {"Authorization": f"Bearer {os.environ['DIS_JWT']}"}
+        authors = requests.get(f"{DIS_URL}doi/authors/{doi}",
+                               headers=headers, timeout=10).json()
+    except Exception as err:
+        raise err
+    first = []
+    first_id = []
+    last = None
+    last_id = None
+    for auth in authors['data']:
+        if not auth['in_database']:
+            continue
+        name = ", ".join([auth['family'], auth['given']])
+        if 'is_first' in auth and auth['is_first']:
+            first.append(name)
+            if 'employeeId' in auth and auth['employeeId']:
+                first_id.append(auth['employeeId'])
+        if 'is_last' in auth and auth['is_last']:
+            last = name
+            if 'employeeId' in auth and auth['employeeId']:
+                last_id = auth['employeeId']
+    pset = {}
+    if first:
+        pset['jrc_first_author'] = first
+        if first_id:
+            pset['jrc_first_id'] = first_id
+    if last:
+        pset['jrc_last_author'] = last
+        if last_id:
+            pset['jrc_last_id'] = last_id
+    if pset:
+        payload = {"$set": pset}
+    else:
+        payload = {"$unset": {'jrc_first_author': None, 'jrc_first_id':  None,
+               'jrc_last_author': None, 'jrc_last_id': None}}
+    LLOGGER.debug(f"First/last payload: {payload}")
+    return payload
 
 
 def get_journal(rec, full=True):
@@ -692,10 +743,11 @@ def is_janelia_author(auth, coll, project):
             if datacite:
                 if "Janelia" in aff:
                     return auth['name']
-            elif 'name' in aff:
+                continue
+            if 'name' in aff:
                 if "Janelia" in aff['name']:
                     return " ".join([auth[given], auth[family]])
-            elif 'id' in aff:
+            if 'id' in aff:
                 # If there's no name in the record, see if we can process an ROR ID
                 for aid in aff['id']:
                     if 'id-type' in aid and aid['id-type'] == 'ROR' \
@@ -821,17 +873,14 @@ def short_citation(doi, expanded=False):
                 authors[0]['familyName'] = 'Unknown author'
         if len(authors) > 1:
             return f"{authors[0]['familyName']} et al.{jour}{pdate}{pmid}"
-        else:
-            return f"{authors[0]['familyName']}.{jour}{pdate}{pmid}"
+        return f"{authors[0]['familyName']}.{jour}{pdate}{pmid}"
     rec['DOI'] = doi
-    firsts = []
     for auth in authors:
         if 'family' not in auth or auth['sequence'] != 'first':
             break
         if len(authors) > 1:
             return f"{authors[0]['family']} et al.{jour}{pdate}{pmid}"
-        else:
-            return f"{authors[0]['family']}.{jour}{pdate}{pmid}"
+        return f"{authors[0]['family']}.{jour}{pdate}{pmid}"
     return None
 
 
