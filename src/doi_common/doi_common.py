@@ -107,7 +107,7 @@ def _add_single_author_jrc(payload, coll):
             if cnt > 1:
                 payload['duplicate_name'] = True
         _adjust_payload(payload, row)
-    elif 'family' in payload:
+    if 'family' in payload and payload['match'] is 'None':
         try:
             cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
             row = coll.find_one({"given": payload['given'], "family": payload['family']})
@@ -119,6 +119,7 @@ def _add_single_author_jrc(payload, coll):
                 payload['duplicate_name'] = True
         _adjust_payload(payload, row)
     if 'affiliations' in payload and payload['affiliations']:
+        # This is the "gold standard" for author matching
         for aff in payload['affiliations']:
             if 'Janelia' in aff:
                 payload['janelian'] = True
