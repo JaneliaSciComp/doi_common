@@ -7,6 +7,7 @@
       get_author_details
       get_author_list
       get_doi_record
+      get_dois_by_author
       get_first_last_author_payload
       get_journal
       get_name_combinations
@@ -107,7 +108,7 @@ def _add_single_author_jrc(payload, coll):
             if cnt > 1:
                 payload['duplicate_name'] = True
         _adjust_payload(payload, row)
-    if 'family' in payload and payload['match'] is 'None':
+    if 'family' in payload and payload['match'] is None:
         try:
             cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
             row = coll.find_one({"given": payload['given'], "family": payload['family']})
@@ -416,6 +417,26 @@ def get_doi_record(doi, coll):
     except Exception as err:
         raise err
     return row
+
+
+def get_dois_by_author(author, coll):
+    ''' Get DOIs by author
+        Keyword arguments:
+          author: record from ORCID collection
+          coll: dois collection
+        Returns:
+          List of DOIs
+    '''
+    payload = {"$or": [{"author.family": {"$in": author['family']},
+                        "author.given": {"$in": author['given']}},
+                       {"creators.familyName": {"$in": author['family']},
+                        "creators.givenName": {"$in": author['given']}}
+                      ]}
+    try:
+        rows = coll.find(payload, {"doi": 1})
+    except Exception as err:
+        raise err
+    return [row['doi'] for row in rows]
 
 
 def get_first_last_author_payload(doi):
