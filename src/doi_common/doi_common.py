@@ -538,7 +538,7 @@ def get_journal(rec, full=True, name_only=False):
     # DataCite
     if 'publisher' in rec and rec['publisher']:
         journal = rec['publisher']
-    else
+    else:
         return None
     if name_only:
         return journal
@@ -546,7 +546,6 @@ def get_journal(rec, full=True, name_only=False):
     if year == 'unknown':
         return None
     return f"{journal}. {year.split('-')[0]}"
-    return None
 
 
 def get_name_combinations(idrec, rec):
