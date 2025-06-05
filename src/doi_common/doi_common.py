@@ -509,7 +509,7 @@ def get_journal(rec, full=True, name_only=False):
             journal = rec['short-container-title'][0]
         elif 'elife' in rec['DOI']:
             journal = 'eLife'
-        elif rec['DOI'].startswith('10.21203'):
+        elif rec['DOI'].startswith('10.21203/'):
             journal = 'Research Square'
         elif 'osf.io' in rec['DOI']:
             journal = 'osf.io'
@@ -536,7 +536,9 @@ def get_journal(rec, full=True, name_only=False):
                 journal += ': ' + rec['DOI'].split('/')[-1]
         return journal
     # DataCite
-    if 'publisher' in rec and rec['publisher']:
+    if rec['DOI'].startswith('10.25378/'):
+        journal = 'Janelia Research Campus (non-publication)'
+    elsif 'publisher' in rec and rec['publisher']:
         journal = rec['publisher']
     else:
         return None
