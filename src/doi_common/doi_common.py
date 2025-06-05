@@ -487,11 +487,12 @@ def get_first_last_author_payload(doi):
     return payload
 
 
-def get_journal(rec, full=True):
+def get_journal(rec, full=True, name_only=False):
     ''' Generate a journal name
         Keyword arguments:
           rec: data record
           full: adds journal and page
+          name_only: returns name only (no year)
         Returns:
           Journal name
     '''
@@ -523,6 +524,8 @@ def get_journal(rec, full=True):
         year = get_publishing_date(rec)
         if year == 'unknown':
             return None
+        if name_only:
+            return journal
         journal += '. ' + year.split('-')[0]
         if full:
             if 'volume' in rec:
@@ -533,11 +536,16 @@ def get_journal(rec, full=True):
                 journal += ': ' + rec['DOI'].split('/')[-1]
         return journal
     # DataCite
+    if 'publisher' in rec and rec['publisher']:
+        journal = rec['publisher']
+    else
+        return None
+    if name_only:
+        return journal
     year = get_publishing_date(rec)
     if year == 'unknown':
         return None
-    if 'publisher' in rec and rec['publisher']:
-        return f"{rec['publisher']}. {year.split('-')[0]}"
+    return f"{journal}. {year.split('-')[0]}"
     return None
 
 
