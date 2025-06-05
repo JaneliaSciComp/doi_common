@@ -514,6 +514,8 @@ def get_journal(rec, full=True):
             journal = 'PeerJ'
         elif 'protocols.io' in rec['DOI']:
             journal = 'protocols.io'
+        elif 'chemrxiv' in rec['DOI']:
+            journal = 'ChemRxiv'
         else:
             return None
         year = get_publishing_date(rec)
