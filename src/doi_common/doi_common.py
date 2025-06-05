@@ -498,15 +498,15 @@ def get_journal(rec, full=True, name_only=False):
     '''
     if 'DOI' in rec:
         # Crossref
-        if 'short-container-title' in rec and rec['short-container-title']:
-            journal = rec['short-container-title'][0]
-        elif 'container-title' in rec and rec['container-title']:
+        if 'container-title' in rec and rec['container-title']:
             journal = rec['container-title'][0]
         elif 'institution' in rec:
             if isinstance(rec['institution'], list):
                 journal = rec['institution'][0]['name']
             else:
                 journal = rec['institution']['name']
+        elif 'short-container-title' in rec and rec['short-container-title']:
+            journal = rec['short-container-title'][0]
         elif 'elife' in rec['DOI']:
             journal = 'eLife'
         elif rec['DOI'].startswith('10.21203'):
