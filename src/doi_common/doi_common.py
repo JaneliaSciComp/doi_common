@@ -536,7 +536,7 @@ def get_journal(rec, full=True, name_only=False):
                 journal += ': ' + rec['DOI'].split('/')[-1]
         return journal
     # DataCite
-    if rec['DOI'].startswith('10.25378/'):
+    if rec['doi'].startswith('10.25378/'):
         journal = 'Janelia Research Campus (non-publication)'
     elif 'publisher' in rec and rec['publisher']:
         journal = rec['publisher']
