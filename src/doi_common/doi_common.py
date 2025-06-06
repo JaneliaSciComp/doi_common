@@ -580,10 +580,11 @@ def get_name_combinations(idrec, rec):
     _process_middle_initials(rec)
 
 
-def get_project_map(coll):
+def get_project_map(coll, inactive=True):
     ''' Get projects from the project_map collection
         Keyword arguments:
           coll: project_map collection
+          inactive: include inactive ("doNotUse") entries
         Returns:
           Project mapping dict
     '''
@@ -593,7 +594,11 @@ def get_project_map(coll):
     except Exception as err:
         raise err
     for row in rows:
+        if 'doNotUse' in row and row['doNotUse'] and (not inactive):
+            continue
         project[row['name']] = row['project']
+        if row['project']:
+            project[row['project']] = row['project']
     return project
 
 

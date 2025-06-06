@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 [project]
 name = "doi_common"
-version = "16.5.0"
+version = "17.0.0"
 authors = [
   { name="Rob Svirskas", email="svirskasr@hhmi.org" },
 ]
