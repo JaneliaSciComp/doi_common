@@ -97,6 +97,7 @@ def _add_single_author_jrc(payload, coll):
     payload['alumni'] = False
     payload['validated'] = False
     payload['match'] = None
+    row = None
     if 'orcid' in payload:
         try:
             cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
