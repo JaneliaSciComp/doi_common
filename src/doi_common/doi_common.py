@@ -21,6 +21,7 @@
       is_janelia_author
       is_journal
       is_preprint
+      is_version
       short_citation
       single_orcid_lookup
     Callable write functions:
@@ -32,7 +33,7 @@
       update_jrc_author_from_doi
 '''
 
-# pylint: disable=broad-exception-caught,broad-exception-raised,logging-fstring-interpolation
+# pylint: disable=broad-exception-caught,broad-exception-raised,logging-fstring-interpolation,too-many-lines
 
 from datetime import datetime
 import logging
@@ -858,6 +859,32 @@ def is_preprint(rec):
     # DataCite
     if ('types' in rec) and ('resourceTypeGeneral' in rec['types']) \
        and (rec['types']['resourceTypeGeneral'] == 'Preprint'):
+        return True
+    return False
+
+
+def is_version(row):
+    ''' Check if a DOI is a version
+        Keyword arguments:
+          row: row from Crossref or DataCite
+        Returns:
+          True if DOI is a version, False otherwise
+    '''
+    # eLife DOIs ending in a dot number with relations (Crossref)
+    if re.search(r'/elife.+\.\d+$', row['doi']) and 'relation' in row \
+       and 'is-version-of' in row['relation']:
+        return True
+    # protocols.io with relations DOIs with relations (CrossRef)
+    if re.search(r'/protocols.io', row['doi']) and 'relation' in row \
+       and 'has-version' in row['relation']:
+        return True
+    # Non-eLife, non-Research Square, non-protocols.io DOIs with relations (Crossref)
+    if ('elife' not in row['doi'] and '/protocols.io' not in row['doi'] \
+        and '/rs.' not in row['doi']) \
+        and 'relation' in row and 'is-version-of' in row['relation']:
+        return True
+    # Janelia DOIs ending in a v number (DataCite)
+    if re.search(r'/janelia.+\.v\d+$', row['doi']):
         return True
     return False
 
