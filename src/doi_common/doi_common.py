@@ -286,10 +286,17 @@ def get_author_details(rec, coll=None):
     if datacite:
         given = 'givenName'
         family = 'familyName'
-    field = 'creators' if datacite else 'author'
-    if field not in rec and 'name' not in rec:
+        field = rec['creators']
+    # Just use authors and investigators
+    #elif rec['type'] == 'peer-review' and 'editor' in rec:
+    #    field = rec['editor']
+    elif 'author' in rec:
+        field = rec['author']
+    elif 'project' in rec and 'investigator' in rec['project'][0]:
+        field = rec['project'][0]['investigator']
+    else:
         return None
-    author = rec[field]
+    author = field
     seq = 0
     for auth in author:
         payload = {}
@@ -353,13 +360,16 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text', project_ma
     if datacite:
         given = 'givenName'
         family = 'familyName'
-    field = 'creators' if datacite else 'author'
-    if field not in rec and 'editor' in rec:
-        field = 'editor'
-    if field not in rec:
-        print(rec)
+        field = rec['creators']
+    elif rec['type'] == 'peer-review' and 'editor' in rec:
+        field = rec['editor']
+    elif 'author' in rec:
+        field = rec['author']
+    elif 'project' in rec and 'investigator' in rec['project'][0]:
+        field = rec['project'][0]['investigator']
+    else:
         return None
-    author = rec[field]
+    author = field
     punc = '.' if style == 'flylight' else ''
     for auth in author:
         full = ""
