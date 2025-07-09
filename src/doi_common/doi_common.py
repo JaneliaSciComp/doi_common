@@ -881,7 +881,7 @@ def is_version(row):
           True if DOI is a version, False otherwise
     '''
     # eLife DOIs ending in a dot number with relations (Crossref)
-    if re.search(r'/elife.+\.\d+$', row['doi']) and 'relation' in row \
+    if re.search(r'/elife\.\d+\.\d+$', row['doi']) and 'relation' in row \
        and 'is-version-of' in row['relation']:
         return True
     # protocols.io with relations DOIs with relations (CrossRef)
