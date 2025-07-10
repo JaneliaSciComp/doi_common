@@ -361,7 +361,7 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text', project_ma
         given = 'givenName'
         family = 'familyName'
         field = rec['creators']
-    elif rec['type'] == 'peer-review' and 'editor' in rec:
+    elif 'type' in rec and rec['type'] == 'peer-review' and 'editor' in rec:
         field = rec['editor']
     elif 'author' in rec:
         field = rec['author']
