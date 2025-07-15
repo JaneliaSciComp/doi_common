@@ -43,6 +43,7 @@ import re
 import requests
 import jrc_common.jrc_common as JRC
 
+DIMENSIONS_URL = "https://metrics-api.dimensions.ai/doi/"
 DIS_URL = "https://dis.int.janelia.org/"
 JANELIA_ROR = "013sk6x84"
 ORCID_LOGO = "https://dis.int.janelia.org/static/images/ORCID-iD_icon_16x16.png"
@@ -418,25 +419,36 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text', project_ma
     return None
 
 
-def get_citation_count(doi, source='openalex'):
+def get_citation_count(doi, source='dimensions'):
     ''' Return a citation count for a doi
         Keyword arguments:
           doi:: DOI
-          source: citation count source
+          source: citation count source (dimensions or openalex)
         Returns:
           Integer citation count
     '''
-    if source not in ['openalex']:
+    if source not in ['dimensions', 'openalex']:
         raise Exception(f"Unknown citation source {source}")
     try:
         data = None
-        if source == 'openalex':
+        if source == 'dimensions':
+            try:
+                data = requests.get(f"{DIMENSIONS_URL}{doi}",
+                                    timeout=10).json()
+                if not data:
+                    return 0
+            except Exception as err:
+                raise err
+        elif source == 'openalex':
             data = JRC.call_oa(doi)
         if not data:
             return 0
     except Exception:
         return 0
-    if source == 'openalex':
+    if source == 'dimensions':
+        if 'times_cited' in data:
+            return data['times_cited']
+    elif source == 'openalex':
         if 'openalx' in data and 'cited_by_count' in data['openalx']:
             return data['openalx']['cited_by_count']
     return 0
@@ -710,6 +722,7 @@ def get_publishing_date(rec):
                     raise err
     else:
         # DataCite
+        # Submitted, Issued, Available
         if 'registered' in rec:
             return rec['registered'].split('T')[0]
     return 'unknown'
