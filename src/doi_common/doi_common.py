@@ -6,6 +6,7 @@
       get_author_counts
       get_author_details
       get_author_list
+      get_citation_count
       get_doi_record
       get_dois_by_author
       get_first_last_author_payload
@@ -415,6 +416,30 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text', project_ma
     if auth_list:
         return  ', '.join(auth_list) + punc + last
     return None
+
+
+def get_citation_count(doi, source='openalex'):
+    ''' Return a citation count for a doi
+        Keyword arguments:
+          doi:: DOI
+          source: citation count source
+        Returns:
+          Integer citation count
+    '''
+    if source not in ['openalex']:
+        raise Exception(f"Unknown citation source {source}")
+    try:
+        data = None
+        if source == 'openalex':
+            data = JRC.call_oa(doi)
+        if not data:
+            return 0
+    except Exception:
+        return 0
+    if source == 'openalex':
+        if 'openalx' in data and 'cited_by_count' in data['openalx']:
+            return data['openalx']['cited_by_count']
+    return 0
 
 
 def get_doi_record(doi, coll):
