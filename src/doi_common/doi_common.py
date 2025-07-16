@@ -46,9 +46,10 @@ import jrc_common.jrc_common as JRC
 DIMENSIONS_URL = "https://metrics-api.dimensions.ai/doi/"
 DIS_URL = "https://dis.int.janelia.org/"
 JANELIA_ROR = "013sk6x84"
+OA_LANDING = "https://openalex.org/works?page=1&filter=ids.openalex:"
 ORCID_LOGO = "https://dis.int.janelia.org/static/images/ORCID-iD_icon_16x16.png"
 ORGS_URL = "https://services.hhmi.org/IT/WD-hcm/supervisoryorgs"
-
+WOS_DOI = "https://api.clarivate.com/apis/wos-starter/v1/documents?db=WOS&limit=1&page=1&q=DO="
 # Logger
 LLOGGER = logging.getLogger(__name__)
 
@@ -427,31 +428,47 @@ def get_citation_count(doi, source='dimensions'):
         Returns:
           Integer citation count
     '''
-    if source not in ['dimensions', 'openalex']:
+    if source not in ['dimensions', 'openalex', 'wos']:
         raise Exception(f"Unknown citation source {source}")
     try:
         data = None
         if source == 'dimensions':
-            try:
-                data = requests.get(f"{DIMENSIONS_URL}{doi}",
-                                    timeout=10).json()
-                if not data:
-                    return 0
-            except Exception as err:
-                raise err
+            data = requests.get(f"{DIMENSIONS_URL}{doi}",
+                                timeout=10).json()
+            if not data:
+                return 0, None
         elif source == 'openalex':
             data = JRC.call_oa(doi)
+        elif source == 'wos':
+            url = f"{WOS_DOI}{doi}"
+            headers = {'X-ApiKey': os.environ['WOS_API_KEY']}
+            data = requests.get(url, headers=headers, timeout=10).json()
         if not data:
-            return 0
+            return 0, None
     except Exception:
-        return 0
+        return 0, None
     if source == 'dimensions':
         if 'times_cited' in data:
-            return data['times_cited']
+            link = f"<span class='__dimensions_badge_embed__' data-doi='{doi}' " \
+                   + "data-style='small_rectangle'></span><script async " \
+                   + "src='https://badge.dimensions.ai/badge.js' charset='utf-8'></script>"
+            return data['times_cited'], link
     elif source == 'openalex':
         if 'openalx' in data and 'cited_by_count' in data['openalx']:
-            return data['openalx']['cited_by_count']
-    return 0
+            link = None
+            if 'id' in data['openalx']:
+                link = f"{OA_LANDING}{data['openalx']['id'].split('/')[-1]}"
+            return data['openalx']['cited_by_count'], link
+    elif source == 'wos':
+        if 'hits' in data and len(data['hits']) > 0 and 'citations' in data['hits'][0]:
+            hit = data['hits'][0]
+            for citation in hit['citations']:
+                if citation['db'] == 'WOS':
+                    link = None
+                    if 'links' in hit and 'record' in hit['links']:
+                        link = hit['links']['record']
+                    return citation['count'], link
+    return 0, None
 
 
 def get_doi_record(doi, coll):
@@ -722,7 +739,12 @@ def get_publishing_date(rec):
                     raise err
     else:
         # DataCite
-        # Submitted, Issued, Available
+        if 'dates' in rec:
+            for date in rec['dates']:
+                if date['dateType'] == 'Submitted':
+                    return date['date'].split('T')[0]
+                elif date['dateType'] == 'Updated':
+                    return date['date'].split('T')[0]
         if 'registered' in rec:
             return rec['registered'].split('T')[0]
     return 'unknown'
