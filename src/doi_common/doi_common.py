@@ -420,11 +420,12 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text', project_ma
     return None
 
 
-def get_citation_count(doi, source='dimensions'):
+def get_citation_count(doi, source='dimensions', datacite=False):
     ''' Return a citation count for a doi
         Keyword arguments:
           doi:: DOI
           source: citation count source (dimensions or openalex)
+          datacite: True if DataCite record
         Returns:
           Integer citation count
     '''
@@ -434,15 +435,23 @@ def get_citation_count(doi, source='dimensions'):
         data = None
         if source == 'dimensions':
             data = requests.get(f"{DIMENSIONS_URL}{doi}",
-                                timeout=10).json()
+                                timeout=10)
             if not data:
+                print(f"No data for {doi} (Dimensions): {data.status_code}")
                 return 0, None
+            data = data.json()
         elif source == 'openalex':
             data = JRC.call_oa(doi)
         elif source == 'wos':
             url = f"{WOS_DOI}{doi}"
+            if datacite:
+                url = url.replace('WOS', 'DRCI')
             headers = {'X-ApiKey': os.environ['WOS_API_KEY']}
-            data = requests.get(url, headers=headers, timeout=10).json()
+            data = requests.get(url, headers=headers, timeout=10)
+            if not data:
+                print(f"No data for {doi} (Web of Science): {data.status_code}")
+                return 0, None
+            data = data.json()
         if not data:
             return 0, None
     except Exception:
@@ -463,7 +472,7 @@ def get_citation_count(doi, source='dimensions'):
         if 'hits' in data and len(data['hits']) > 0 and 'citations' in data['hits'][0]:
             hit = data['hits'][0]
             for citation in hit['citations']:
-                if citation['db'] == 'WOS':
+                if citation['db'] in ['DRCI', 'WOS']:
                     link = None
                     if 'links' in hit and 'record' in hit['links']:
                         link = hit['links']['record']
