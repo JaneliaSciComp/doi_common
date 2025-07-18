@@ -752,7 +752,7 @@ def get_publishing_date(rec):
             for date in rec['dates']:
                 if date['dateType'] == 'Submitted':
                     return date['date'].split('T')[0]
-                elif date['dateType'] == 'Updated':
+                if date['dateType'] == 'Updated':
                     return date['date'].split('T')[0]
         if 'registered' in rec:
             return rec['registered'].split('T')[0]
