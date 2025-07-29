@@ -820,11 +820,11 @@ def get_title(rec):
     if 'DOI' in rec:
         # Crossref
         if 'title' in rec and rec['title'] and rec['title'][0]:
-            return rec['title'][0]
+            return rec['title'][0].replace("\n", " ")
         return 'No title'
     # DataCite
     if 'titles' in rec and rec['titles'] and 'title' in rec['titles'][0]:
-        return rec['titles'][0]['title']
+        return rec['titles'][0]['title'].replace("\n", " ")
     return 'No title'
 
 
