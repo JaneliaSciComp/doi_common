@@ -40,6 +40,7 @@ from datetime import datetime
 import logging
 import os
 import re
+from pyalex import Works
 import requests
 import jrc_common.jrc_common as JRC
 
@@ -480,7 +481,7 @@ def get_citation_count(doi, source='dimensions', datacite=False):
     return 0, None
 
 
-def get_doi_record(doi, coll):
+def get_doi_record(doi, coll=None, source='mongo'):
     ''' Return a record from the dois collection
         Keyword arguments:
           doi:: DOI
@@ -488,10 +489,16 @@ def get_doi_record(doi, coll):
         Returns:
           None
     '''
-    try:
-        row = coll.find_one({"doi": doi})
-    except Exception as err:
-        raise err
+    if source == 'mongo':
+        try:
+            row = coll.find_one({"doi": doi})
+        except Exception as err:
+            raise err
+    elif source == 'openalex':
+        try:
+            row = Works().filter(doi=doi).get()
+        except Exception as err:
+            raise err
     return row
 
 

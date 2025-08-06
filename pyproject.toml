@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 [project]
 name = "doi_common"
-version = "26.1.0"
+version = "27.0.0"
 authors = [
   { name="Rob Svirskas", email="svirskasr@hhmi.org" },
 ]
 description = "Library of common DOI- and ORCID-related functions for Python"
 readme = "README.md"
 requires-python = ">=3.7"
-dependencies = [ ]
+dependencies = [ "pyalex" ]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
