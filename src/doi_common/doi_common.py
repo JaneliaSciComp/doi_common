@@ -40,9 +40,11 @@ from datetime import datetime
 import logging
 import os
 import re
-from pyalex import Works
+import pyalex
 import requests
 import jrc_common.jrc_common as JRC
+
+pyalex.config.email = "svirskasr@hhmi.org"
 
 DIMENSIONS_URL = "https://metrics-api.dimensions.ai/doi/"
 DIS_URL = "https://dis.int.janelia.org/"
@@ -496,7 +498,7 @@ def get_doi_record(doi, coll=None, source='mongo'):
             raise err
     elif source == 'openalex':
         try:
-            row = Works().filter(doi=doi).get()
+            row = pyalex.Works().filter(doi=doi).get()
         except Exception as err:
             raise err
     return row
