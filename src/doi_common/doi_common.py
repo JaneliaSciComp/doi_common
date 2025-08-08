@@ -48,6 +48,7 @@ pyalex.config.email = "svirskasr@hhmi.org"
 
 DIMENSIONS_URL = "https://metrics-api.dimensions.ai/doi/"
 DIS_URL = "https://dis.int.janelia.org/"
+ELIFE_CC_URL = "https://api.elifesciences.org//metrics/article/"
 ELIFE_URL = "https://api.elifesciences.org/articles/"
 JANELIA_ROR = "013sk6x84"
 OA_LANDING = "https://openalex.org/works?page=1&filter=ids.openalex:"
@@ -433,7 +434,7 @@ def get_citation_count(doi, source='dimensions', datacite=False):
         Returns:
           Integer citation count
     '''
-    if source not in ['dimensions', 'openalex', 'wos']:
+    if source not in ['dimensions', 'elife', 'openalex', 'wos']:
         raise Exception(f"Unknown citation source {source}")
     try:
         data = None
@@ -442,6 +443,14 @@ def get_citation_count(doi, source='dimensions', datacite=False):
                                 timeout=10)
             if not data:
                 print(f"No data for {doi} (Dimensions): {data.status_code}")
+                return 0, None
+            data = data.json()
+        elif source == 'elife':
+            frag = doi.split('ife.')[-1].split('.')[0]
+            data = requests.get(f"{ELIFE_CC_URL}{frag}/citations",
+                                timeout=10)
+            if not data:
+                print(f"No data for {doi} (eLife): {data.status_code}")
                 return 0, None
             data = data.json()
         elif source == 'openalex':
@@ -466,6 +475,17 @@ def get_citation_count(doi, source='dimensions', datacite=False):
                    + "data-style='small_rectangle'></span><script async " \
                    + "src='https://badge.dimensions.ai/badge.js' charset='utf-8'></script>"
             return data['times_cited'], link
+    elif source == 'elife':
+        cnt = 0
+        link = None
+        if data:
+            for itm in data:
+                if 'citations' in itm:
+                    cnt += itm['citations']
+        if cnt:
+            frag = doi.split('ife.')[-1].split('.')[0]
+            link = f"{ELIFE_CC_URL}{frag}/citations"
+        return cnt, link
     elif source == 'openalex':
         if 'openalx' in data and 'cited_by_count' in data['openalx']:
             link = None
