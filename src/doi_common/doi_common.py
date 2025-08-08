@@ -496,12 +496,16 @@ def get_doi_record(doi, coll=None, source='mongo'):
             row = coll.find_one({"doi": doi})
         except Exception as err:
             raise err
+        return row
     elif source == 'openalex':
         try:
             row = pyalex.Works().filter(doi=doi).get()
         except Exception as err:
             raise err
-    return row
+        if not row:
+            return None
+        return row[0]
+    return None
 
 
 def get_dois_by_author(author, coll):
