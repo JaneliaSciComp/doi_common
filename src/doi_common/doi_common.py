@@ -1038,12 +1038,15 @@ def short_citation(doi, expanded=False):
     except Exception as err:
         raise err
     pdate = " " + get_publishing_date(rec).split('-')[0]
-    try:
-        pmid = JRC.get_pmid(doi)
-    except Exception as _:
+    if expanded:
+        try:
+            pmid = JRC.get_pmid(doi)
+        except Exception as _:
+            pmid = ""
+        if pmid:
+            pmid = f" <a href='https://pubmed.ncbi.nlm.nih.gov/{pmid}'>{pmid}</a>"
+    else:
         pmid = ""
-    if pmid:
-        pmid = f" <a href='https://pubmed.ncbi.nlm.nih.gov/{pmid}'>{pmid}</a>"
     jour = ""
     if expanded:
         jour = get_journal(rec, False)
