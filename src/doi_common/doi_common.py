@@ -10,6 +10,7 @@
       get_doi_record
       get_dois_by_author
       get_first_last_author_payload
+      get_incoming_citations
       get_journal
       get_name_combinations
       get_project_map
@@ -44,7 +45,8 @@ import pyalex
 import requests
 import jrc_common.jrc_common as JRC
 
-pyalex.config.email = "svirskasr@hhmi.org"
+OPENALEX_EMAIL = "svirskasr@hhmi.org"
+pyalex.config.email = OPENALEX_EMAIL
 
 DIMENSIONS_URL = "https://metrics-api.dimensions.ai/doi/"
 DIS_URL = "https://dis.int.janelia.org/"
@@ -603,6 +605,41 @@ def get_first_last_author_payload(doi):
                'jrc_last_author': None, 'jrc_last_id': None}}
     LLOGGER.debug(f"First/last payload: {payload}")
     return payload
+
+
+def get_incoming_citations(doi):
+    ''' Get incoming citations for a DOI (uses OpenAlex)
+        Keyword arguments:
+          doi: DOI
+        Returns:
+          List of DOIs
+    '''
+    try:
+        rec = get_doi_record(doi, coll=None, source='openalex')
+    except Exception as err:
+        raise err
+    if not rec or 'cited_by_api_url' not in rec or not rec['cited_by_api_url']:
+        return []
+    base = rec['cited_by_api_url'] + f"&mailto={OPENALEX_EMAIL}&per-page=200&cursor="
+    cursor = '*'
+    dois = []
+    while cursor:
+        try:
+            resp = requests.get(base + cursor, timeout=10)
+            if resp.status_code != 200:
+                break
+            data = resp.json()
+        except Exception as err:
+            raise err
+        if 'results' not in data or not data['results']:
+            break
+        for itm in data['results']:
+            if 'doi' in itm and itm['doi']:
+                dois.append(itm['doi'].split('/')[-1])
+        cursor = data['meta']['next_cursor'] if data['meta']['next_cursor'] else None
+    if not dois:
+        return []
+    return dois
 
 
 def get_journal(rec, full=True, name_only=False):
