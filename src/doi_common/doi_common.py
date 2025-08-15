@@ -640,7 +640,6 @@ def get_incoming_citations(doi):
                     continue
                 dois.append(adoi)
         cursor = data['meta']['next_cursor'] if data['meta']['next_cursor'] else None
-        cursor = None
     if not dois:
         return []
     return dois
