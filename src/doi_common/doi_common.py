@@ -635,7 +635,7 @@ def get_incoming_citations(doi):
             break
         for itm in data['results']:
             if 'doi' in itm and itm['doi']:
-                dois.append(itm['doi'].split('/')[-1])
+                dois.append(itm['doi'].replace('https://doi.org/', ''))
         cursor = data['meta']['next_cursor'] if data['meta']['next_cursor'] else None
     if not dois:
         return []
