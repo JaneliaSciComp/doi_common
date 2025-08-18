@@ -51,6 +51,7 @@ pyalex.config.email = OPENALEX_EMAIL
 DIMENSIONS_URL = "https://metrics-api.dimensions.ai/doi/"
 DIS_URL = "https://dis.int.janelia.org/"
 ELIFE_CC_URL = "https://api.elifesciences.org//metrics/article/"
+ELIFE = "https://api.elifesciences.org/articles/"
 JANELIA_ROR = "013sk6x84"
 OA_LANDING = "https://openalex.org/works?page=1&filter=ids.openalex:"
 ORCID_LOGO = "https://dis.int.janelia.org/static/images/ORCID-iD_icon_16x16.png"
@@ -516,7 +517,7 @@ def get_doi_record(doi, coll=None, source='mongo'):
     if source == 'elife':
         try:
             frag = doi.split('ife.')[-1].split('.')[0]
-            return requests.get(f"{JRC.ELIFE}{frag}",
+            return requests.get(f"{ELIFE}{frag}",
                                 timeout=10).json()
         except Exception as err:
             return None
