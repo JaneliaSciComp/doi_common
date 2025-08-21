@@ -1,6 +1,7 @@
 ''' doi_common.py
     Library of routines for parsing and interpreting DOI/ORCID records.
     Callable read functions:
+      convert_pubmed
       get_abstract
       get_affiliations
       get_author_counts
@@ -43,6 +44,7 @@ import os
 import re
 import pyalex
 import requests
+import xmltodict
 import jrc_common.jrc_common as JRC
 
 OPENALEX_EMAIL = "svirskasr@hhmi.org"
@@ -56,6 +58,10 @@ JANELIA_ROR = "013sk6x84"
 OA_LANDING = "https://openalex.org/works?page=1&filter=ids.openalex:"
 ORCID_LOGO = "https://dis.int.janelia.org/static/images/ORCID-iD_icon_16x16.png"
 ORGS_URL = "https://services.hhmi.org/IT/WD-hcm/supervisoryorgs"
+PMC_CITING_WORKS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed" \
+                   + f"&linkname=pubmed_pmc_refs&email={OPENALEX_EMAIL}&id="
+PM_CONVERTER_URL = "https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles?tool=dis" \
+                   + f"&format=json&email={OPENALEX_EMAIL}&idtype="
 WOS_DOI = "https://api.clarivate.com/apis/wos-starter/v1/documents?db=WOS&limit=1&page=1&q=DO="
 # Logger
 LLOGGER = logging.getLogger(__name__)
@@ -143,6 +149,25 @@ def _add_single_author_jrc(payload, coll):
                 break
 
 
+def _pubmed_citations(pmid):
+    ''' Get PubMed citations
+        Keyword arguments:
+          pmid: PubMed ID
+        Returns:
+          Integer citation count
+    '''
+    try:
+        resp = requests.get(f"{PMC_CITING_WORKS}{pmid}", timeout=10)
+        xmld = xmltodict.parse(resp.text)
+    except Exception as err:
+        raise err
+    if not xmld or 'eLinkResult' not in xmld or 'LinkSet' not in xmld['eLinkResult'] \
+        or 'LinkSetDb' not in xmld['eLinkResult']['LinkSet'] \
+        or 'Link' not in xmld['eLinkResult']['LinkSet']['LinkSetDb']:
+        return 0
+    return len(xmld['eLinkResult']['LinkSet']['LinkSetDb']['Link'])
+
+
 def _process_middle_initials(rec):
     ''' Add name combinations for first names in the forms "F. M." or "F."
         with or without the periods.
@@ -187,6 +212,27 @@ def _set_paper_orcid(auth, datacite, payload):
 # ******************************************************************************
 # * Callable read functions                                                    *
 # ******************************************************************************
+
+def convert_pubmed(iid, itype='pmid'):
+    ''' Convert a PubMed IDs/DOIs
+        Keyword arguments:
+          iid: input ID
+          itype: input type (pmid, pmcid, or doi)
+        Returns:
+          dictionary containing doi, pmcid, and pmid
+    '''
+    url = f"{PM_CONVERTER_URL}{itype}&ids={iid}"
+    try:
+        resp = requests.get(url, timeout=10)
+        if not resp:
+            return None
+    except Exception as err:
+        raise err
+    data = resp.json()
+    if 'records' not in data:
+        return None
+    return data['records']
+
 
 def get_abstract(rec):
     ''' Generate an abstract
@@ -431,12 +477,12 @@ def get_citation_count(doi, source='dimensions', datacite=False):
     ''' Return a citation count for a doi
         Keyword arguments:
           doi:: DOI
-          source: citation count source (dimensions or openalex)
+          source: citation count source (dimensions, elife, openalex, pubmed, wos)
           datacite: True if DataCite record
         Returns:
           Integer citation count
     '''
-    if source not in ['dimensions', 'elife', 'openalex', 'wos']:
+    if source not in ['dimensions', 'elife', 'openalex', 'pubmed', 'wos']:
         raise Exception(f"Unknown citation source {source}")
     try:
         data = None
@@ -457,6 +503,11 @@ def get_citation_count(doi, source='dimensions', datacite=False):
             data = data.json()
         elif source == 'openalex':
             data = JRC.call_oa(doi)
+        elif source == 'pubmed':
+            try:
+                return _pubmed_citations(doi), f"https://pubmed.ncbi.nlm.nih.gov/{doi}"
+            except Exception as err:
+                raise err
         elif source == 'wos':
             url = f"{WOS_DOI}{doi}"
             if datacite:
@@ -519,9 +570,7 @@ def get_doi_record(doi, coll=None, source='mongo'):
             frag = doi.split('ife.')[-1].split('.')[0]
             return requests.get(f"{ELIFE}{frag}",
                                 timeout=10).json()
-        except Exception as err:
-            return None
-        if not row:
+        except Exception:
             return None
     elif source == 'mongo':
         try:
