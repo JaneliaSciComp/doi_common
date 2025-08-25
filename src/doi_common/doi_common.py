@@ -550,6 +550,7 @@ def get_doi_record(doi, coll=None, source='mongo'):
         Keyword arguments:
           doi:: DOI
           coll: dois collection
+          source: elife, mongo, or openalex
         Returns:
           None
     '''
@@ -713,7 +714,7 @@ def get_incoming_citations_pubmed(pmid, convert=True):
           List of DOIs
     '''
     try:
-        resp = requests.get(f"{PMC_CITING_WORKS}{pmid}", timeout=10)
+        resp = requests.get(f"{PMC_CITING_WORKS}{pmid}", timeout=5)
         xmld = xmltodict.parse(resp.text)
     except Exception as err:
         raise err
