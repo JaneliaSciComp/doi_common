@@ -12,6 +12,8 @@
       get_dois_by_author
       get_first_last_author_payload
       get_incoming_citations
+      get_incoming_citations_openalex
+      get_incoming_citations_pubmed
       get_journal
       get_name_combinations
       get_project_map
@@ -147,25 +149,6 @@ def _add_single_author_jrc(payload, coll):
                     payload['match'] = 'asserted'
                 _adjust_payload(payload, row)
                 break
-
-
-def _pubmed_citations(pmid):
-    ''' Get PubMed citations
-        Keyword arguments:
-          pmid: PubMed ID
-        Returns:
-          Integer citation count
-    '''
-    try:
-        resp = requests.get(f"{PMC_CITING_WORKS}{pmid}", timeout=10)
-        xmld = xmltodict.parse(resp.text)
-    except Exception as err:
-        raise err
-    if not xmld or 'eLinkResult' not in xmld or 'LinkSet' not in xmld['eLinkResult'] \
-        or 'LinkSetDb' not in xmld['eLinkResult']['LinkSet'] \
-        or 'Link' not in xmld['eLinkResult']['LinkSet']['LinkSetDb']:
-        return 0
-    return len(xmld['eLinkResult']['LinkSet']['LinkSetDb']['Link'])
 
 
 def _process_middle_initials(rec):
@@ -477,12 +460,12 @@ def get_citation_count(doi, source='dimensions', datacite=False):
     ''' Return a citation count for a doi
         Keyword arguments:
           doi:: DOI
-          source: citation count source (dimensions, elife, openalex, pubmed, wos)
+          source: citation count source (dimensions, elife, oa, openalex, pubmed, wos)
           datacite: True if DataCite record
         Returns:
           Integer citation count
     '''
-    if source not in ['dimensions', 'elife', 'openalex', 'pubmed', 'wos']:
+    if source not in ['dimensions', 'elife', 'oa', 'openalex', 'pubmed', 'wos']:
         raise Exception(f"Unknown citation source {source}")
     try:
         data = None
@@ -501,11 +484,15 @@ def get_citation_count(doi, source='dimensions', datacite=False):
                 print(f"No data for {doi} (eLife): {data.status_code}")
                 return 0, None
             data = data.json()
-        elif source == 'openalex':
+        elif source == 'oa':
             data = JRC.call_oa(doi)
+        elif source == 'openalex':
+            rec = get_doi_record(doi, coll=None, source='openalex')
+            data = get_incoming_citations_openalex(doi, rec)
         elif source == 'pubmed':
             try:
-                return _pubmed_citations(doi), f"https://pubmed.ncbi.nlm.nih.gov/{doi}"
+                return len(get_incoming_citations_pubmed(doi, convert=False)), \
+                       f"https://pubmed.ncbi.nlm.nih.gov/{doi}"
             except Exception as err:
                 raise err
         elif source == 'wos':
@@ -539,12 +526,13 @@ def get_citation_count(doi, source='dimensions', datacite=False):
             frag = doi.split('ife.')[-1].split('.')[0]
             link = f"{ELIFE_CC_URL}{frag}/citations"
         return cnt, link
+    elif source == 'oa':
+        return data['openalx']['cited_by_count'], None
     elif source == 'openalex':
-        if 'openalx' in data and 'cited_by_count' in data['openalx']:
-            link = None
-            if 'id' in data['openalx']:
-                link = f"{OA_LANDING}{data['openalx']['id'].split('/')[-1]}"
-            return data['openalx']['cited_by_count'], link
+        link = None
+        if 'id' in rec:
+            link = f"{OA_LANDING}{rec['id'].split('/')[-1]}"
+        return len(data), link
     elif source == 'wos':
         if 'hits' in data and len(data['hits']) > 0 and 'citations' in data['hits'][0]:
             hit = data['hits'][0]
@@ -656,17 +644,19 @@ def get_first_last_author_payload(doi):
     return payload
 
 
-def get_incoming_citations(doi):
-    ''' Get incoming citations for a DOI (uses OpenAlex)
+def get_incoming_citations_openalex(doi, rec=None):
+    ''' Get incoming citations for a DOI using OpenAlex
         Keyword arguments:
           doi: DOI
+          rec: OpenAlex record (optional)
         Returns:
           List of DOIs
     '''
-    try:
-        rec = get_doi_record(doi, coll=None, source='openalex')
-    except Exception as err:
-        raise err
+    if rec is None:
+        try:
+            rec = get_doi_record(doi, coll=None, source='openalex')
+        except Exception as err:
+            raise err
     if not rec or 'cited_by_api_url' not in rec or not rec['cited_by_api_url']:
         return []
     base = rec['cited_by_api_url'] + f"&mailto={OPENALEX_EMAIL}&per-page=200&cursor="
@@ -692,6 +682,81 @@ def get_incoming_citations(doi):
     if not dois:
         return []
     return dois
+
+
+def batch_pmcid_conversion(pmcids):
+    ''' Convert PMC IDs to DOIs
+        Keyword arguments:
+          pmcids: list of PMC IDs
+        Returns:
+          List of DOIs
+    '''
+    outlist = []
+    try:
+        recs = convert_pubmed(','.join(pmcids), 'pmcid')
+        if not recs:
+            return outlist
+        for rec in recs:
+            if rec and 'doi' in rec:
+                outlist.append(rec['doi'])
+    except Exception as err:
+        raise err
+    return outlist
+
+
+def get_incoming_citations_pubmed(pmid, convert=True):
+    ''' Get incoming citations for a DOI using PubMed
+        Keyword arguments:
+          pmid: PubMed ID
+          convert: convert PMC IDs to DOIs if True
+        Returns:
+          List of DOIs
+    '''
+    try:
+        resp = requests.get(f"{PMC_CITING_WORKS}{pmid}", timeout=10)
+        xmld = xmltodict.parse(resp.text)
+    except Exception as err:
+        raise err
+    if not xmld or 'eLinkResult' not in xmld or 'LinkSet' not in xmld['eLinkResult'] \
+        or 'LinkSetDb' not in xmld['eLinkResult']['LinkSet'] \
+        or 'Link' not in xmld['eLinkResult']['LinkSet']['LinkSetDb']:
+        return []
+    if not convert:
+        return xmld['eLinkResult']['LinkSet']['LinkSetDb']['Link']
+    dois = []
+    pmcids = []
+    limit = len(xmld['eLinkResult']['LinkSet']['LinkSetDb']['Link'])
+    for works in xmld['eLinkResult']['LinkSet']['LinkSetDb']['Link']:
+        pmcids.append(works['Id'])
+        if len(pmcids) < limit and len(pmcids) < 200:
+            continue
+        resp = batch_pmcid_conversion(pmcids)
+        if resp:
+            dois.extend(resp)
+        pmcids = []
+    if pmcids:
+        resp = batch_pmcid_conversion(pmcids)
+        if resp:
+            dois.extend(resp)
+    return dois
+
+
+def get_incoming_citations(doi, source='openalex'):
+    ''' Convenience function to get incoming citations for a DOI
+        Keyword arguments:
+          doi: DOI (or PMID for PubMed)
+          source: citation count source (openalex, pubmed)
+        Returns:
+          List of DOIs
+    '''
+    try:
+        if source == 'openalex':
+            return get_incoming_citations_openalex(doi)
+        if source == 'pubmed':
+            return get_incoming_citations_pubmed(doi)
+    except Exception as err:
+        raise err
+    return []
 
 
 def get_journal(rec, full=True, name_only=False):
