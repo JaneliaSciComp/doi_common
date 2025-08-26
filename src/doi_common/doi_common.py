@@ -1055,7 +1055,8 @@ def is_datacite(doi):
     return bool("/janelia" in doilc or "/arxiv" in doilc or "/d1." in doilc \
                 or "/dryad" in doilc or "/micropub.biology" in doilc \
                 or "/zenodo" in doilc or "figshare" in doilc \
-                or "10.5517/" in doilc)
+                or "10.5517/" in doilc or "10.17615/" in doilc \
+                or "10.17632/" in doilc)
 
 
 def is_janelia_author(auth, coll, project):
