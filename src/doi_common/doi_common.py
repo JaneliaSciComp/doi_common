@@ -62,6 +62,10 @@ ORCID_LOGO = "https://dis.int.janelia.org/static/images/ORCID-iD_icon_16x16.png"
 ORGS_URL = "https://services.hhmi.org/IT/WD-hcm/supervisoryorgs"
 PMC_CITING_WORKS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed" \
                    + f"&linkname=pubmed_pmc_refs&email={OPENALEX_EMAIL}&id="
+PMC_XML = "https://www.ncbi.nlm.nih.gov/pmc/oai/oai.cgi?verb=GetRecord&metadataPrefix=pmc" \
+          + f"&identifier=oai:pubmedcentral.nih.gov:"
+PMID_XML = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed" \
+           + f"&email={OPENALEX_EMAIL}&id="
 PM_CONVERTER_URL = "https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles?tool=dis" \
                    + f"&format=json&email={OPENALEX_EMAIL}&idtype="
 WOS_DOI = "https://api.clarivate.com/apis/wos-starter/v1/documents?db=WOS&limit=1&page=1&q=DO="
@@ -550,7 +554,7 @@ def get_doi_record(doi, coll=None, source='mongo'):
         Keyword arguments:
           doi:: DOI
           coll: dois collection
-          source: elife, mongo, or openalex
+          source: elife, mongo, openalex, or pubmed
         Returns:
           None
     '''
@@ -558,7 +562,7 @@ def get_doi_record(doi, coll=None, source='mongo'):
         try:
             frag = doi.split('ife.')[-1].split('.')[0]
             return requests.get(f"{ELIFE}{frag}",
-                                timeout=10).json()
+                                timeout=5).json()
         except Exception:
             return None
     elif source == 'mongo':
@@ -575,6 +579,20 @@ def get_doi_record(doi, coll=None, source='mongo'):
         if not row:
             return None
         return row[0]
+    elif source == 'pmc':
+        try:
+            resp = requests.get(f"{PMC_XML}{doi}", timeout=5)
+            xmld = xmltodict.parse(resp.text)
+            return xmld
+        except Exception:
+            return None
+    elif source == 'pubmed':
+        try:
+            resp = requests.get(f"{PMID_XML}{doi}", timeout=5)
+            xmld = xmltodict.parse(resp.text)
+            return xmld
+        except Exception:
+            return None
     return None
 
 
