@@ -52,12 +52,14 @@ import jrc_common.jrc_common as JRC
 OPENALEX_EMAIL = "svirskasr@hhmi.org"
 pyalex.config.email = OPENALEX_EMAIL
 
+BIOXIV_API = "https://api.biorxiv.org/details/biorxiv/"
 DIMENSIONS_URL = "https://metrics-api.dimensions.ai/doi/"
 DIS_URL = "https://dis.int.janelia.org/"
 ELIFE_CC_URL = "https://api.elifesciences.org//metrics/article/"
 ELIFE = "https://api.elifesciences.org/articles/"
 JANELIA_ROR = "013sk6x84"
 OA_LANDING = "https://openalex.org/works?page=1&filter=ids.openalex:"
+OA_API = "https://api.openalex.org/works/"
 ORCID_LOGO = "https://dis.int.janelia.org/static/images/ORCID-iD_icon_16x16.png"
 ORGS_URL = "https://services.hhmi.org/IT/WD-hcm/supervisoryorgs"
 PMC_CITING_WORKS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed" \
@@ -549,19 +551,50 @@ def get_citation_count(doi, source='dimensions', datacite=False):
     return 0, None
 
 
+def doi_api_url(doi, source='openalex'):
+    ''' Return the API URL for a DOI
+        Keyword arguments:
+          doi: DOI (or PMID for PubMed, PMCID for PubMed Central)
+          source: source (biorxiv, elife, openalex, pmc, or pubmed)
+        Returns:
+          API URL
+    '''
+    print(f"DOI: {doi}, source: {source}")
+    match source:
+        case 'biorxiv':
+            return f"{BIOXIV_API}{doi}"
+        case 'elife':
+            return f"{ELIFE}{doi.split('ife.')[-1].split('.')[0]}"
+        case 'openalex':
+            if not doi.startswith('https://doi.org/'):
+                doi = 'https://doi.org/' + doi
+            return f"{OA_API}{doi}"
+        case 'pmc':
+            return f"{PMC_XML}{doi}"
+        case 'pubmed':
+            return f"{PMID_XML}{doi}"
+        case _:
+            return None
+
+
 def get_doi_record(doi, coll=None, source='mongo'):
     ''' Return a record from the dois collection
         Keyword arguments:
-          doi:: DOI
+          doi:: DOI (or PMID for PubMed, PMCID for PubMed Central)
           coll: dois collection
-          source: elife, mongo, openalex, or pubmed
+          source: biorxiv, elife, figshare, openalex, or pubmed
         Returns:
           None
     '''
-    if source == 'elife':
+    if source == 'biorxiv':
         try:
-            frag = doi.split('ife.')[-1].split('.')[0]
-            return requests.get(f"{ELIFE}{frag}",
+            return requests.get(doi_api_url(doi, source='biorxiv'),
+                                timeout=5).json()
+        except Exception:
+            return None
+    elif source == 'elife':
+        try:
+            return requests.get(doi_api_url(doi, source='elife'),
                                 timeout=5).json()
         except Exception:
             return None
@@ -581,14 +614,14 @@ def get_doi_record(doi, coll=None, source='mongo'):
         return row[0]
     elif source == 'pmc':
         try:
-            resp = requests.get(f"{PMC_XML}{doi}", timeout=5)
+            resp = requests.get(doi_api_url(doi, source='pmc'), timeout=5)
             xmld = xmltodict.parse(resp.text)
             return xmld
         except Exception:
             return None
     elif source == 'pubmed':
         try:
-            resp = requests.get(f"{PMID_XML}{doi}", timeout=5)
+            resp = requests.get(doi_api_url(doi, source='pubmed'), timeout=5)
             xmld = xmltodict.parse(resp.text)
             return xmld
         except Exception:
