@@ -600,7 +600,6 @@ def get_doi_record(doi, coll=None, source='mongo'):
     elif source == 'elsevier':
         try:
             return requests.get(doi_api_url(doi, source=source),
-                                headers={'X-ELS-APIKey': os.environ['ELSEVIER_API_KEY']},
                                 timeout=5).json()
         except Exception as err:
             raise err
