@@ -57,6 +57,7 @@ DIMENSIONS_URL = "https://metrics-api.dimensions.ai/doi/"
 DIS_URL = "https://dis.int.janelia.org/"
 ELIFE_CC_URL = "https://api.elifesciences.org//metrics/article/"
 ELIFE = "https://api.elifesciences.org/articles/"
+ELSEVIER_API = "https://api.elsevier.com/content/article/doi/"
 JANELIA_ROR = "013sk6x84"
 OA_LANDING = "https://openalex.org/works?page=1&filter=ids.openalex:"
 OA_API = "https://api.openalex.org/works/"
@@ -493,8 +494,11 @@ def get_citation_count(doi, source='dimensions', datacite=False):
         elif source == 'oa':
             data = JRC.call_oa(doi)
         elif source == 'openalex':
-            rec = get_doi_record(doi, coll=None, source='openalex')
-            data = get_incoming_citations_openalex(doi, rec)
+            try:
+                rec = get_doi_record(doi, coll=None, source='openalex')
+                data = get_incoming_citations_openalex(doi, rec)
+            except Exception as err:
+                data = None
         elif source == 'pubmed':
             try:
                 return len(get_incoming_citations_pubmed(doi, convert=False)), \
@@ -555,7 +559,7 @@ def doi_api_url(doi, source='openalex'):
     ''' Return the API URL for a DOI
         Keyword arguments:
           doi: DOI (or PMID for PubMed, PMCID for PubMed Central)
-          source: source (biorxiv, elife, openalex, pmc, or pubmed)
+          source: source (biorxiv, elife, elsevier, openalex, pmc, or pubmed)
         Returns:
           API URL
     '''
@@ -565,6 +569,8 @@ def doi_api_url(doi, source='openalex'):
             return f"{BIOXIV_API}{doi}"
         case 'elife':
             return f"{ELIFE}{doi.split('ife.')[-1].split('.')[0]}"
+        case 'elsevier':
+            return f"{ELSEVIER_API}{doi}?httpAccept=application/json"
         case 'openalex':
             if not doi.startswith('https://doi.org/'):
                 doi = 'https://doi.org/' + doi
@@ -582,22 +588,23 @@ def get_doi_record(doi, coll=None, source='mongo'):
         Keyword arguments:
           doi:: DOI (or PMID for PubMed, PMCID for PubMed Central)
           coll: dois collection
-          source: biorxiv, elife, figshare, openalex, or pubmed
+          source: biorxiv, elife, elsevier, figshare, openalex, pmc, or pubmed
         Returns:
           None
     '''
-    if source == 'biorxiv':
+    if source in ('biorxiv', 'elife'):
         try:
-            return requests.get(doi_api_url(doi, source='biorxiv'),
+            return requests.get(doi_api_url(doi, source=source),
                                 timeout=5).json()
-        except Exception:
-            return None
-    elif source == 'elife':
+        except Exception as err:
+            raise err
+    elif source == 'elsevier':
         try:
-            return requests.get(doi_api_url(doi, source='elife'),
+            return requests.get(doi_api_url(doi, source=source),
+                                headers={'X-ELS-APIKey': os.environ['ELSEVIER_API_KEY']},
                                 timeout=5).json()
-        except Exception:
-            return None
+        except Exception as err:
+            raise err
     elif source == 'mongo':
         try:
             row = coll.find_one({"doi": doi})
