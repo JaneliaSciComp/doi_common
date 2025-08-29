@@ -563,7 +563,6 @@ def doi_api_url(doi, source='openalex'):
         Returns:
           API URL
     '''
-    print(f"DOI: {doi}, source: {source}")
     match source:
         case 'biorxiv':
             return f"{BIOXIV_API}{doi}"
