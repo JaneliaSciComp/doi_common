@@ -22,6 +22,7 @@
       get_single_author_details
       get_supervisory_orgs
       get_title
+      highlight_acknowledgments (experimental)
       is_datacite
       is_janelia_author
       is_journal
@@ -66,7 +67,7 @@ ORGS_URL = "https://services.hhmi.org/IT/WD-hcm/supervisoryorgs"
 PMC_CITING_WORKS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed" \
                    + f"&linkname=pubmed_pmc_refs&email={OPENALEX_EMAIL}&id="
 PMC_XML = "https://www.ncbi.nlm.nih.gov/pmc/oai/oai.cgi?verb=GetRecord&metadataPrefix=pmc" \
-          + f"&identifier=oai:pubmedcentral.nih.gov:"
+          + "&identifier=oai:pubmedcentral.nih.gov:"
 PMID_XML = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed" \
            + f"&email={OPENALEX_EMAIL}&id="
 PM_CONVERTER_URL = "https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles?tool=dis" \
@@ -78,6 +79,25 @@ LLOGGER = logging.getLogger(__name__)
 # ******************************************************************************
 # * Internal functions                                                         *
 # ******************************************************************************
+
+def _adjust_given_name(payload, oarec):
+    ''' Adjust the given name. If it's made up of initials, we're not going to
+        find it in the orcid collection. If OpenAlex has a display name,
+        use the first word in the display name as the given name.
+        Keyword arguments:
+          payload: payload
+          oarec: OpenAlex author data
+        Returns:
+          None
+    '''
+    if not oarec:
+        return
+    if (re.match(r"[A-Z]\.?$", payload['given']) \
+        or re.match(r"[A-Z]\.? [A-Z]\.?$", payload['given'])) \
+       and 'author' in oarec and 'display_name' in oarec['author'] \
+       and oarec['author']['display_name']:
+        payload['given'] = oarec['author']['display_name'].split(" ")[0]
+
 
 def _adjust_payload(payload, row):
     ''' Update author detail with additional attributes
@@ -156,6 +176,34 @@ def _add_single_author_jrc(payload, coll):
                     payload['match'] = 'asserted'
                 _adjust_payload(payload, row)
                 break
+
+
+def _augment_payload(oarec, payload):
+    ''' Augment the payload with OpenAlex data
+        Keyword arguments:
+          auth: author data
+          oarec: OpenAlex author data
+          payload: payload
+    '''
+    if not oarec or not payload['janelian']:
+        return
+    # See if we can get an affiliation from OpenAlex
+    if ('asserted' not in payload or not payload['asserted']) \
+       and ('affiliations' in oarec and oarec['affiliations']):
+        for aff in oarec['affiliations']:
+            if 'raw_affiliation_string' in aff and 'Janelia' in aff['raw_affiliation_string']:
+                payload['asserted'] = True
+                payload['match'] = 'asserted'
+                break
+    return
+    # We can't depend on the ORCID from OpenAlex. Case in point: 10.1038/s41467-024-48189-1
+    # has Andrew Moore (0009-0008-7037-6640) as an author, but lists 0000-0001-8062-1779
+    # as the ORCID.
+    if 'paper_orcid' not in payload and 'author' in oarec and 'orcid' in oarec['author'] \
+       and oarec['author']['orcid']:
+        payload['paper_orcid'] = oarec['author']['orcid'].split("/")[-1]
+        payload['orcid'] = payload['paper_orcid']
+        print(payload)
 
 
 def _process_middle_initials(rec):
@@ -344,6 +392,11 @@ def get_author_details(rec, coll=None):
         return None
     author = field
     seq = 0
+    oarec = get_doi_record(rec['doi'], coll=None, source='openalex')
+    if oarec and 'authorships' in oarec:
+        oarec = oarec['authorships']
+    else:
+        oarec = []
     for auth in author:
         payload = {}
         _set_paper_orcid(auth, datacite, payload)
@@ -380,7 +433,11 @@ def get_author_details(rec, coll=None):
         LLOGGER.debug(f"Payload: {payload}")
         if coll is not None:
             try:
+                if oarec:
+                    _adjust_given_name(payload, oarec[seq-1])
                 _add_single_author_jrc(payload, coll)
+                if oarec:
+                    _augment_payload(oarec[seq-1], payload)
             except Exception as err:
                 raise err
         auth_list.append(payload)
@@ -497,7 +554,7 @@ def get_citation_count(doi, source='dimensions', datacite=False):
             try:
                 rec = get_doi_record(doi, coll=None, source='openalex')
                 data = get_incoming_citations_openalex(doi, rec)
-            except Exception as err:
+            except Exception:
                 data = None
         elif source == 'pubmed':
             try:
@@ -1082,6 +1139,33 @@ def get_title(rec):
     if 'titles' in rec and rec['titles'] and 'title' in rec['titles'][0]:
         return rec['titles'][0]['title'].replace("\n", " ")
     return 'No title'
+
+
+def highlight_acknowledgments(ack, conn):
+    ''' Highlight acknowledgments
+        Keyword arguments:
+          ack: acknowledgment text
+          conn: connection to MongoDB
+        Returns:
+          Highlight HTML
+    '''
+    matches = {}
+    try:
+        rows = conn.project_map.find({"doNotUse": {"$ne": True}})
+        for row in rows:
+            matches[row['name']] = row['project']
+        rows = conn.acknowledgements.find({})
+        for row in rows:
+            matches[row['name']] = row['project']
+    except Exception as err:
+        raise err
+    preamble = r'\s*(?:Janelia|Janelia Research Campus|JRC)?\s*'
+    for mtch in matches:
+        rematches = re.finditer(preamble+mtch, ack, flags=re.IGNORECASE)
+        for rematch in rematches:
+            ack = ack.replace(rematch.group().lstrip(),
+                              f"<span style='background-color: peru;'>{rematch.group()}</span>")
+    return ack
 
 
 def is_datacite(doi):
