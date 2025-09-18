@@ -392,8 +392,10 @@ def get_author_details(rec, coll=None):
         return None
     author = field
     seq = 0
-    oarec = get_doi_record(rec['doi'], coll=None, source='openalex')
-    if oarec and 'authorships' in oarec:
+    oarec = []
+    if 'doi' in rec:
+        oarec = get_doi_record(rec['doi'], coll=None, source='openalex')
+    if oarec and 'authorships' in oarec and len(author) == len(oarec['authorships']):
         oarec = oarec['authorships']
     else:
         oarec = []
