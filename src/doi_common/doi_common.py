@@ -2,6 +2,7 @@
     Library of routines for parsing and interpreting DOI/ORCID records.
     Callable read functions:
       convert_pubmed
+      doi_api_url
       get_abstract
       get_affiliations
       get_author_counts
@@ -617,7 +618,7 @@ def get_citation_count(doi, source='dimensions', datacite=False):
 def doi_api_url(doi, source='openalex'):
     ''' Return the API URL for a DOI
         Keyword arguments:
-          doi: DOI (or PMID for PubMed, PMCID for PubMed Central)
+          doi: DOI (or optional PMID for PubMed, required PMCID for PubMed Central)
           source: source (biorxiv, elife, elsevier, openalex, pmc, or pubmed)
         Returns:
           API URL
@@ -644,7 +645,7 @@ def doi_api_url(doi, source='openalex'):
 def get_doi_record(doi, coll=None, source='mongo'):
     ''' Return a record from the dois collection
         Keyword arguments:
-          doi:: DOI (or PMID for PubMed, PMCID for PubMed Central)
+          doi: DOI (or optional PMID for PubMed, required PMCID for PubMed Central)
           coll: dois collection
           source: biorxiv, elife, elsevier, figshare, openalex, pmc, or pubmed
         Returns:
@@ -1152,6 +1153,7 @@ def highlight_acknowledgments(ack, conn):
           Highlight HTML
     '''
     matches = {}
+    original = ack
     try:
         rows = conn.project_map.find({"doNotUse": {"$ne": True}})
         for row in rows:
@@ -1159,14 +1161,18 @@ def highlight_acknowledgments(ack, conn):
         rows = conn.acknowledgements.find({})
         for row in rows:
             matches[row['name']] = row['project']
+            matches[row['project']] = row['project']
     except Exception as err:
         raise err
+    sorted_matches = dict(sorted(matches.items(), key=lambda k: len(k[1]), reverse=True))
     preamble = r'\s*(?:Janelia|Janelia Research Campus|JRC)?\s*'
-    for mtch in matches:
+    for mtch in sorted_matches:
         rematches = re.finditer(preamble+mtch, ack, flags=re.IGNORECASE)
         for rematch in rematches:
             ack = ack.replace(rematch.group().lstrip(),
-                              f"<span style='background-color: peru;'>{rematch.group()}</span>")
+                              f"<span style='background-color: green;'>{rematch.group()}</span>")
+    if ack != original:
+        ack = f"<span style='color:whitesmoke'>{ack}</span>"
     return ack
 
 
