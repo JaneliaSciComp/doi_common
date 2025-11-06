@@ -61,6 +61,8 @@ ELIFE_CC_URL = "https://api.elifesciences.org//metrics/article/"
 ELIFE = "https://api.elifesciences.org/articles/"
 ELSEVIER_API = "https://api.elsevier.com/content/article/doi/"
 JANELIA_ROR = "013sk6x84"
+LENS_PATENT_API = "https://api.lens.org/patent/search"
+LENS_SCHOLAR_API = "https://api.lens.org/scholarly/search"
 OA_LANDING = "https://openalex.org/works?page=1&filter=ids.openalex:"
 OA_API = "https://api.openalex.org/works/"
 ORCID_LOGO = "https://dis.int.janelia.org/static/images/ORCID-iD_icon_16x16.png"
@@ -621,8 +623,10 @@ def get_citation_count(doi, source='dimensions', datacite=False):
 def doi_api_url(doi, source='openalex'):
     ''' Return the API URL for a DOI
         Keyword arguments:
-          doi: DOI (or optional PMID for PubMed, required PMCID for PubMed Central)
-          source: source (biorxiv, elife, elsevier, openalex, pmc, or pubmed)
+          doi: DOI (or optional PMID for PubMed, required PMCID for
+                    PubMed Central, required Lens ID for lens_patent)
+          source: source (biorxiv, elife, elsevier, lens_patent, lens_scholar,
+                  openalex, pmc, or pubmed)
         Returns:
           API URL
     '''
@@ -633,6 +637,12 @@ def doi_api_url(doi, source='openalex'):
             return f"{ELIFE}{doi.split('ife.')[-1].split('.')[0]}"
         case 'elsevier':
             return f"{ELSEVIER_API}{doi}?httpAccept=application/json"
+        case 'lens_patent':
+            return f"{LENS_PATENT_API}?token={os.environ['LENS_API_KEY']}" \
+                   + f"&query=lens_id:{doi}"
+        case 'lens_scholar':
+            return f"{LENS_SCHOLAR_API}?token={os.environ['LENS_API_KEY']}" \
+                   + f"&query=doi:{doi}"
         case 'openalex':
             if not doi.startswith('https://doi.org/'):
                 doi = 'https://doi.org/' + doi
@@ -646,15 +656,17 @@ def doi_api_url(doi, source='openalex'):
 
 
 def get_doi_record(doi, coll=None, source='mongo'):
-    ''' Return a record from the dois collection
+    ''' Return a record from the dois collection or online sources
         Keyword arguments:
-          doi: DOI (or optional PMID for PubMed, required PMCID for PubMed Central)
+          doi: DOI (or optional PMID for PubMed, required PMCID for
+                    PubMed Central required Lens ID for lens_patent)
           coll: dois collection
-          source: biorxiv, elife, elsevier, figshare, openalex, pmc, or pubmed
+          source: biorxiv, elife, elsevier, figshare, lens_patent, lens_scholar,
+                  openalex, pmc, or pubmed
         Returns:
           None
     '''
-    if source in ('biorxiv', 'elife'):
+    if source in ('biorxiv', 'elife', 'lens_patent', 'lens_scholar'):
         try:
             return requests.get(doi_api_url(doi, source=source),
                                 timeout=5).json()
@@ -682,16 +694,9 @@ def get_doi_record(doi, coll=None, source='mongo'):
         if not row:
             return None
         return row[0]
-    elif source == 'pmc':
+    elif source in ('pmc', 'pubmed'):
         try:
-            resp = requests.get(doi_api_url(doi, source='pmc'), timeout=5)
-            xmld = xmltodict.parse(resp.text)
-            return xmld
-        except Exception:
-            return None
-    elif source == 'pubmed':
-        try:
-            resp = requests.get(doi_api_url(doi, source='pubmed'), timeout=5)
+            resp = requests.get(doi_api_url(doi, source=source), timeout=5)
             xmld = xmltodict.parse(resp.text)
             return xmld
         except Exception:
@@ -1098,10 +1103,11 @@ def get_single_author_details(rec, coll=None):
 
 
 
-def get_supervisory_orgs(coll=None):
+def get_supervisory_orgs(coll=None, full=False):
     ''' Get supervisory organizations from HQ (default) or MongoDB
         Keyword arguments:
           coll: suporg collection object (optional)
+          full: return full record (default False)
         Returns:
           Dict of supervisory organizations
     '''
@@ -1125,7 +1131,7 @@ def get_supervisory_orgs(coll=None):
         raise Exception(f"Failed to get supervisory organizations: {resp.status_code}")
     for org in results:
         if org['LOCATIONCODE'] and 'Janelia' in org['LOCATIONCODE'] and 'SUPORGCODE' in org:
-            orgs[org['SUPORGNAME']] = org['SUPORGCODE']
+            orgs[org['SUPORGNAME']] = org if full else org['SUPORGCODE']
     return orgs
 
 
