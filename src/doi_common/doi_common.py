@@ -620,13 +620,14 @@ def get_citation_count(doi, source='dimensions', datacite=False):
     return 0, None
 
 
-def doi_api_url(doi, source='openalex'):
+def doi_api_url(doi, source='openalex', content='json'):
     ''' Return the API URL for a DOI
         Keyword arguments:
           doi: DOI (or optional PMID for PubMed, required PMCID for
                     PubMed Central, required Lens ID for lens_patent)
           source: source (biorxiv, elife, elsevier, lens_patent, lens_scholar,
                   openalex, pmc, or pubmed)
+          content: content type (json or xml)
         Returns:
           API URL
     '''
@@ -636,7 +637,8 @@ def doi_api_url(doi, source='openalex'):
         case 'elife':
             return f"{ELIFE}{doi.split('ife.')[-1].split('.')[0]}"
         case 'elsevier':
-            return f"{ELSEVIER_API}{doi}?httpAccept=application/json"
+            haccept = 'application/json' if content == 'json' else 'text/xml'
+            return f"{ELSEVIER_API}{doi}?httpAccept={haccept}"
         case 'lens_patent':
             return f"{LENS_PATENT_API}?token={os.environ['LENS_API_KEY']}" \
                    + f"&query=lens_id:{doi}"
@@ -663,6 +665,7 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
           coll: dois collection
           source: biorxiv, elife, elsevier, figshare, lens_patent, lens_scholar,
                   openalex, pmc, or pubmed
+          content: content type (json or xml)
         Returns:
           None
     '''
@@ -675,12 +678,14 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
     elif source == 'elsevier':
         headers = {'X-ELS-APIKey': os.environ['ELSEVIER_API_KEY']}
         try:
-            url = doi_api_url(doi, source=source)
             if content == 'xml':
-                url = url.replace('application/json', 'text/xml')
-            return requests.get(doi_api_url(doi, source=source),
-                                headers=headers,
-                                timeout=5).json()
+                return requests.get(doi_api_url(doi, source=source, content=content),
+                                    headers=headers,
+                                    timeout=5)
+            else:
+                return requests.get(doi_api_url(doi, source=source, content=content),
+                                    headers=headers,
+                                    timeout=5).json()
         except Exception as err:
             raise err
     elif source == 'mongo':
