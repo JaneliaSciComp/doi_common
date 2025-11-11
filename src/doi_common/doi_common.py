@@ -655,7 +655,7 @@ def doi_api_url(doi, source='openalex'):
             return None
 
 
-def get_doi_record(doi, coll=None, source='mongo'):
+def get_doi_record(doi, coll=None, source='mongo', content='json'):
     ''' Return a record from the dois collection or online sources
         Keyword arguments:
           doi: DOI (or optional PMID for PubMed, required PMCID for
@@ -675,6 +675,9 @@ def get_doi_record(doi, coll=None, source='mongo'):
     elif source == 'elsevier':
         headers = {'X-ELS-APIKey': os.environ['ELSEVIER_API_KEY']}
         try:
+            url = doi_api_url(doi, source=source)
+            if content == 'xml':
+                url = url.replace('application/json', 'text/xml')
             return requests.get(doi_api_url(doi, source=source),
                                 headers=headers,
                                 timeout=5).json()
