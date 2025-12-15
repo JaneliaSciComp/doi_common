@@ -76,7 +76,7 @@ PMID_XML = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed"
 PM_CONVERTER_URL = "https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles?tool=dis" \
                    + f"&format=json&email={OPENALEX_EMAIL}&idtype="
 WOS_DOI = "https://api.clarivate.com/apis/wos-starter/v1/documents?db=WOS&limit=1&page=1&q=DO="
-ZENODO_API = "https://zenodo.org/api/records?q=doi:"
+ZENODO_API = "https://zenodo.org/api/records/"
 # Logger
 LLOGGER = logging.getLogger(__name__)
 
@@ -199,7 +199,8 @@ def _augment_payload(doi, oarec, payload):
             if 'raw_affiliation_string' in aff and 'Janelia' in aff['raw_affiliation_string']:
                 payload['asserted'] = True
                 payload['match'] = 'asserted'
-                print(f"Upgraded match on {doi} to asserted for", payload['given'], payload['family'])
+                print(f"Upgraded match on {doi} to asserted for",
+                      payload['given'], payload['family'])
                 break
     if 'match' in payload and payload['match'] == 'name' and 'paper_orcid' not in payload \
        and 'author' in oarec and 'orcid' in oarec['author'] and oarec['author']['orcid'] \
@@ -655,7 +656,7 @@ def doi_api_url(doi, source='openalex', content='json'):
         case 'pubmed':
             return f"{PMID_XML}{doi}"
         case 'zenodo':
-            return f"{ZENODO_API}{doi}"
+            return f"{ZENODO_API}{doi.split('.')[-1]}"
         case _:
             return None
 
@@ -685,10 +686,9 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
                 return requests.get(doi_api_url(doi, source=source, content=content),
                                     headers=headers,
                                     timeout=5)
-            else:
-                return requests.get(doi_api_url(doi, source=source, content=content),
-                                    headers=headers,
-                                    timeout=5).json()
+            return requests.get(doi_api_url(doi, source=source, content=content),
+                                headers=headers,
+                                timeout=5).json()
         except Exception as err:
             raise err
     elif source == 'mongo':
@@ -714,13 +714,11 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
             return None
     elif source == 'zenodo':
         try:
-            resp = requests.get(doi_api_url(doi, source=source), timeout=5).json()
-            if not resp or 'hits' not in resp or not resp['hits'] or 'hits' not in resp['hits'] \
-               or len(resp['hits']['hits']) != 1:
-                return None
-            return resp['hits']['hits'][0]
+            headers = {'Authorization': f'Bearer {os.environ["ZENODO_API_KEY"]}'}
+            resp = requests.get(doi_api_url(doi, source=source), headers=headers, timeout=5).json()
+            return resp
         except Exception as err:
-            raise err
+            return None
     return None
 
 
