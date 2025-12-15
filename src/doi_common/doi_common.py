@@ -494,7 +494,7 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text', project_ma
             if not row:
                 full = ""
         if not full:
-            if given in auth:
+            if given in auth and 'family' in auth:
                 initials = auth[given].split()
                 first = []
                 for gvn in initials:
