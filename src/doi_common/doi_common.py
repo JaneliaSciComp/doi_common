@@ -1345,7 +1345,7 @@ def is_version(row):
     return False
 
 
-def short_citation(doi, expanded=False):
+def short_citation(doi, expanded=False, coll=None):
     ''' Generate a short citation
         Keyword arguments:
           doi: DOI
@@ -1355,16 +1355,24 @@ def short_citation(doi, expanded=False):
     '''
     try:
         if is_datacite(doi):
-            rec = JRC.call_datacite(doi)
-            if rec is None or 'data' not in rec:
-                return None
-            rec = rec['data']['attributes']
+            rec = {}
+            if coll is not None:
+                rec = get_doi_record(doi, coll)
+            if not rec:
+                rec = JRC.call_datacite(doi)
+                if rec is None or 'data' not in rec:
+                    return None
+                rec = rec['data']['attributes']
             authors = rec['creators']
         else:
-            rec = JRC.call_crossref(doi)
-            if rec is None or 'message' not in rec:
-                return None
-            rec = rec['message']
+            rec = {}
+            if coll is not None:
+                rec = get_doi_record(doi, coll)
+            if not rec:
+                rec = JRC.call_crossref(doi)
+                if rec is None or 'message' not in rec:
+                    return None
+                rec = rec['message']
             if 'author' in rec:
                 authors = rec['author']
             else:
