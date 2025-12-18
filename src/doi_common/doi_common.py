@@ -40,7 +40,7 @@
       update_jrc_author_from_doi
 '''
 
-# pylint: disable=broad-exception-caught,broad-exception-raised,logging-fstring-interpolation,too-many-lines
+# pylint: disable=broad-exception-caught,broad-exception-raised,logging-fstring-interpolation,too-many-arguments,too-many-branches,too-many-lines,too-many-positional-arguments,too-many-return-statements,too-many-statements
 
 from datetime import datetime
 import logging
@@ -76,6 +76,7 @@ PMID_XML = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed"
 PM_CONVERTER_URL = "https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles?tool=dis" \
                    + f"&format=json&email={OPENALEX_EMAIL}&idtype="
 WOS_DOI = "https://api.clarivate.com/apis/wos-starter/v1/documents?db=WOS&limit=1&page=1&q=DO="
+SPRINGER_API = "https://api.springernature.com/meta/v2/json"
 ZENODO_API = "https://zenodo.org/api/records/"
 # Logger
 LLOGGER = logging.getLogger(__name__)
@@ -628,7 +629,7 @@ def doi_api_url(doi, source='openalex', content='json'):
           doi: DOI (or optional PMID for PubMed, required PMCID for
                     PubMed Central, required Lens ID for lens_patent)
           source: source (biorxiv, elife, elsevier, lens_patent, lens_scholar,
-                  openalex, pmc, pubmed, zenodo)
+                  openalex, pmc, pubmed, springer, zenodo)
           content: content type (json or xml)
         Returns:
           API URL
@@ -655,6 +656,8 @@ def doi_api_url(doi, source='openalex', content='json'):
             return f"{PMC_XML}{doi}"
         case 'pubmed':
             return f"{PMID_XML}{doi}"
+        case 'springer':
+            return f"{SPRINGER_API}?q=doi:{doi}&api_key={os.environ['SPRINGER_META_API_KEY']}"
         case 'zenodo':
             return f"{ZENODO_API}{doi.split('.')[-1]}"
         case _:
@@ -668,7 +671,7 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
                     PubMed Central required Lens ID for lens_patent)
           coll: dois collection
           source: biorxiv, elife, elsevier, figshare, lens_patent, lens_scholar,
-                  openalex, pmc, pubmed, zenodo
+                  openalex, pmc, pubmed, springer, zenodo
           content: content type (json or xml)
         Returns:
           None
@@ -711,6 +714,12 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
             xmld = xmltodict.parse(resp.text)
             return xmld
         except Exception:
+            return None
+    elif source == 'springer':
+        try:
+            resp = requests.get(doi_api_url(doi, source=source), timeout=5).json()
+            return resp
+        except Exception as err:
             return None
     elif source == 'zenodo':
         try:
