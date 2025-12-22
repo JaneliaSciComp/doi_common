@@ -79,7 +79,7 @@ WOS_DOI = "https://api.clarivate.com/apis/wos-starter/v1/documents?db=WOS&limit=
 SPRINGER_API = "https://api.springernature.com/meta/v2/json"
 ZENODO_API = "https://zenodo.org/api/records/"
 # DataCite prefixes
-DC_PREFIX = ['10.1101/', '10.15151/', '10.15785/', '10.17615/', '10.17617/', '10.17632/',
+DC_PREFIX = ['10.15151/', '10.15785/', '10.17615/', '10.17617/', '10.17632/',
              '10.22002/', '10.24433/', '10.25345/', '10.3929/', '10.48324/', '10.48448/',
              '10.5517/', '10.5522/', '10.57736/', '10.60692/', '10.7907/']
 # Logger
