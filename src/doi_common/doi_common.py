@@ -78,6 +78,10 @@ PM_CONVERTER_URL = "https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles?to
 WOS_DOI = "https://api.clarivate.com/apis/wos-starter/v1/documents?db=WOS&limit=1&page=1&q=DO="
 SPRINGER_API = "https://api.springernature.com/meta/v2/json"
 ZENODO_API = "https://zenodo.org/api/records/"
+# DataCite prefixes
+DC_PREFIX = ['10.1101/', '10.15151/', '10.15785/', '10.17615/', '10.17617/', '10.17632/',
+             '10.22002/', '10.24433/', '10.25345/', '10.3929/', '10.48324/', '10.48448/',
+             '10.5517/', '10.5522/', '10.57736/', '10.60692/', '10.7907/']
 # Logger
 LLOGGER = logging.getLogger(__name__)
 
@@ -413,7 +417,8 @@ def get_author_details(rec, coll=None):
         _set_paper_orcid(auth, datacite, payload)
         seq += 1
         if datacite and (given not in auth or not auth[given]) \
-           and 'name' in auth and " " in auth['name']:
+           and 'name' in auth and " " in auth['name'] \
+           and auth['name'] != 'Janelia Research Campus':
             payload['given'] = auth['name'].split(" ")[0]
             payload['family'] = auth['name'].split(" ")[-1]
         else:
@@ -1220,11 +1225,11 @@ def is_datacite(doi):
           True or False
     '''
     doilc = doi.lower()
-    return bool("/janelia" in doilc or "/arxiv" in doilc or "/d1." in doilc \
+    if ("/janelia" in doilc or "/arxiv" in doilc or "/d1." in doilc \
                 or "/dryad" in doilc or "/micropub.biology" in doilc \
-                or "/zenodo" in doilc or "figshare" in doilc \
-                or "10.5517/" in doilc or "10.17615/" in doilc \
-                or "10.17632/" in doilc)
+                or "/zenodo" in doilc or "figshare" in doilc):
+        return True
+    return bool(any(doilc.startswith(prefix) for prefix in DC_PREFIX))
 
 
 def is_janelia_author(auth, coll, project):
