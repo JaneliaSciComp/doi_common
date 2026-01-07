@@ -20,6 +20,7 @@
       get_project_map
       get_projects_from_dois
       get_publishing_date
+      get_pubmed_affiliations
       get_single_author_details
       get_supervisory_orgs
       get_title
@@ -75,6 +76,7 @@ PMID_XML = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed"
            + f"&email={OPENALEX_EMAIL}&id="
 PM_CONVERTER_URL = "https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles?tool=dis" \
                    + f"&format=json&email={OPENALEX_EMAIL}&idtype="
+PUBMED_BASE = "https://pubmed.ncbi.nlm.nih.gov/"
 WOS_DOI = "https://api.clarivate.com/apis/wos-starter/v1/documents?db=WOS&limit=1&page=1&q=DO="
 SPRINGER_API = "https://api.springernature.com/meta/v2/json"
 ZENODO_API = "https://zenodo.org/api/records/"
@@ -381,7 +383,7 @@ def get_author_counts(tag, year, show, doi_coll, orcid_coll):
 def get_author_details(rec, coll=None):
     ''' Generate a detailed author list from a DOI record
         Keyword arguments:
-          data: DOI data record
+          rec: DOI data record
           coll: optional orcid collection
         Returns:
           Detailed author list
@@ -406,12 +408,22 @@ def get_author_details(rec, coll=None):
     author = field
     seq = 0
     oarec = []
+    # Get OpenAlex and PubMed data
     if 'doi' in rec:
         oarec = get_doi_record(rec['doi'], coll=None, source='openalex')
     if oarec and 'authorships' in oarec and len(author) == len(oarec['authorships']):
         oarec = oarec['authorships']
     else:
         oarec = []
+    pubmed_aff = []
+    if 'jrc_pmid' in rec:
+        try:
+            pubmed_aff = get_pubmed_affiliations(rec['jrc_pmid'])
+            if len(pubmed_aff) != len(author):
+                pubmed_aff = []
+        except Exception as err:
+            raise err
+    # Generate author details
     for auth in author:
         payload = {}
         _set_paper_orcid(auth, datacite, payload)
@@ -456,10 +468,12 @@ def get_author_details(rec, coll=None):
                     _augment_payload(rec['doi'], oarec[seq-1], payload)
             except Exception as err:
                 raise err
+        if pubmed_aff:
+            aff = pubmed_aff.pop(0)
+            if aff:
+                payload['pubmed_affiliation'] = aff
         auth_list.append(payload)
-    if not auth_list:
-        return None
-    return auth_list
+    return None if not auth_list else auth_list
 
 
 def get_author_list(rec, orcid=False, style='dis', returntype='text', project_map=None):
@@ -575,7 +589,7 @@ def get_citation_count(doi, source='dimensions', datacite=False):
         elif source == 'pubmed':
             try:
                 return len(get_incoming_citations_pubmed(doi, convert=False)), \
-                       f"https://pubmed.ncbi.nlm.nih.gov/{doi}"
+                       f"{PUBMED_BASE}{doi}"
             except Exception as err:
                 raise err
         elif source == 'wos':
@@ -715,9 +729,11 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
         return row[0]
     elif source in ('pmc', 'pubmed'):
         try:
+            headers = {'api_key': os.environ['NCBI_API_KEY']}
             resp = requests.get(doi_api_url(doi, source=source), timeout=5)
-            xmld = xmltodict.parse(resp.text)
-            return xmld
+            if content == 'xml':
+                return resp
+            return xmltodict.parse(resp.text)
         except Exception:
             return None
     elif source == 'springer':
@@ -1115,6 +1131,37 @@ def get_publishing_date(rec):
     return 'unknown'
 
 
+def get_pubmed_affiliations(pmid):
+    ''' Get PubMed affiliations for a PMID
+        Keyword arguments:
+          pmid: PMID
+        Returns:
+          List of PubMed affiliations
+    '''
+    pubmed_aff = []
+    rec = get_doi_record(pmid, source='pubmed')
+    if not rec:
+        return pubmed_aff
+    alist = (rec.get('PubmedArticleSet', {}).get('PubmedArticle', {}).get('MedlineCitation', {})
+             .get('Article', {}).get('AuthorList', {}).get('Author', []))
+    if alist:
+        for auth in alist:
+            afflist = auth.get('AffiliationInfo', [])
+            found = False
+            for aff in afflist:
+                if isinstance(aff, str):
+                    aff = {'Affiliation': aff}
+                if 'Affiliation' not in aff:
+                    continue
+                if 'Janelia' in aff['Affiliation']:
+                    pubmed_aff.append(aff['Affiliation'])
+                    found = True
+                    break
+            if not found:
+                pubmed_aff.append(False)
+    return pubmed_aff
+
+
 def get_single_author_details(rec, coll=None):
     ''' Generate a detail dict for a single author from the orcid collection
         Keyword arguments:
@@ -1400,7 +1447,7 @@ def short_citation(doi, expanded=False, coll=None):
         except Exception as _:
             pmid = ""
         if pmid:
-            pmid = f" <a href='https://pubmed.ncbi.nlm.nih.gov/{pmid}'>{pmid}</a>"
+            pmid = f" <a href='{PUBMED_BASE}{pmid}'>{pmid}</a>"
     else:
         pmid = ""
     jour = ""
