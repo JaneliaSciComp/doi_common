@@ -197,7 +197,7 @@ def _augment_payload(doi, oarec, payload):
           oarec: OpenAlex author data
           payload: payload
     '''
-    if not oarec or not payload['janelian']:
+    if not oarec:
         return
     # See if we can get an affiliation from OpenAlex
     if ('asserted' not in payload or not payload['asserted']) \
@@ -404,7 +404,7 @@ def get_author_details(rec, coll=None):
     elif 'project' in rec and 'investigator' in rec['project'][0]:
         field = rec['project'][0]['investigator']
     else:
-        return None
+        return []
     author = field
     seq = 0
     oarec = []
@@ -473,7 +473,7 @@ def get_author_details(rec, coll=None):
             if aff:
                 payload['pubmed_affiliation'] = aff
         auth_list.append(payload)
-    return None if not auth_list else auth_list
+    return [] if not auth_list else auth_list
 
 
 def get_author_list(rec, orcid=False, style='dis', returntype='text', project_map=None):
