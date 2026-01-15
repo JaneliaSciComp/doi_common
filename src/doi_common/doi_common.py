@@ -206,8 +206,7 @@ def _augment_payload(doi, oarec, payload):
             if 'raw_affiliation_string' in aff and 'Janelia' in aff['raw_affiliation_string']:
                 payload['asserted'] = True
                 payload['match'] = 'asserted'
-                print(f"Upgraded match on {doi} to asserted for",
-                      payload['given'], payload['family'])
+                payload['match_notes'] = "Upgraded match to asserted using OpenAlex affiliation"
                 break
     if 'match' in payload and payload['match'] == 'name' and 'paper_orcid' not in payload \
        and 'author' in oarec and 'orcid' in oarec['author'] and oarec['author']['orcid'] \
@@ -215,7 +214,7 @@ def _augment_payload(doi, oarec, payload):
         payload['paper_orcid'] = oarec['author']['orcid'].split("/")[-1]
         payload['orcid'] = payload['paper_orcid']
         payload['match'] = 'orcid'
-        print(f"Upgraded match on {doi} to orcid for", payload['given'], payload['family'])
+        payload['match_notes'] = "Upgraded match to orcid using OpenAlex ORCID"
     # We can't depend on the ORCID from OpenAlex alone. Case in point: 10.1038/s41467-024-48189-1
     # has Andrew Moore (0009-0008-7037-6640) as an author, but lists 0000-0001-8062-1779
     # as the ORCID.
@@ -415,8 +414,9 @@ def get_author_details(rec, coll=None):
         oarec = oarec['authorships']
     else:
         oarec = []
+    # Grab the PubMed record if available
     pubmed_aff = []
-    if 'jrc_pmid' in rec:
+    if rec.get('jrc_pmid'):
         try:
             pubmed_aff = get_pubmed_affiliations(rec['jrc_pmid'])
             if len(pubmed_aff) != len(author):
@@ -468,10 +468,14 @@ def get_author_details(rec, coll=None):
                     _augment_payload(rec['doi'], oarec[seq-1], payload)
             except Exception as err:
                 raise err
+        # If the match is not asserted and we have PubMed affiliations, pop one
         if pubmed_aff:
             aff = pubmed_aff.pop(0)
-            if aff:
-                payload['pubmed_affiliation'] = aff
+            if payload.get('match') != 'asserted':
+                if aff:
+                    payload['match'] = 'asserted'
+                    payload['asserted'] = True
+                    payload['match_notes'] = "Upgraded match to asserted using PubMed affiliation"
         auth_list.append(payload)
     return [] if not auth_list else auth_list
 
@@ -1136,17 +1140,21 @@ def get_pubmed_affiliations(pmid):
         Keyword arguments:
           pmid: PMID
         Returns:
-          List of PubMed affiliations
+          List of PubMed affiliations (False for no Janelia affiliation)
     '''
     pubmed_aff = []
     rec = get_doi_record(pmid, source='pubmed')
-    if not rec:
+    if not rec or not rec.get('PubmedArticleSet'):
         return pubmed_aff
-    alist = (rec.get('PubmedArticleSet', {}).get('PubmedArticle', {}).get('MedlineCitation', {})
-             .get('Article', {}).get('AuthorList', {}).get('Author', []))
+    alist = (rec.get('PubmedArticleSet', {}).get('PubmedArticle', {}).get('MedlineCitation', {}).get('Article', {}).get('AuthorList', {}).get('Author', []))
     if alist:
         for auth in alist:
-            afflist = auth.get('AffiliationInfo', [])
+            if not auth:
+                continue
+            try:
+                afflist = auth.get('AffiliationInfo', [])
+            except Exception as err:
+                continue
             found = False
             for aff in afflist:
                 if isinstance(aff, str):
