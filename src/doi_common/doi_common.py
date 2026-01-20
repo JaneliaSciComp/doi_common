@@ -47,6 +47,7 @@ from datetime import datetime
 import logging
 import os
 import re
+import xml.etree.ElementTree as ET
 import pyalex
 import requests
 import xmltodict
@@ -189,10 +190,9 @@ def _add_single_author_jrc(payload, coll):
                 break
 
 
-def _augment_payload(doi, oarec, payload):
+def _augment_payload(oarec, payload):
     ''' Augment the payload with OpenAlex data
         Keyword arguments:
-          doi: DOI
           auth: author data from orcid collection
           oarec: OpenAlex author data
           payload: payload
@@ -204,6 +204,7 @@ def _augment_payload(doi, oarec, payload):
        and ('affiliations' in oarec and oarec['affiliations']):
         for aff in oarec['affiliations']:
             if 'raw_affiliation_string' in aff and 'Janelia' in aff['raw_affiliation_string']:
+                payload['affiliations'] = [aff['raw_affiliation_string']]
                 payload['asserted'] = True
                 payload['match'] = 'asserted'
                 payload['match_notes'] = "Upgraded match to asserted using OpenAlex affiliation"
@@ -378,6 +379,87 @@ def get_author_counts(tag, year, show, doi_coll, orcid_coll):
         counts[author[row['_id']]] = row['count']
     return counts
 
+def parse_elsevier_authors(rec):
+    ''' Parse Elsevier authors
+        Keyword arguments:
+          rec: DOI data record
+        Returns:
+          Elsevier author affiliation list
+    '''
+    # Get XML content from Elsevier API
+    try:
+        rec = get_doi_record(rec['doi'], source='elsevier', content='xml')
+    except Exception:
+        return None
+    if not rec or not rec.content:
+        return None
+    xmlstr = rec.content
+    # Parse the XML string into an element tree
+    root = ET.fromstring(xmlstr)
+    authors = []
+    # Find the head element (using wildcard namespace to handle any namespace)
+    head = root.find('.//{*}head')
+    if head is None:
+        return None
+    # Find the author-group element
+    author_group = head.find('{*}author-group')
+    if author_group is None:
+        return None
+    # First, extract all affiliations and create a mapping from ID to textfn
+    affiliation_map = {}
+    affiliation_elements = head.findall('.//{*}affiliation')
+    for aff_elem in affiliation_elements:
+        aff_id = aff_elem.get('id', '')
+        textfn_elem = aff_elem.find('{*}textfn')
+        if aff_id and textfn_elem is not None:
+            affiliation_map[aff_id] = textfn_elem.text if textfn_elem.text else ''
+    # Find all author elements under author-group
+    author_elements = author_group.findall('{*}author')
+    # Process each author element
+    for author_elem in author_elements:
+        author_dict = {}
+        # Extract attributes
+        author_dict['id'] = author_elem.get('id', '')
+        author_dict['author-id'] = author_elem.get('author-id', '')
+        author_dict['orcid'] = author_elem.get('orcid', '')
+        # Extract given name
+        given_name = author_elem.find('{*}given-name')
+        author_dict['given'] = given_name.text if given_name is not None else ''
+        # Extract surname
+        surname = author_elem.find('{*}surname')
+        author_dict['family'] = surname.text if surname is not None else ''
+        # Extract contributor roles
+        contributor_roles = []
+        for role_elem in author_elem.findall('{*}contributor-role'):
+            role_dict = {
+                'role_url': role_elem.get('role', ''),
+                'role_text': role_elem.text if role_elem.text else ''
+            }
+            contributor_roles.append(role_dict)
+        author_dict['contributor_roles'] = contributor_roles
+        # Extract cross-references (affiliations)
+        found = False
+        for cross_ref_elem in author_elem.findall('{*}cross-ref'):
+            refid = cross_ref_elem.get('refid', '')
+            cross_ref_dict = {
+                'refid': refid,
+                'id': cross_ref_elem.get('id', '')
+            }
+            # Get the superscript text if present
+            sup_elem = cross_ref_elem.find('{*}sup')
+            if sup_elem is not None:
+                cross_ref_dict['sup'] = sup_elem.text if sup_elem.text else ''
+            # Add the affiliation name (textfn) if available
+            if refid in affiliation_map:
+                cross_ref_dict['textfn'] = affiliation_map[refid]
+                if 'Janelia' in affiliation_map[refid]:
+                    authors.append(affiliation_map[refid])
+                    found = True
+                    break
+        if not found:
+            authors.append(False)
+    return authors
+
 
 def get_author_details(rec, coll=None):
     ''' Generate a detailed author list from a DOI record
@@ -407,27 +489,32 @@ def get_author_details(rec, coll=None):
     author = field
     seq = 0
     oarec = []
-    # Get OpenAlex and PubMed data
+    pubmed_aff = []
+    elsevier_app = None
+    if 'Elsevier' in rec.get('publisher', ''):
+        elsevier_app = parse_elsevier_authors(rec)
+    # Get OpenAlex data
     if 'doi' in rec:
         oarec = get_doi_record(rec['doi'], coll=None, source='openalex')
     if oarec and 'authorships' in oarec and len(author) == len(oarec['authorships']):
         oarec = oarec['authorships']
     else:
         oarec = []
-    # Grab the PubMed record if available
-    pubmed_aff = []
-    if rec.get('jrc_pmid'):
+    # Grab the PubMed record if it's available and we're not using Elsevier
+    if rec.get('jrc_pmid') and (elsevier_app is None or not oarec):
         try:
             pubmed_aff = get_pubmed_affiliations(rec['jrc_pmid'])
             if len(pubmed_aff) != len(author):
                 pubmed_aff = []
         except Exception as err:
+            print(err)
             raise err
     # Generate author details
     for auth in author:
         payload = {}
         _set_paper_orcid(auth, datacite, payload)
         seq += 1
+        # Set author name
         if datacite and (given not in auth or not auth[given]) \
            and 'name' in auth and " " in auth['name'] \
            and auth['name'] != 'Janelia Research Campus':
@@ -448,7 +535,9 @@ def get_author_details(rec, coll=None):
             payload['is_last'] = True
         if 'ORCID' in auth:
             payload['orcid'] = auth['ORCID'].split("/")[-1]
+        # Set affiliations
         affiliations = []
+        # 1. See if there is an affiliation in Crossref/DataCite
         if 'affiliation' in auth and auth['affiliation']:
             for aff in auth['affiliation']:
                 if datacite:
@@ -458,24 +547,32 @@ def get_author_details(rec, coll=None):
                         affiliations.append(aff['name'])
         if affiliations:
             payload['affiliations'] = affiliations
+        # 2. See if there is an affiliation in Elsevier data
+        if elsevier_app is not None:
+            if elsevier_app[seq-1]:
+                payload['affiliations'] = [elsevier_app[seq-1]]
+                payload['match'] = 'asserted'
+                payload['asserted'] = True
+                payload['match_notes'] = "Upgraded match to asserted using Elsevier affiliation"
         LLOGGER.debug(f"Payload: {payload}")
+        # 3. Update the payload with the OpenAlex author details (and affiliations if necessary)
         if coll is not None:
             try:
                 if oarec:
                     _adjust_given_name(payload, oarec[seq-1])
                 _add_single_author_jrc(payload, coll)
-                if oarec:
-                    _augment_payload(rec['doi'], oarec[seq-1], payload)
+                if oarec and payload.get('match') != 'asserted':
+                    _augment_payload(oarec[seq-1], payload)
             except Exception as err:
                 raise err
-        # If the match is not asserted and we have PubMed affiliations, pop one
-        if pubmed_aff:
-            aff = pubmed_aff.pop(0)
-            if payload.get('match') != 'asserted':
-                if aff:
-                    payload['match'] = 'asserted'
-                    payload['asserted'] = True
-                    payload['match_notes'] = "Upgraded match to asserted using PubMed affiliation"
+        # 4. If the match is not asserted and we have a PubMed affiliations, use it
+        if payload.get('match') != 'asserted' and pubmed_aff:
+            aff = pubmed_aff[seq-1]
+            if aff:
+                payload['match'] = 'asserted'
+                payload['asserted'] = True
+                payload['match_notes'] = "Upgraded match to asserted using PubMed affiliation"
+                payload['affiliations'] = [aff]
         auth_list.append(payload)
     return [] if not auth_list else auth_list
 
@@ -735,10 +832,14 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
         try:
             headers = {'api_key': os.environ['NCBI_API_KEY']}
             resp = requests.get(doi_api_url(doi, source=source), timeout=5)
+            if resp.status_code != 200:
+                print(f"Failed to get DOI record for {doi} from {source}: {resp.status_code}")
+                return None
             if content == 'xml':
                 return resp
             return xmltodict.parse(resp.text)
-        except Exception:
+        except Exception as err:
+            print(f"Failed to get DOI record for {doi} from {source}: {err}")
             return None
     elif source == 'springer':
         try:
@@ -1146,25 +1247,34 @@ def get_pubmed_affiliations(pmid):
     rec = get_doi_record(pmid, source='pubmed')
     if not rec or not rec.get('PubmedArticleSet'):
         return pubmed_aff
-    alist = (rec.get('PubmedArticleSet', {}).get('PubmedArticle', {}).get('MedlineCitation', {}).get('Article', {}).get('AuthorList', {}).get('Author', []))
+    alist = (rec.get('PubmedArticleSet', {}).get('PubmedArticle', {}).get('MedlineCitation', {})
+             .get('Article', {}).get('AuthorList', {}).get('Author', []))
     if alist:
         for auth in alist:
             if not auth:
                 continue
             try:
                 afflist = auth.get('AffiliationInfo', [])
-            except Exception as err:
+                print("**********")
+                print(afflist)
+            except Exception:
                 continue
             found = False
-            for aff in afflist:
-                if isinstance(aff, str):
-                    aff = {'Affiliation': aff}
-                if 'Affiliation' not in aff:
-                    continue
-                if 'Janelia' in aff['Affiliation']:
-                    pubmed_aff.append(aff['Affiliation'])
+            if isinstance(afflist, dict):
+                aff = afflist.get('Affiliation', '')
+                if 'Janelia' in aff:
+                    pubmed_aff.append(aff)
                     found = True
-                    break
+            else:
+                for aff in afflist:
+                    if isinstance(aff, str):
+                        aff = {'Affiliation': aff}
+                    if 'Affiliation' not in aff:
+                        continue
+                    if 'Janelia' in aff['Affiliation']:
+                        pubmed_aff.append(aff['Affiliation'])
+                        found = True
+                        break
             if not found:
                 pubmed_aff.append(False)
     return pubmed_aff
