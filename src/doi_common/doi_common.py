@@ -403,6 +403,7 @@ def parse_elsevier_authors(rec):
     # Find the head element (using wildcard namespace to handle any namespace)
     head = root.find('.//{*}head')
     if head is None:
+        print("No head element found in the XML")
         return None
     # Find the author-group element
     author_group = head.find('{*}author-group')
@@ -496,7 +497,6 @@ def get_author_details(rec, coll=None):
     elsevier = False
     elsevier_app = None
     if 'Elsevier' in rec.get('publisher', ''):
-        elsevier = True
         elsevier_app = parse_elsevier_authors(rec)
     # Get OpenAlex data
     if 'doi' in rec:
@@ -567,12 +567,12 @@ def get_author_details(rec, coll=None):
                 if oarec:
                     _adjust_given_name(payload, oarec[seq-1])
                 _add_single_author_jrc(payload, coll)
-                if oarec and payload.get('match') != 'asserted' and not elsevier:
+                if oarec and payload.get('match') != 'asserted' and elsevier_app is None:
                     _augment_payload(oarec[seq-1], payload)
             except Exception as err:
                 raise err
         # 4. If the match is not asserted and we have a PubMed affiliation, use it
-        if payload.get('match') != 'asserted' and pubmed_aff and not elsevier:
+        if payload.get('match') != 'asserted' and pubmed_aff and elsevier_app is None:
             aff = pubmed_aff[seq-1]
             if aff:
                 payload['match'] = 'asserted'
