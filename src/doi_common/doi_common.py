@@ -164,6 +164,7 @@ def _add_single_author_jrc(payload, coll):
             raise err
         if row:
             payload['match'] = 'ORCID'
+            payload['match_notes'] = "ORCID match using Crossref/DataCite"
             if cnt > 1:
                 payload['duplicate_name'] = True
         _adjust_payload(payload, row)
@@ -175,6 +176,7 @@ def _add_single_author_jrc(payload, coll):
             raise err
         if row:
             payload['match'] = 'name'
+            payload['match_notes'] = "Name match using Crossref/DataCite"
             if cnt > 1:
                 payload['duplicate_name'] = True
         _adjust_payload(payload, row)
@@ -186,6 +188,7 @@ def _add_single_author_jrc(payload, coll):
                 payload['asserted'] = True
                 if payload['match'] != 'ORCID':
                     payload['match'] = 'asserted'
+                    payload['match_notes'] = "Assertion match using Crossref/DataCite"
                 _adjust_payload(payload, row)
                 break
 
@@ -490,8 +493,10 @@ def get_author_details(rec, coll=None):
     seq = 0
     oarec = []
     pubmed_aff = []
+    elsevier = False
     elsevier_app = None
     if 'Elsevier' in rec.get('publisher', ''):
+        elsevier = True
         elsevier_app = parse_elsevier_authors(rec)
     # Get OpenAlex data
     if 'doi' in rec:
@@ -547,7 +552,8 @@ def get_author_details(rec, coll=None):
                         affiliations.append(aff['name'])
         if affiliations:
             payload['affiliations'] = affiliations
-        # 2. See if there is an affiliation in Elsevier data
+        # 2. See if there is an affiliation in Elsevier data.
+        #    Elsevier matches are treated as gospel.
         if elsevier_app is not None:
             if elsevier_app[seq-1]:
                 payload['affiliations'] = [elsevier_app[seq-1]]
@@ -561,12 +567,12 @@ def get_author_details(rec, coll=None):
                 if oarec:
                     _adjust_given_name(payload, oarec[seq-1])
                 _add_single_author_jrc(payload, coll)
-                if oarec and payload.get('match') != 'asserted':
+                if oarec and payload.get('match') != 'asserted' and not elsevier:
                     _augment_payload(oarec[seq-1], payload)
             except Exception as err:
                 raise err
-        # 4. If the match is not asserted and we have a PubMed affiliations, use it
-        if payload.get('match') != 'asserted' and pubmed_aff:
+        # 4. If the match is not asserted and we have a PubMed affiliation, use it
+        if payload.get('match') != 'asserted' and pubmed_aff and not elsevier:
             aff = pubmed_aff[seq-1]
             if aff:
                 payload['match'] = 'asserted'
@@ -1255,8 +1261,7 @@ def get_pubmed_affiliations(pmid):
                 continue
             try:
                 afflist = auth.get('AffiliationInfo', [])
-                print("**********")
-                print(afflist)
+                LLOGGER.debug(afflist)
             except Exception:
                 continue
             found = False
