@@ -186,9 +186,8 @@ def _add_single_author_jrc(payload, coll):
             if 'Janelia' in aff:
                 payload['janelian'] = True
                 payload['asserted'] = True
-                if payload['match'] != 'ORCID':
-                    payload['match'] = 'asserted'
-                    payload['match_notes'] = "Assertion match using Crossref/DataCite"
+                payload['match'] = 'asserted'
+                payload['match_notes'] = "Assertion match using Crossref/DataCite"
                 _adjust_payload(payload, row)
                 break
 
@@ -217,7 +216,7 @@ def _augment_payload(oarec, payload):
        and 'orcid' in payload and payload['orcid'] == oarec['author']['orcid'].split("/")[-1]:
         payload['paper_orcid'] = oarec['author']['orcid'].split("/")[-1]
         payload['orcid'] = payload['paper_orcid']
-        payload['match'] = 'orcid'
+        payload['match'] = 'ORCID'
         payload['match_notes'] = "Upgraded match to orcid using OpenAlex ORCID"
     # We can't depend on the ORCID from OpenAlex alone. Case in point: 10.1038/s41467-024-48189-1
     # has Andrew Moore (0009-0008-7037-6640) as an author, but lists 0000-0001-8062-1779
@@ -301,7 +300,7 @@ def get_abstract(rec):
     if 'DOI' in rec:
         if 'abstract' in rec:
             return rec['abstract']
-        elif 'Elsevier' in rec.get('publisher', ''):
+        if 'Elsevier' in rec.get('publisher', ''):
             els = get_doi_record(rec['DOI'], source='elsevier')
             if els:
                 abst = els.get('full-text-retrieval-response',
@@ -502,10 +501,9 @@ def get_author_details(rec, coll=None):
     seq = 0
     oarec = []
     pubmed_aff = []
-    elsevier = False
-    elsevier_app = None
+    elsevier_aff = None
     if 'Elsevier' in rec.get('publisher', ''):
-        elsevier_app = parse_elsevier_authors(rec)
+        elsevier_aff = parse_elsevier_authors(rec)
     # Get OpenAlex data
     if 'doi' in rec:
         oarec = get_doi_record(rec['doi'], coll=None, source='openalex')
@@ -514,7 +512,7 @@ def get_author_details(rec, coll=None):
     else:
         oarec = []
     # Grab the PubMed record if it's available and we're not using Elsevier
-    if rec.get('jrc_pmid') and (elsevier_app is None or not oarec):
+    if rec.get('jrc_pmid') and (elsevier_aff is None or not oarec):
         try:
             pubmed_aff = get_pubmed_affiliations(rec['jrc_pmid'])
             if len(pubmed_aff) != len(author):
@@ -562,9 +560,9 @@ def get_author_details(rec, coll=None):
             payload['affiliations'] = affiliations
         # 2. See if there is an affiliation in Elsevier data.
         #    Elsevier matches are treated as gospel.
-        if elsevier_app is not None:
-            if elsevier_app[seq-1]:
-                payload['affiliations'] = [elsevier_app[seq-1]]
+        if elsevier_aff is not None:
+            if elsevier_aff[seq-1]:
+                payload['affiliations'] = [elsevier_aff[seq-1]]
                 payload['match'] = 'asserted'
                 payload['asserted'] = True
                 payload['match_notes'] = "Upgraded match to asserted using Elsevier affiliation"
@@ -575,12 +573,12 @@ def get_author_details(rec, coll=None):
                 if oarec:
                     _adjust_given_name(payload, oarec[seq-1])
                 _add_single_author_jrc(payload, coll)
-                if oarec and payload.get('match') != 'asserted' and elsevier_app is None:
+                if oarec and payload.get('match') != 'asserted' and elsevier_aff is None:
                     _augment_payload(oarec[seq-1], payload)
             except Exception as err:
                 raise err
         # 4. If the match is not asserted and we have a PubMed affiliation, use it
-        if payload.get('match') != 'asserted' and pubmed_aff and elsevier_app is None:
+        if payload.get('match') != 'asserted' and pubmed_aff and elsevier_aff is None:
             aff = pubmed_aff[seq-1]
             if aff:
                 payload['match'] = 'asserted'
