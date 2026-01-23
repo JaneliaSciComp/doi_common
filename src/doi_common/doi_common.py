@@ -297,10 +297,18 @@ def get_abstract(rec):
         Returns:
           Abstract
     '''
+    print(rec.get('publisher', ''))
     if 'DOI' in rec:
         if 'abstract' in rec:
             return rec['abstract']
-    elif 'descriptions' in rec:
+        elif 'Elsevier' in rec.get('publisher', ''):
+            els = get_doi_record(rec['DOI'], source='elsevier')
+            if els:
+                abst = els.get('full-text-retrieval-response',
+                               {}).get('coredata', {}).get('dc:description', '')
+                if abst:
+                    return abst
+    if 'descriptions' in rec:
         for desc in rec['descriptions']:
             if 'descriptionType' in desc and desc['descriptionType'] == 'Abstract' \
                and 'description' in desc:
