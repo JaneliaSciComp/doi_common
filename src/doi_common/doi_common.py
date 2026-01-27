@@ -32,6 +32,7 @@
       is_version
       short_citation
       single_orcid_lookup
+      single_orcid_lookup_name
     Callable write functions:
       add_doi_to_process
       add_orcid
@@ -55,6 +56,8 @@ import jrc_common.jrc_common as JRC
 
 OPENALEX_EMAIL = "svirskasr@hhmi.org"
 pyalex.config.email = OPENALEX_EMAIL
+
+INSENSITIVE = {'locale': 'en', 'strength': 1}
 
 BIOXIV_API = "https://api.biorxiv.org/details/biorxiv/"
 DIMENSIONS_URL = "https://metrics-api.dimensions.ai/doi/"
@@ -1632,6 +1635,24 @@ def single_orcid_lookup(val, coll, lookup_by='orcid'):
         if cnt > 1:
             row['duplicate_name'] = True
     return row
+
+
+def single_orcid_lookup_name(given, family, coll):
+    ''' Lookup a single row in the orcid collection by author name
+        Keyword arguments:
+          given: given name
+          family: family name
+          coll: orcid collection
+        Returns:
+          row from collection
+    '''
+    payload = {"given": given, "family": family}
+    try:
+        rows = coll.find(payload).collation(INSENSITIVE)
+    except Exception as err:
+        raise err
+    for row in rows:
+        return row
 
 
 def add_doi_to_process(doi, coll, write=True):
