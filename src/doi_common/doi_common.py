@@ -167,7 +167,8 @@ def _add_single_author_jrc(payload, coll):
             raise err
         if row:
             payload['match'] = 'ORCID'
-            payload['match_notes'] = "ORCID match using Crossref/DataCite"
+            if not payload.get('match_notes'):
+                payload['match_notes'] = "ORCID match using Crossref/DataCite"
             if cnt > 1:
                 payload['duplicate_name'] = True
         _adjust_payload(payload, row)
@@ -179,7 +180,8 @@ def _add_single_author_jrc(payload, coll):
             raise err
         if row:
             payload['match'] = 'name'
-            payload['match_notes'] = "Name match using Crossref/DataCite"
+            if not payload.get('match_notes'):
+                payload['match_notes'] = "Name match using Crossref/DataCite"
             if cnt > 1:
                 payload['duplicate_name'] = True
         _adjust_payload(payload, row)
@@ -190,7 +192,8 @@ def _add_single_author_jrc(payload, coll):
                 payload['janelian'] = True
                 payload['asserted'] = True
                 payload['match'] = 'asserted'
-                payload['match_notes'] = "Assertion match using Crossref/DataCite"
+                if not payload.get('match_notes'):
+                    payload['match_notes'] = "Assertion match using Crossref/DataCite"
                 _adjust_payload(payload, row)
                 break
 
@@ -401,12 +404,11 @@ def parse_elsevier_authors(rec):
     '''
     # Get XML content from Elsevier API
     try:
-        rec = get_doi_record(rec['doi'], source='elsevier', content='xml')
+        xmlstr = get_doi_record(rec['doi'], source='elsevier', content='xml')
     except Exception:
         return None
-    if not rec or not rec.content:
+    if not xmlstr:
         return None
-    xmlstr = rec.content
     # Parse the XML string into an element tree
     root = ET.fromstring(xmlstr)
     authors = []
@@ -820,13 +822,12 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
     elif source == 'elsevier':
         headers = {'X-ELS-APIKey': os.environ['ELSEVIER_API_KEY']}
         try:
+            xmlresp = requests.get(doi_api_url(doi, source=source, content='xml'),
+                                   headers=headers,
+                                   timeout=5)
             if content == 'xml':
-                return requests.get(doi_api_url(doi, source=source, content=content),
-                                    headers=headers,
-                                    timeout=5)
-            return requests.get(doi_api_url(doi, source=source, content=content),
-                                headers=headers,
-                                timeout=5).json()
+                return xmlresp.text
+            return xmltodict.parse(xmlresp.text) #JSON
         except Exception as err:
             raise err
     elif source == 'mongo':
@@ -851,7 +852,7 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
                 print(f"Failed to get DOI record for {doi} from {source}: {resp.status_code}")
                 return None
             if content == 'xml':
-                return resp
+                return resp.text
             return xmltodict.parse(resp.text)
         except Exception as err:
             print(f"Failed to get DOI record for {doi} from {source}: {err}")
