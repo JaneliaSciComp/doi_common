@@ -188,7 +188,7 @@ def _add_single_author_jrc(payload, coll):
         try:
             cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
             row = coll.find_one({"given": payload['given'],
-                                 "family": payload['family']}).collation(INSENSITIVE)
+                                 "family": payload['family']})
         except Exception as err:
             raise err
         if row and not payload.get('match'):
