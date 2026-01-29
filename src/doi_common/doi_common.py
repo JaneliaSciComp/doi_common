@@ -432,6 +432,9 @@ def parse_elsevier_authors(rec):
             affiliation_map[aff_id] = textfn_elem.text if textfn_elem.text else ''
     # Find all author elements under author-group
     author_elements = author_group.findall('{*}author')
+    if not author_elements:
+        print("No author elements found")
+        return None
     # Process each author element
     for author_elem in author_elements:
         author_dict = {}
@@ -555,7 +558,7 @@ def get_author_details(rec, coll=None):
         # Set affiliations
         affiliations = []
         # 1. See if there is an affiliation in Crossref/DataCite
-        if 'affiliation' in auth and auth['affiliation']:
+        if auth.get('affiliation', []):
             for aff in auth['affiliation']:
                 if datacite:
                     affiliations.append(aff)
