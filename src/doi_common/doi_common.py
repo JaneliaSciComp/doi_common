@@ -122,26 +122,27 @@ def _adjust_payload(payload, row):
         Returns:
           None
     '''
-    if row:
-        payload['orcid'] = row['orcid'] if 'orcid' in row else ''
-        payload['in_database'] = True
-        if 'employeeId' in row:
-            payload['validated'] = True
-        payload['janelian'] = bool('alumni' not in row)
-        if 'alumni' in row:
-            payload['alumni'] = True
-        if 'group' in row:
-            payload['group'] = row['group']
-        if 'group_code' in row:
-            payload['group_code'] = row['group_code']
-        if 'affiliations' in row:
-            payload['tags'] = row['affiliations']
-        if 'employeeId' in row and row['employeeId']:
-            payload['employeeId'] = row['employeeId']
-        if 'userIdO365' in row and row['userIdO365']:
-            payload['userIdO365'] = row['userIdO365']
-        if 'workerType' in row and row['workerType']:
-            payload['workerType'] = row['workerType']
+    if not row:
+        return
+    payload['orcid'] = row['orcid'] if 'orcid' in row else ''
+    payload['in_database'] = True
+    if 'employeeId' in row:
+        payload['validated'] = True
+    payload['janelian'] = bool('alumni' not in row)
+    if 'alumni' in row:
+        payload['alumni'] = True
+    if 'group' in row:
+        payload['group'] = row['group']
+    if 'group_code' in row:
+        payload['group_code'] = row['group_code']
+    if 'affiliations' in row:
+        payload['tags'] = row['affiliations']
+    if 'employeeId' in row and row['employeeId']:
+        payload['employeeId'] = row['employeeId']
+    if 'userIdO365' in row and row['userIdO365']:
+        payload['userIdO365'] = row['userIdO365']
+    if 'workerType' in row and row['workerType']:
+        payload['workerType'] = row['workerType']
 
 
 def _add_single_author_jrc(payload, coll):
@@ -159,33 +160,7 @@ def _add_single_author_jrc(payload, coll):
     payload['validated'] = False
     payload['match'] = None
     row = None
-    if 'orcid' in payload:
-        try:
-            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
-            row = coll.find_one({"orcid": payload['orcid']})
-        except Exception as err:
-            raise err
-        if row:
-            payload['match'] = 'ORCID'
-            if not payload.get('match_notes'):
-                payload['match_notes'] = "ORCID match using Crossref/DataCite"
-            if cnt > 1:
-                payload['duplicate_name'] = True
-        _adjust_payload(payload, row)
-    if 'family' in payload and payload['match'] is None:
-        try:
-            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
-            row = coll.find_one({"given": payload['given'], "family": payload['family']})
-        except Exception as err:
-            raise err
-        if row:
-            payload['match'] = 'name'
-            if not payload.get('match_notes'):
-                payload['match_notes'] = "Name match using Crossref/DataCite"
-            if cnt > 1:
-                payload['duplicate_name'] = True
-        _adjust_payload(payload, row)
-    if 'affiliations' in payload and payload['affiliations']:
+    if payload.get('affiliations'):
         # This is the "gold standard" for author matching
         for aff in payload['affiliations']:
             if 'Janelia' in aff:
@@ -196,6 +171,33 @@ def _add_single_author_jrc(payload, coll):
                     payload['match_notes'] = "Assertion match using Crossref/DataCite"
                 _adjust_payload(payload, row)
                 break
+    if payload.get('orcid'):
+        try:
+            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
+            row = coll.find_one({"orcid": payload['orcid']})
+        except Exception as err:
+            raise err
+        if row and not payload.get('match'):
+            payload['match'] = 'ORCID'
+            if not payload.get('match_notes'):
+                payload['match_notes'] = "ORCID match using Crossref/DataCite"
+            if cnt > 1:
+                payload['duplicate_name'] = True
+        _adjust_payload(payload, row)
+    if payload.get('family'):
+        try:
+            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
+            row = coll.find_one({"given": payload['given'],
+                                 "family": payload['family']}).collation(INSENSITIVE)
+        except Exception as err:
+            raise err
+        if row and not payload.get('match'):
+            payload['match'] = 'name'
+            if not payload.get('match_notes'):
+                payload['match_notes'] = "Name match using Crossref/DataCite"
+            if cnt > 1:
+                payload['duplicate_name'] = True
+        _adjust_payload(payload, row)
 
 
 def _augment_payload(oarec, payload):
@@ -302,7 +304,6 @@ def get_abstract(rec):
         Returns:
           Abstract
     '''
-    print(rec.get('publisher', ''))
     if 'DOI' in rec:
         if 'abstract' in rec:
             return rec['abstract']
