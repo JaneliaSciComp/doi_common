@@ -124,21 +124,22 @@ def _adjust_payload(payload, row):
     '''
     if not row:
         return
-    payload['orcid'] = row['orcid'] if 'orcid' in row else ''
     payload['in_database'] = True
-    if 'employeeId' in row:
-        payload['validated'] = True
     payload['janelian'] = bool('alumni' not in row)
+    if 'affiliations' in row:
+        payload['tags'] = row['affiliations']
     if 'alumni' in row:
         payload['alumni'] = True
+    if 'employeeId' in row and row['employeeId']:
+        payload['validated'] = True
+        payload['employeeId'] = row['employeeId']
     if 'group' in row:
         payload['group'] = row['group']
     if 'group_code' in row:
         payload['group_code'] = row['group_code']
-    if 'affiliations' in row:
-        payload['tags'] = row['affiliations']
-    if 'employeeId' in row and row['employeeId']:
-        payload['employeeId'] = row['employeeId']
+    if 'hireDate' in row:
+        payload['hireDate'] = row['hireDate']
+    payload['orcid'] = row['orcid'] if 'orcid' in row else ''
     if 'userIdO365' in row and row['userIdO365']:
         payload['userIdO365'] = row['userIdO365']
     if 'workerType' in row and row['workerType']:
@@ -153,12 +154,12 @@ def _add_single_author_jrc(payload, coll):
         Returns:
           None
     '''
+    payload['alumni'] = False
+    payload['asserted'] = False
     payload['in_database'] = False
     payload['janelian'] = False
-    payload['asserted'] = False
-    payload['alumni'] = False
-    payload['validated'] = False
     payload['match'] = None
+    payload['validated'] = False
     row = None
     if payload.get('affiliations'):
         # This is the "gold standard" for author matching
