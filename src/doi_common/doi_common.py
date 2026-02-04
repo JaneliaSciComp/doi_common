@@ -56,6 +56,7 @@ import jrc_common.jrc_common as JRC
 
 OPENALEX_EMAIL = "svirskasr@hhmi.org"
 pyalex.config.email = OPENALEX_EMAIL
+pyalex.config.api_key = os.environ["OPENALEX_API_KEY"]
 
 INSENSITIVE = {'locale': 'en', 'strength': 1}
 
