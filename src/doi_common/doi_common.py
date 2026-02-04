@@ -1109,9 +1109,11 @@ def get_journal(rec, full=True, name_only=False):
                 journal += ': ' + rec['DOI'].split('/')[-1]
         return journal
     # DataCite
-    if rec['doi'].startswith('10.25378/') or rec['doi'].startswith('10.6084/'):
+    if rec['doi'].startswith('10.25378/'):
         journal = 'Janelia Research Campus (non-publication)'
-    elif 'publisher' in rec and rec['publisher']:
+    elif rec['doi'].startswith('10.6084/') and rec.get('publisher', '') == 'figshare':
+        journal = 'Janelia Research Campus (non-publication)'
+    elif rec.get('publisher'):
         journal = rec['publisher']
     else:
         return None
