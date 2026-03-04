@@ -1,6 +1,7 @@
 ''' doi_common.py
     Library of routines for parsing and interpreting DOI/ORCID records.
     Callable read functions:
+      add_doi_process
       convert_pubmed
       doi_api_url
       get_abstract
@@ -45,6 +46,8 @@
 # pylint: disable=broad-exception-caught,broad-exception-raised,logging-fstring-interpolation,too-many-arguments,too-many-branches,too-many-lines,too-many-positional-arguments,too-many-return-statements,too-many-statements
 
 from datetime import datetime
+import getpass
+import inspect
 import logging
 import os
 import re
@@ -131,20 +134,13 @@ def _adjust_payload(payload, row):
         payload['tags'] = row['affiliations']
     if 'alumni' in row:
         payload['alumni'] = True
+    payload['orcid'] = row['orcid'] if 'orcid' in row else ''
     if 'employeeId' in row and row['employeeId']:
         payload['validated'] = True
         payload['employeeId'] = row['employeeId']
-    if 'group' in row:
-        payload['group'] = row['group']
-    if 'group_code' in row:
-        payload['group_code'] = row['group_code']
-    if 'hireDate' in row:
-        payload['hireDate'] = row['hireDate']
-    payload['orcid'] = row['orcid'] if 'orcid' in row else ''
-    if 'userIdO365' in row and row['userIdO365']:
-        payload['userIdO365'] = row['userIdO365']
-    if 'workerType' in row and row['workerType']:
-        payload['workerType'] = row['workerType']
+    for rname in ['group', 'group_code', 'hireDate', 'managed', 'userIdO365', 'workerType']:
+        if row.get(rname):
+            payload[rname] = row[rname]
 
 
 def _add_single_author_jrc(payload, coll):
@@ -277,6 +273,34 @@ def _set_paper_orcid(auth, datacite, payload):
 # ******************************************************************************
 # * Callable read functions                                                    *
 # ******************************************************************************
+
+def add_doi_process(doi, action=None, coll=None, notes=None):
+    ''' Add a DOI to the dois_to_process collection
+        Keyword arguments:
+          doi: DOI
+          action: action
+          coll: collection
+          notes: notes
+        Returns:
+          None
+    '''
+    caller_module = inspect.getmodule(inspect.stack()[1][0])
+    ver = getattr(caller_module, '__version__', None)
+    program = os.path.basename(caller_module.__file__)
+    payload = {'action': action,
+               'program': program,
+               'timestamp': datetime.now().isoformat()}
+    if ver is not None:
+        payload['version'] = ver
+    if notes is not None:
+        payload['notes'] = notes
+    payload['user'] = getpass.getuser()
+    try:
+        coll.update_one({'type': 'doi', 'key': doi},
+                        {'$push': {'processes': payload}}, upsert=True)
+    except Exception as err:
+        raise err
+
 
 def convert_pubmed(iid, itype='pmid'):
     ''' Convert a PubMed IDs/DOIs
