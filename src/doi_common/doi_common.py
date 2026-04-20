@@ -1585,7 +1585,10 @@ def short_citation(doi, expanded=False, coll=None):
             if coll is not None:
                 rec = get_doi_record(doi, coll)
             if not rec:
-                rec = JRC.call_datacite(doi)
+                try:
+                    rec = JRC.call_datacite(doi)
+                except Exception as err:
+                    raise err
                 if rec is None or 'data' not in rec:
                     return None
                 rec = rec['data']['attributes']
@@ -1593,9 +1596,15 @@ def short_citation(doi, expanded=False, coll=None):
         else:
             rec = {}
             if coll is not None:
-                rec = get_doi_record(doi, coll)
+                try:
+                    rec = get_doi_record(doi, coll)
+                except Exception as err:
+                    raise err
             if not rec:
-                rec = JRC.call_crossref(doi)
+                try:
+                    rec = JRC.call_crossref(doi)
+                except Exception as err:
+                    raise err
                 if rec is None or 'message' not in rec:
                     return None
                 rec = rec['message']
