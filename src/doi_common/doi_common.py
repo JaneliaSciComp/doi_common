@@ -860,6 +860,19 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
             return xmltodict.parse(xmlresp.text) #JSON
         except Exception as err:
             raise err
+    elif source == 'figshare':
+        try:
+            response = JRC.call_figshare(doi)
+            if response and response[0].get('url'):
+                try:
+                    response2 = requests.get(response[0]['url'], timeout=5)
+                    if response2.status_code == 200:
+                        response = response2.json()
+                except Exception as err:
+                    raise err
+            return response
+        except Exception as err:
+            raise err
     elif source == 'mongo':
         try:
             row = coll.find_one({"doi": doi})
