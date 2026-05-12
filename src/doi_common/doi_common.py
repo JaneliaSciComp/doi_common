@@ -5,6 +5,7 @@
       convert_pubmed
       doi_api_url
       get_abstract
+      get_acknowledgements
       get_affiliations
       get_author_counts
       get_author_details
@@ -229,6 +230,30 @@ def _augment_payload(oarec, payload):
     # as the ORCID.
 
 
+def _parse_pmc_ack(edata):
+    ''' Parse PMC acknowledgements
+        Keyword arguments:
+          edata: dictionary of article data
+        Returns:
+          string of acknowledgements
+    '''
+    acktext = ""
+    if not isinstance(edata, dict):
+        return acktext
+    if edata.get('p'):
+        if isinstance(edata['p'], str):
+            acktext = edata['p']
+        elif isinstance(edata['p'], dict) and '#text' in edata['p']:
+            acktext = edata['p']['#text']
+        elif isinstance(edata['p'], list):
+            for ackp in edata['p']:
+                if isinstance(ackp, str):
+                    acktext += ackp
+                elif isinstance(ackp, dict) and '#text' in ackp:
+                    acktext += ackp['#text']
+    return acktext
+
+
 def _process_middle_initials(rec):
     ''' Add name combinations for first names in the forms "F. M." or "F."
         with or without the periods.
@@ -346,6 +371,43 @@ def get_abstract(rec):
                and 'description' in desc:
                 return desc['description']
     return None
+
+
+def get_acknowledgements(doi, pmcid=None, elife_rec=None, pmc_rec=None):
+    ''' Generate acknowledgements
+        Keyword arguments:
+          doi: DOI
+          pmcid: PubMed Central ID
+          elife_rec: eLife record
+          pmc_rec: PubMed Central record
+        Returns:
+          Acknowledgements
+    '''
+    acktext = ""
+    # Check eLife
+    if 'elife' in doi.lower() or elife_rec:
+        if not elife_rec:
+            elife_rec = get_doi_record(doi, source='elife')
+        if elife_rec.get('acknowledgements', ''):
+            acklist = []
+            for ack in elife_rec['acknowledgements']:
+                acklist.append(ack['text'])
+            acktext =  ' '.join(acklist)
+            if acktext:
+                return acktext
+    if not (pmcid or pmc_rec):
+        pdict = convert_pubmed(doi, itype='doi')
+        if pdict and pdict[0].get('pmcid'):
+            pmcid = pdict[0]['pmcid'].replace('PMC', '')
+    if pmcid:
+        pmc_rec = get_doi_record(pmcid, source='pmc')
+    if pmc_rec:
+        if pmc_rec and pmc_rec.get('OAI-PMH', {}).get('GetRecord'):
+            edata = pmc_rec['OAI-PMH']['GetRecord']['record']['metadata']
+            edata = (edata.get('article', {}).get('back') or {}).get('ack')
+            if edata:
+                acktext = _parse_pmc_ack(edata)
+    return acktext
 
 
 def get_affiliations(idrec, rec):
@@ -734,6 +796,8 @@ def get_citation_count(doi, source='dimensions', datacite=False):
                 data = get_incoming_citations_openalex(doi, rec)
             except Exception:
                 data = None
+            if not data and rec.get('cited_by_count'):
+                return rec.get('cited_by_count'), None
         elif source == 'pubmed':
             try:
                 return len(get_incoming_citations_pubmed(doi, convert=False)), \
@@ -772,7 +836,7 @@ def get_citation_count(doi, source='dimensions', datacite=False):
             link = f"{ELIFE_CC_URL}{frag}/citations"
         return cnt, link
     elif source == 'oa':
-        return data['openalx']['cited_by_count'], None
+        return data['openalex']['cited_by_count'], None
     elif source == 'openalex':
         link = None
         if 'id' in rec:
@@ -888,18 +952,16 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
             return None
         return row[0]
     elif source in ('pmc', 'pubmed'):
-        try:
-            headers = {'api_key': os.environ['NCBI_API_KEY']}
-            resp = requests.get(doi_api_url(doi, source=source), timeout=5)
-            if resp.status_code != 200:
-                print(f"Failed to get DOI record for {doi} from {source}: {resp.status_code}")
-                return None
-            if content == 'xml':
-                return resp.text
-            return xmltodict.parse(resp.text)
-        except Exception as err:
-            print(f"Failed to get DOI record for {doi} from {source}: {err}")
-            return None
+        headers = {'api_key': os.environ['NCBI_API_KEY']}
+        print("Making request")
+        resp = requests.get(doi_api_url(doi, source=source), headers=headers, timeout=5)
+        if not resp.ok:
+            print("Raising HTTPError")
+            raise requests.HTTPError(resp.status_code, resp.text)
+        if content == 'xml':
+            print("Returning XML")
+            return resp.text
+        return xmltodict.parse(resp.text)
     elif source == 'springer':
         try:
             resp = requests.get(doi_api_url(doi, source=source), timeout=5).json()
@@ -1381,11 +1443,14 @@ def get_supervisory_orgs(coll=None, full=False):
         return orgs
     try:
         resp = requests.get(ORGS_URL, timeout=10)
-        results = resp.json()['result']
     except Exception as err:
         raise err
     if resp.status_code != 200:
         raise Exception(f"Failed to get supervisory organizations: {resp.status_code}")
+    try:
+        results = resp.json()['result']
+    except Exception as err:
+        raise err
     for org in results:
         if org['LOCATIONCODE'] and 'Janelia' in org['LOCATIONCODE'] and 'SUPORGCODE' in org:
             orgs[org['SUPORGNAME']] = org if full else org['SUPORGCODE']
