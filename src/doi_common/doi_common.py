@@ -953,13 +953,10 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
         return row[0]
     elif source in ('pmc', 'pubmed'):
         headers = {'api_key': os.environ['NCBI_API_KEY']}
-        print("Making request")
         resp = requests.get(doi_api_url(doi, source=source), headers=headers, timeout=5)
         if not resp.ok:
-            print("Raising HTTPError")
             raise requests.HTTPError(resp.status_code, resp.text)
         if content == 'xml':
-            print("Returning XML")
             return resp.text
         return xmltodict.parse(resp.text)
     elif source == 'springer':
