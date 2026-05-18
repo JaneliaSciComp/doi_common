@@ -373,12 +373,13 @@ def get_abstract(rec):
     return None
 
 
-def get_acknowledgements(doi, pmcid=None, elife_rec=None, pmc_rec=None):
+def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=None):
     ''' Generate acknowledgements
         Keyword arguments:
           doi: DOI
           pmcid: PubMed Central ID
           elife_rec: eLife record
+          els_rec: Elsevier record
           pmc_rec: PubMed Central record
         Returns:
           Acknowledgements
@@ -395,11 +396,37 @@ def get_acknowledgements(doi, pmcid=None, elife_rec=None, pmc_rec=None):
             acktext =  ' '.join(acklist)
             if acktext:
                 return acktext
+    elif '10.1016' in doi or els_rec:
+        if not els_rec:
+            els_rec = get_doi_record(doi, source='elsevier')
+        otext = els_rec.get('full-text-retrieval-response', {}).get('originalText', {})
+        article = otext.get('xocs:doc', {}).get('xocs:serial-item', {}).get('article', {})
+        sections = article.get('body', {}).get('ce:sections', {}).get('ce:section', [])
+        acktext = ''
+        for sec in sections:
+            if '@role' in sec and sec['@role'] == 'acknowledgement':
+                if 'ce:para' in sec and isinstance(sec['ce:para'], list):
+                    ackl = []
+                    for para in sec['ce:para']:
+                        if '#text' in para:
+                            ackl.append(para['#text'])
+                    if ackl:
+                        acktext += para['#text']
+                        break
+                elif 'ce:para' in sec and '#text' in sec['ce:para']:
+                    acktext += sec['ce:para']['#text']
+                    break
+        if acktext:
+            return acktext
     if not (pmcid or pmc_rec):
-        pdict = convert_pubmed(doi, itype='doi')
+        try:
+            pdict = convert_pubmed(doi, itype='doi')
+        except Exception as err:
+            print(f"Error converting DOI to PMCID for {doi}: {err}")
+            return ''
         if pdict and pdict[0].get('pmcid'):
             pmcid = pdict[0]['pmcid'].replace('PMC', '')
-    if pmcid:
+    if pmcid and not pmc_rec:
         pmc_rec = get_doi_record(pmcid, source='pmc')
     if pmc_rec:
         if pmc_rec and pmc_rec.get('OAI-PMH', {}).get('GetRecord'):
