@@ -395,7 +395,7 @@ def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=
                 acklist.append(ack['text'])
             acktext =  ' '.join(acklist)
             if acktext:
-                return acktext
+                return acktext, 'eLife'
     elif '10.1016' in doi or els_rec:
         if not els_rec:
             els_rec = get_doi_record(doi, source='elsevier')
@@ -417,13 +417,13 @@ def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=
                     acktext += sec['ce:para']['#text']
                     break
         if acktext:
-            return acktext
+            return acktext, 'Elsevier'
     if not (pmcid or pmc_rec):
         try:
             pdict = convert_pubmed(doi, itype='doi')
         except Exception as err:
             print(f"Error converting DOI to PMCID for {doi}: {err}")
-            return ''
+            return '', ''
         if pdict and pdict[0].get('pmcid'):
             pmcid = pdict[0]['pmcid'].replace('PMC', '')
     if pmcid and not pmc_rec:
@@ -434,7 +434,9 @@ def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=
             edata = (edata.get('article', {}).get('back') or {}).get('ack')
             if edata:
                 acktext = _parse_pmc_ack(edata)
-    return acktext
+                if acktext:
+                    return acktext, 'PMC'
+    return '', ''
 
 
 def get_affiliations(idrec, rec):
