@@ -88,6 +88,7 @@ PM_CONVERTER_URL = "https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles?to
 PUBMED_BASE = "https://pubmed.ncbi.nlm.nih.gov/"
 WOS_DOI = "https://api.clarivate.com/apis/wos-starter/v1/documents?db=WOS&limit=1&page=1&q=DO="
 SPRINGER_API = "https://api.springernature.com/meta/v2/json"
+UNPAYWALL_API = "https://api.unpaywall.org/v2/"
 ZENODO_API = "https://zenodo.org/api/records/"
 # DataCite prefixes
 DC_PREFIX = ['10.15151/', '10.15785/', '10.17615/', '10.17617/', '10.17632/',
@@ -889,7 +890,7 @@ def doi_api_url(doi, source='openalex', content='json'):
           doi: DOI (or optional PMID for PubMed, required PMCID for
                     PubMed Central, required Lens ID for lens_patent)
           source: source (biorxiv, elife, elsevier, lens_patent, lens_scholar,
-                  openalex, pmc, pubmed, springer, zenodo)
+                  openalex, pmc, pubmed, springer, unpaywall, zenodo)
           content: content type (json or xml)
         Returns:
           API URL
@@ -918,6 +919,8 @@ def doi_api_url(doi, source='openalex', content='json'):
             return f"{PMID_XML}{doi}"
         case 'springer':
             return f"{SPRINGER_API}?q=doi:{doi}&api_key={os.environ['SPRINGER_META_API_KEY']}"
+        case 'unpaywall':
+            return f"{UNPAYWALL_API}{doi}?email=svirskasr@hhmi.org"
         case 'zenodo':
             return f"{ZENODO_API}{doi.split('.')[-1]}"
         case _:
@@ -931,12 +934,12 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
                     PubMed Central required Lens ID for lens_patent)
           coll: dois collection
           source: biorxiv, elife, elsevier, figshare, lens_patent, lens_scholar,
-                  openalex, pmc, pubmed, springer, zenodo
+                  openalex, pmc, pubmed, springer, unpaywall, zenodo
           content: content type (json or xml)
         Returns:
           None
     '''
-    if source in ('biorxiv', 'elife', 'lens_patent', 'lens_scholar'):
+    if source in ('biorxiv', 'elife', 'lens_patent', 'lens_scholar', 'unpaywall'):
         try:
             return requests.get(doi_api_url(doi, source=source),
                                 timeout=5).json()
