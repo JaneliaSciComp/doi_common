@@ -495,7 +495,11 @@ def get_author_counts(tag, year, show, doi_coll, orcid_coll):
         raise err
     author = {}
     for auth in rows:
-        author[auth['employeeId']] = auth['family'][0] + ", " + auth['given'][0]
+        k = 'employeeId'
+        if not auth.get(k):
+            print(f"No employeeId or userIdO365 for {auth}")
+            k = '_id'
+        author[auth[k]] = auth['family'][0] + ", " + auth['given'][0]
     payload = [{"$unwind": "$jrc_author"},
                {"$match": {"jrc_author": {"$in": list(author.keys())},
                            "jrc_tag.name": tag}},
