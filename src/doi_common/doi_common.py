@@ -48,10 +48,14 @@
 
 from datetime import datetime
 import getpass
+import gzip
 import inspect
+import io
 import logging
 import os
 import re
+import tarfile
+import time
 import xml.etree.ElementTree as ET
 import pyalex
 import requests
@@ -94,6 +98,19 @@ ZENODO_API = "https://zenodo.org/api/records/"
 DC_PREFIX = ['10.15151/', '10.15785/', '10.17615/', '10.17617/', '10.17632/',
              '10.22002/', '10.24433/', '10.25345/', '10.3929/', '10.48324/', '10.48448/',
              '10.5517/', '10.5522/', '10.57736/', '10.60692/', '10.7907/']
+# arXiv full-text acknowledgement extraction
+ARXIV_HTML_URL = "https://arxiv.org/html/"
+ARXIV_EPRINT_URL = "https://arxiv.org/e-print/"
+# Polite User-Agent for arXiv full-text downloads
+ARXIV_HEADERS = {'User-Agent': 'janelia-dis/doi_common'}
+# LaTeX/HTML patterns for locating an Acknowledg(e)ments section
+ACK_TEX_RE = re.compile(r'\\(?:section|subsection|paragraph)\*?\s*\{[^}]*'
+                        r'acknowledg[^}]*\}', re.IGNORECASE)
+ACK_TEX_ENV_RE = re.compile(r'\\begin\{acknowledg[^}]*\}(.*?)\\end\{acknowledg[^}]*\}',
+                            re.IGNORECASE | re.DOTALL)
+ACK_TEX_CMD_RE = re.compile(r'\\acknowledg[a-z]*\b', re.IGNORECASE)
+ACK_HTML_RE = re.compile(r'<h[1-6][^>]*>\s*(?:<[^>]+>\s*)*[^<]*acknowledg[^<]*</h[1-6]>',
+                         re.IGNORECASE)
 # Logger
 LLOGGER = logging.getLogger(__name__)
 
@@ -229,6 +246,147 @@ def _augment_payload(oarec, payload):
     # We can't depend on the ORCID from OpenAlex alone. Case in point: 10.1038/s41467-024-48189-1
     # has Andrew Moore (0009-0008-7037-6640) as an author, but lists 0000-0001-8062-1779
     # as the ORCID.
+
+
+def _arxiv_html_to_text(html):
+    ''' Crude HTML-to-text: drop tags and collapse whitespace.
+        Keyword arguments:
+          html: HTML (or plain) string
+        Returns:
+          Plain text string
+    '''
+    if not html:
+        return ''
+    text = re.sub(r'<br\s*/?>', '\n', html, flags=re.IGNORECASE)
+    text = re.sub(r'</p>', '\n', text, flags=re.IGNORECASE)
+    text = re.sub(r'<[^>]+>', '', text)
+    text = re.sub(r'[ \t]+', ' ', text)
+    return text.strip()
+
+
+def _ack_from_arxiv_html(html):
+    ''' Extract the Acknowledgements section body from an arXiv HTML render.
+        Keyword arguments:
+          html: page HTML
+        Returns:
+          Acknowledgement text, or None
+    '''
+    match = ACK_HTML_RE.search(html)
+    if not match:
+        return None
+    tail = html[match.end():]
+    stop = re.search(r'<h[1-6][^>]*>|<(?:section|div)[^>]*class="[^"]*ltx_bibliography',
+                     tail, re.IGNORECASE)
+    body = _arxiv_html_to_text(tail[:stop.start()] if stop else tail)
+    return body or None
+
+
+def _read_arxiv_tex_sources(blob):
+    ''' Yield .tex file contents from an arXiv e-print blob (tar.gz or gz).
+        Keyword arguments:
+          blob: raw bytes of the e-print download
+        Returns:
+          List of decoded .tex strings
+    '''
+    texts = []
+    try:
+        with tarfile.open(fileobj=io.BytesIO(blob), mode='r:*') as tar:
+            for member in tar.getmembers():
+                if member.isfile() and member.name.lower().endswith('.tex'):
+                    fobj = tar.extractfile(member)
+                    if fobj:
+                        texts.append(fobj.read().decode('utf-8', errors='ignore'))
+        return texts
+    except (tarfile.TarError, OSError):
+        pass
+    try:
+        texts.append(gzip.decompress(blob).decode('utf-8', errors='ignore'))
+    except OSError:
+        pass
+    return texts
+
+
+def _arxiv_tex_to_text(body):
+    ''' Strip the most common inline LaTeX commands, keeping the prose.
+        Keyword arguments:
+          body: LaTeX fragment
+        Returns:
+          Plain text string
+    '''
+    body = re.sub(r'\\[a-zA-Z]+\*?(\[[^\]]*\])?(\{[^}]*\})?', ' ', body)
+    body = re.sub(r'[{}]', '', body)
+    return re.sub(r'\s+', ' ', body).strip()
+
+
+def _ack_from_arxiv_tex(tex):
+    ''' Extract the Acknowledgements from a LaTeX string. Handles a sectioning
+        heading, a REVTeX/AMS acknowledgments environment, and a bare
+        \\acknowledgments command.
+        Keyword arguments:
+          tex: LaTeX source string
+        Returns:
+          Acknowledgement text, or None
+    '''
+    # Strip LaTeX line comments so commented-out template text is not mistaken
+    # for real prose.
+    tex = re.sub(r'(?<!\\)%.*', '', tex)
+    stop_re = (r'\\(?:section|subsection|paragraph|bibliography'
+               r'|begin\{thebibliography\}|end\{document\})')
+    match = ACK_TEX_RE.search(tex)
+    if match:
+        tail = tex[match.end():]
+        stop = re.search(stop_re, tail)
+        body = _arxiv_tex_to_text(tail[:stop.start()] if stop else tail)
+        if body:
+            return body
+    match = ACK_TEX_ENV_RE.search(tex)
+    if match:
+        body = _arxiv_tex_to_text(match.group(1))
+        if body:
+            return body
+    match = ACK_TEX_CMD_RE.search(tex)
+    if match:
+        tail = tex[match.end():]
+        stop = re.search(stop_re, tail)
+        body = _arxiv_tex_to_text(tail[:stop.start()] if stop else tail)
+        if body:
+            return body
+    return None
+
+
+def _ack_from_arxiv(arxiv_id):
+    ''' Extract the Acknowledgements text for an arXiv paper. Tries the HTML
+        render first, then the e-print TeX source.
+        Keyword arguments:
+          arxiv_id: arXiv id (may include a version suffix)
+        Returns:
+          Acknowledgement text, or None
+    '''
+    try:
+        resp = requests.get(f"{ARXIV_HTML_URL}{arxiv_id}", timeout=30,
+                            headers=ARXIV_HEADERS)
+        if resp.ok and 'text/html' in resp.headers.get('Content-Type', ''):
+            ack = _ack_from_arxiv_html(resp.text)
+            time.sleep(0.5)
+            if ack:
+                return ack
+        else:
+            time.sleep(0.5)
+    except Exception as err:
+        LLOGGER.debug(f"arXiv HTML fetch failed for {arxiv_id}: {err}")
+    try:
+        resp = requests.get(f"{ARXIV_EPRINT_URL}{arxiv_id}", timeout=30,
+                            headers=ARXIV_HEADERS)
+        resp.raise_for_status()
+    except Exception as err:
+        LLOGGER.debug(f"arXiv e-print fetch failed for {arxiv_id}: {err}")
+        return None
+    time.sleep(0.5)
+    for tex in _read_arxiv_tex_sources(resp.content):
+        ack = _ack_from_arxiv_tex(tex)
+        if ack:
+            return ack
+    return None
 
 
 def _parse_pmc_ack(edata):
@@ -419,6 +577,13 @@ def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=
                     break
         if acktext:
             return acktext, 'Elsevier'
+    elif 'arxiv' in doi.lower():
+        # arXiv DataCite DOIs (e.g. 10.48550/arxiv.2401.01234); fetch the
+        # acknowledgements from the arXiv HTML render or e-print TeX source.
+        arxiv_id = re.sub(r'^10\.48550/arxiv\.', '', doi, flags=re.IGNORECASE)
+        acktext = _ack_from_arxiv(arxiv_id)
+        if acktext:
+            return acktext, 'arXiv'
     if not (pmcid or pmc_rec):
         try:
             pdict = convert_pubmed(doi, itype='doi')
