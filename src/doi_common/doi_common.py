@@ -89,6 +89,14 @@ PMID_XML = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed"
            + f"&email={OPENALEX_EMAIL}&id="
 PM_CONVERTER_URL = "https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles?tool=dis" \
                    + f"&format=json&email={OPENALEX_EMAIL}&idtype="
+PLOS_API = "https://journals.plos.org/"
+# Polite User-Agent for PLOS full-text downloads
+PLOS_HEADERS = {'User-Agent': 'janelia-dis/doi_common'}
+# PLOS journal code (the "journal.XXXX" part of the DOI) -> URL slug for the
+# article-file endpoint. Unrecognized codes fall back to "plosone".
+PLOS_JOURNALS = {'pone': 'plosone', 'pbio': 'plosbiology', 'pcbi': 'ploscompbiol',
+                 'pgen': 'plosgenetics', 'pmed': 'plosmedicine', 'pntd': 'plosntds',
+                 'ppat': 'plospathogens'}
 PUBMED_BASE = "https://pubmed.ncbi.nlm.nih.gov/"
 WOS_DOI = "https://api.clarivate.com/apis/wos-starter/v1/documents?db=WOS&limit=1&page=1&q=DO="
 SPRINGER_API = "https://api.springernature.com/meta/v2/json"
@@ -453,6 +461,19 @@ def _set_paper_orcid(auth, datacite, payload):
                         break
     elif 'ORCID' in auth:
         payload['paper_orcid'] = auth['ORCID'].split("/")[-1]
+
+
+def _plos_journal_slug(doi):
+    ''' Map a PLOS DOI to its journal URL slug (e.g. 10.1371/journal.pone.* ->
+        plosone). Unrecognized journal codes fall back to "plosone".
+        Keyword arguments:
+          doi: PLOS DOI
+        Returns:
+          PLOS journal URL slug
+    '''
+    match = re.search(r'journal\.([a-z]+)\.', doi, re.IGNORECASE)
+    code = match.group(1).lower() if match else ''
+    return PLOS_JOURNALS.get(code, 'plosone')
 
 # ******************************************************************************
 # * Callable read functions                                                    *
@@ -1059,7 +1080,7 @@ def doi_api_url(doi, source='openalex', content='json'):
           doi: DOI (or optional PMID for PubMed, required PMCID for
                     PubMed Central, required Lens ID for lens_patent)
           source: source (biorxiv, elife, elsevier, lens_patent, lens_scholar,
-                  openalex, pmc, pubmed, springer, unpaywall, zenodo)
+                  openalex, plos, pmc, pubmed, springer, unpaywall, zenodo)
           content: content type (json or xml)
         Returns:
           API URL
@@ -1082,6 +1103,9 @@ def doi_api_url(doi, source='openalex', content='json'):
             if not doi.startswith('https://doi.org/'):
                 doi = 'https://doi.org/' + doi
             return f"{OA_API}{doi}"
+        case 'plos':
+            return f"{PLOS_API}{_plos_journal_slug(doi)}/article/file?id={doi}" \
+                   + "&type=manuscript"
         case 'pmc':
             return f"{PMC_XML}{doi}"
         case 'pubmed':
@@ -1103,7 +1127,7 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
                     PubMed Central required Lens ID for lens_patent)
           coll: dois collection
           source: biorxiv, elife, elsevier, figshare, lens_patent, lens_scholar,
-                  openalex, pmc, pubmed, springer, unpaywall, zenodo
+                  openalex, plos, pmc, pubmed, springer, unpaywall, zenodo
           content: content type (json or xml)
         Returns:
           None
@@ -1125,6 +1149,18 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
             return xmltodict.parse(xmlresp.text) #JSON
         except Exception as err:
             raise err
+    elif source == 'plos':
+        # PLOS serves the full-text article as XML; convert to JSON via
+        # xmltodict unless the caller explicitly asked for raw XML.
+        try:
+            resp = requests.get(doi_api_url(doi, source=source), headers=PLOS_HEADERS,
+                                timeout=5)
+            resp.raise_for_status()
+        except Exception as err:
+            raise err
+        if content == 'xml':
+            return resp.text
+        return xmltodict.parse(resp.text)
     elif source == 'figshare':
         try:
             response = JRC.call_figshare(doi)
