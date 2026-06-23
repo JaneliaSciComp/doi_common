@@ -1184,7 +1184,8 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
         try:
             row = pyalex.Works().filter(doi=doi).get()
         except Exception as err:
-            raise err
+            LLOGGER.warning(f"OpenAlex unavailable for {doi}: {err}")
+            return None
         if not row:
             return None
         return row[0]
@@ -1291,7 +1292,8 @@ def get_incoming_citations_openalex(doi, rec=None):
         try:
             rec = get_doi_record(doi, coll=None, source='openalex')
         except Exception as err:
-            raise err
+            LLOGGER.warning(f"OpenAlex unavailable for {doi}: {err}")
+            return []
     if not rec or 'cited_by_api_url' not in rec or not rec['cited_by_api_url']:
         return []
     base = rec['cited_by_api_url'] + f"&mailto={OPENALEX_EMAIL}&per-page=200&cursor="
