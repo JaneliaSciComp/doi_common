@@ -1189,8 +1189,8 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
             return None
         return row[0]
     elif source in ('pmc', 'pubmed'):
-        headers = {'api_key': os.environ['NCBI_API_KEY']}
-        resp = requests.get(doi_api_url(doi, source=source), headers=headers, timeout=5)
+        resp = requests.get(doi_api_url(doi, source=source)
+                            + f"&api_key={os.environ['NCBI_API_KEY']}", timeout=5)
         if not resp.ok:
             raise requests.HTTPError(resp.status_code, resp.text)
         if content == 'xml':
@@ -1348,7 +1348,7 @@ def get_incoming_citations_pubmed(pmid, convert=True):
           List of DOIs
     '''
     try:
-        resp = requests.get(f"{PMC_CITING_WORKS}{pmid}", timeout=5)
+        resp = requests.get(f"{PMC_CITING_WORKS}{pmid}&api_key={os.environ['NCBI_API_KEY']}", timeout=5)
         xmld = xmltodict.parse(resp.text)
     except Exception as err:
         raise err
