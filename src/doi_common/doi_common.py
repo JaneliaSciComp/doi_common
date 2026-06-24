@@ -106,7 +106,8 @@ ZENODO_API = "https://zenodo.org/api/records/"
 DC_PREFIX = ['10.15151/', '10.15785/', '10.17615/', '10.17617/', '10.17632/',
              '10.22002/', '10.24433/', '10.25345/', '10.3929/', '10.48324/', '10.48448/',
              '10.5517/', '10.5522/', '10.57736/', '10.60692/', '10.7907/']
-# arXiv full-text acknowledgement extraction
+# arXiv
+ARXIV_API = "https://export.arxiv.org/api/query"
 ARXIV_HTML_URL = "https://arxiv.org/html/"
 ARXIV_EPRINT_URL = "https://arxiv.org/e-print/"
 # Polite User-Agent for arXiv full-text downloads
@@ -1079,13 +1080,16 @@ def doi_api_url(doi, source='openalex', content='json'):
         Keyword arguments:
           doi: DOI (or optional PMID for PubMed, required PMCID for
                     PubMed Central, required Lens ID for lens_patent)
-          source: source (biorxiv, elife, elsevier, lens_patent, lens_scholar,
-                  openalex, plos, pmc, pubmed, springer, unpaywall, zenodo)
+          source: source (arxiv, biorxiv, elife, elsevier, lens_patent, lens_scholar,
+                  openalex, plos, pmc, pubmed, springer, unpaywall, wos, zenodo)
           content: content type (json or xml)
         Returns:
           API URL
     '''
     match source:
+        case 'arxiv':
+            arxiv_id = re.sub(r'^10\.48550/arxiv\.', '', doi, flags=re.IGNORECASE)
+            return f"{ARXIV_API}?id_list={arxiv_id}"
         case 'biorxiv':
             return f"{BIOXIV_API}{doi}"
         case 'elife':
@@ -1114,6 +1118,8 @@ def doi_api_url(doi, source='openalex', content='json'):
             return f"{SPRINGER_API}?q=doi:{doi}&api_key={os.environ['SPRINGER_META_API_KEY']}"
         case 'unpaywall':
             return f"{UNPAYWALL_API}{doi}?email=svirskasr@hhmi.org"
+        case 'wos':
+            return f"{WOS_DOI}{doi}"
         case 'zenodo':
             return f"{ZENODO_API}{doi.split('.')[-1]}"
         case _:
@@ -1126,12 +1132,21 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
           doi: DOI (or optional PMID for PubMed, required PMCID for
                     PubMed Central required Lens ID for lens_patent)
           coll: dois collection
-          source: biorxiv, elife, elsevier, figshare, lens_patent, lens_scholar,
-                  openalex, plos, pmc, pubmed, springer, unpaywall, zenodo
+          source: arxiv, biorxiv, elife, elsevier, figshare, lens_patent, lens_scholar,
+                  openalex, plos, pmc, pubmed, springer, unpaywall, wos, zenodo
           content: content type (json or xml)
         Returns:
           None
     '''
+    if source == 'arxiv':
+        try:
+            resp = requests.get(doi_api_url(doi, source='arxiv'), timeout=5)
+            resp.raise_for_status()
+        except Exception as err:
+            raise err
+        if content == 'xml':
+            return resp.text
+        return xmltodict.parse(resp.text)
     if source in ('biorxiv', 'elife', 'lens_patent', 'lens_scholar', 'unpaywall'):
         try:
             return requests.get(doi_api_url(doi, source=source),
@@ -1203,6 +1218,14 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
             return resp
         except Exception as err:
             return None
+    elif source == 'wos':
+        try:
+            headers = {'X-ApiKey': os.environ['WOS_API_KEY']}
+            resp = requests.get(doi_api_url(doi, source='wos'), headers=headers, timeout=10)
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as err:
+            raise err
     elif source == 'zenodo':
         try:
             headers = {'Authorization': f'Bearer {os.environ["ZENODO_API_KEY"]}'}
