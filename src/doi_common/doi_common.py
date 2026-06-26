@@ -1205,8 +1205,10 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
             return None
         return row[0]
     elif source in ('pmc', 'pubmed'):
-        resp = requests.get(doi_api_url(doi, source=source)
-                            + f"&api_key={os.environ['NCBI_API_KEY']}", timeout=5)
+        url = doi_api_url(doi, source=source)
+        if source == 'pubmed':
+            url += f"&api_key={os.environ['NCBI_API_KEY']}"
+        resp = requests.get(url, timeout=5)
         if not resp.ok:
             raise requests.HTTPError(resp.status_code, resp.text)
         if content == 'xml':
