@@ -399,27 +399,29 @@ def _ack_from_arxiv(arxiv_id):
 
 
 def _parse_pmc_ack(edata):
-    ''' Parse PMC acknowledgements
+    ''' Parse a PMC <ack> element into one acknowledgement string, recursively
+        flattening nested inline text (institutions, italics, cross-refs, etc.) so
+        none is dropped, and skipping the section title/label. Handles a single ack
+        (dict) or multiple (list).
         Keyword arguments:
-          edata: dictionary of article data
+          edata: the <ack> element (dict or list) from the PMC JATS
         Returns:
-          string of acknowledgements
+          string of acknowledgements (empty string if none)
     '''
-    acktext = ""
+    if isinstance(edata, list):
+        return re.sub(r'\s+', ' ', ' '.join(_parse_pmc_ack(e) for e in edata)).strip()
     if not isinstance(edata, dict):
-        return acktext
+        return _flatten_xml_text(edata).strip()
+    # Prefer the <p> paragraphs (skips the "Acknowledgements" title); if there is no
+    # <p> (text held in a nested <sec> or inline), fall back to the whole element
+    # minus its title/label. Recursive flatten keeps nested inline text a direct
+    # '#text' read would drop.
     if edata.get('p'):
-        if isinstance(edata['p'], str):
-            acktext = edata['p']
-        elif isinstance(edata['p'], dict) and '#text' in edata['p']:
-            acktext = edata['p']['#text']
-        elif isinstance(edata['p'], list):
-            for ackp in edata['p']:
-                if isinstance(ackp, str):
-                    acktext += ackp
-                elif isinstance(ackp, dict) and '#text' in ackp:
-                    acktext += ackp['#text']
-    return acktext
+        text = _flatten_xml_text(edata['p'])
+    else:
+        text = ' '.join(_flatten_xml_text(v) for k, v in edata.items()
+                        if k not in ('title', 'label') and not k.startswith('@'))
+    return re.sub(r'\s+', ' ', text).strip()
 
 
 def _process_middle_initials(rec):
@@ -554,6 +556,28 @@ def get_abstract(rec):
     return None
 
 
+def _flatten_xml_text(node):
+    ''' Recursively collect all text from an xmltodict subtree (e.g. Elsevier ce:)
+        into one string, including nested inline elements. This preserves text a
+        shallow '#text'-only read would drop - funder names, cross-references, and
+        search terms embedded in nested elements. Attribute keys ('@...') skipped.
+        Keyword arguments:
+          node: dict, list, str, or None from xmltodict
+        Returns:
+          Flattened text string
+    '''
+    if node is None:
+        return ''
+    if isinstance(node, str):
+        return node
+    if isinstance(node, list):
+        return ' '.join(_flatten_xml_text(n) for n in node)
+    if isinstance(node, dict):
+        return ' '.join(_flatten_xml_text(v) for k, v in node.items()
+                        if not k.startswith('@'))
+    return str(node)
+
+
 def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=None):
     ''' Generate acknowledgements
         Keyword arguments:
@@ -580,23 +604,30 @@ def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=
     elif '10.1016' in doi or els_rec:
         if not els_rec:
             els_rec = get_doi_record(doi, source='elsevier')
-        otext = els_rec.get('full-text-retrieval-response', {}).get('originalText', {})
-        article = otext.get('xocs:doc', {}).get('xocs:serial-item', {}).get('article', {})
-        sections = article.get('body', {}).get('ce:sections', {}).get('ce:section', [])
-        acktext = ''
-        for sec in sections:
-            if '@role' in sec and sec['@role'] == 'acknowledgement':
-                if 'ce:para' in sec and isinstance(sec['ce:para'], list):
-                    ackl = []
-                    for para in sec['ce:para']:
-                        if '#text' in para:
-                            ackl.append(para['#text'])
-                    if ackl:
-                        acktext += para['#text']
-                        break
-                elif 'ce:para' in sec and '#text' in sec['ce:para']:
-                    acktext += sec['ce:para']['#text']
-                    break
+        otext = ((els_rec or {}).get('full-text-retrieval-response') or {}).get('originalText')
+        article = {}
+        if isinstance(otext, dict):   # a string means no entitled full text
+            doc = otext.get('xocs:doc') or {}
+            serial = doc.get('xocs:serial-item') or {} if isinstance(doc, dict) else {}
+            if isinstance(serial, dict):
+                article = serial.get('article') or {}
+        # Gather every acknowledgement region and flatten each RECURSIVELY so nested
+        # inline text (funder names, cross-refs, embedded terms) is preserved: body
+        # <ce:section role="acknowledgement"> paragraphs plus any tail
+        # <ce:acknowledgment>. The old code kept only one paragraph's direct #text,
+        # dropping nested text - so funders and embedded terms went missing.
+        parts = []
+        body = article.get('body') if isinstance(article, dict) else None
+        sections = (body.get('ce:sections') or {}).get('ce:section') if isinstance(body, dict) else None
+        if isinstance(sections, dict):
+            sections = [sections]
+        for sec in sections or []:
+            if isinstance(sec, dict) and sec.get('@role') == 'acknowledgement':
+                parts.append(_flatten_xml_text(sec.get('ce:para')))
+        tail = article.get('tail') if isinstance(article, dict) else None
+        if isinstance(tail, dict) and tail.get('ce:acknowledgment'):
+            parts.append(_flatten_xml_text(tail['ce:acknowledgment']))
+        acktext = re.sub(r'\s+', ' ', ' '.join(parts)).strip()
         if acktext:
             return acktext, 'Elsevier'
     elif 'arxiv' in doi.lower():
