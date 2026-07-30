@@ -578,7 +578,8 @@ def _flatten_xml_text(node):
     return str(node)
 
 
-def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=None):
+def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=None,
+                         plos_rec=None):
     ''' Generate acknowledgements
         Keyword arguments:
           doi: DOI
@@ -586,8 +587,9 @@ def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=
           elife_rec: eLife record
           els_rec: Elsevier record
           pmc_rec: PubMed Central record
+          plos_rec: PLOS full-text record
         Returns:
-          Acknowledgements
+          (acknowledgement text, source label) tuple; ('', '') if none found
     '''
     acktext = ""
     # Check eLife
@@ -637,6 +639,24 @@ def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=
         acktext = _ack_from_arxiv(arxiv_id)
         if acktext:
             return acktext, 'arXiv'
+    elif '10.1371' in doi or plos_rec:
+        # PLOS full text is first-party JATS with the same <back><ack> shape as
+        # PMC, retrievable per DOI - so we capture the ack without waiting for PMC
+        # to ingest the article. A fetch failure (404 for a non-article DOI,
+        # network) or a missing ack falls through to the PMC backstop below rather
+        # than aborting.
+        if not plos_rec:
+            try:
+                plos_rec = get_doi_record(doi, source='plos')
+            except Exception as err:
+                LLOGGER.warning(f"PLOS full text unavailable for {doi}: {err}")
+                plos_rec = None
+        if isinstance(plos_rec, dict):
+            ack = ((plos_rec.get('article') or {}).get('back') or {}).get('ack')
+            if ack:
+                acktext = _parse_pmc_ack(ack)
+                if acktext:
+                    return acktext, 'PLOS'
     if not (pmcid or pmc_rec):
         try:
             pdict = convert_pubmed(doi, itype='doi')
@@ -1197,7 +1217,10 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
             raise err
     elif source == 'plos':
         # PLOS serves the full-text article as XML; convert to JSON via
-        # xmltodict unless the caller explicitly asked for raw XML.
+        # xmltodict unless the caller explicitly asked for raw XML. PLOS sends no
+        # charset header, so requests defaults resp.text to ISO-8859-1 and mangles
+        # UTF-8 (e.g. accented names); parse the raw bytes so the XML declaration
+        # drives decoding, and force UTF-8 on the raw-XML path.
         try:
             resp = requests.get(doi_api_url(doi, source=source), headers=PLOS_HEADERS,
                                 timeout=5)
@@ -1205,8 +1228,9 @@ def get_doi_record(doi, coll=None, source='mongo', content='json'):
         except Exception as err:
             raise err
         if content == 'xml':
+            resp.encoding = 'utf-8'
             return resp.text
-        return xmltodict.parse(resp.text)
+        return xmltodict.parse(resp.content)
     elif source == 'figshare':
         try:
             response = JRC.call_figshare(doi)
