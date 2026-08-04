@@ -10,7 +10,7 @@ authors = [
 description = "Library of common DOI- and ORCID-related functions for Python"
 readme = "README.md"
 requires-python = ">=3.7"
-dependencies = [ "pyalex" ]
+dependencies = [ "pyalex", "truststore" ]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
