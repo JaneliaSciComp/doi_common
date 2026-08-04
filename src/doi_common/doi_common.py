@@ -1761,13 +1761,13 @@ def get_supervisory_orgs(coll=None, full=False):
         return orgs
     try:
         resp = requests.get(ORGS_URL, timeout=10)
+        if resp.status_code != 200:
+            raise Exception(f"Failed to get supervisory organizations: {resp.status_code}")
     except requests.exceptions.SSLError:
         with open("suporgs.json", "r", encoding="utf-8") as fh:
             results = json.load(fh)
     except Exception as err:
         raise err
-    if resp.status_code != 200 and not results:
-        raise Exception(f"Failed to get supervisory organizations: {resp.status_code}")
     try:
         if not results:
             results = resp.json()['result']
