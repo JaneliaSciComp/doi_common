@@ -1765,7 +1765,7 @@ def get_supervisory_orgs(coll=None, full=False):
             raise Exception(f"Failed to get supervisory organizations: {resp.status_code}")
     except requests.exceptions.SSLError:
         with open("suporgs.json", "r", encoding="utf-8") as fh:
-            results = json.load(fh)
+            results = json.load(fh)['result']
     except Exception as err:
         raise err
     try:
