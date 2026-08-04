@@ -59,8 +59,11 @@ import time
 import xml.etree.ElementTree as ET
 import pyalex
 import requests
+import truststore
 import xmltodict
 import jrc_common.jrc_common as JRC
+
+truststore.inject_into_ssl()
 
 OPENALEX_EMAIL = "svirskasr@hhmi.org"
 pyalex.config.email = OPENALEX_EMAIL
