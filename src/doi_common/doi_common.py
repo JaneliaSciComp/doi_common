@@ -51,6 +51,7 @@ import getpass
 import gzip
 import inspect
 import io
+import json
 import logging
 import os
 import re
@@ -59,11 +60,8 @@ import time
 import xml.etree.ElementTree as ET
 import pyalex
 import requests
-import truststore
 import xmltodict
 import jrc_common.jrc_common as JRC
-
-truststore.inject_into_ssl()
 
 OPENALEX_EMAIL = "svirskasr@hhmi.org"
 pyalex.config.email = OPENALEX_EMAIL
@@ -1750,6 +1748,7 @@ def get_supervisory_orgs(coll=None, full=False):
           Dict of supervisory organizations
     '''
     orgs = {}
+    results = {}
     if coll is not None:
         try:
             rows = coll.find({})
@@ -1762,12 +1761,16 @@ def get_supervisory_orgs(coll=None, full=False):
         return orgs
     try:
         resp = requests.get(ORGS_URL, timeout=10)
+    except requests.exceptions.SSLError:
+        with open("suporgs.json", "r", encoding="utf-8") as fh:
+            results = json.load(fh)
     except Exception as err:
         raise err
-    if resp.status_code != 200:
+    if resp.status_code != 200 and not results:
         raise Exception(f"Failed to get supervisory organizations: {resp.status_code}")
     try:
-        results = resp.json()['result']
+        if not results:
+            results = resp.json()['result']
     except Exception as err:
         raise err
     for org in results:

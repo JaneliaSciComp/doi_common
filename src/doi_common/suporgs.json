@@ -1,0 +1,6439 @@
+{
+  "result": [
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-793",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Gaby Maimon Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-797",
+      "LOCATIONCODE": "Univ_COL_site",
+      "SUPORGNAME": "Dr. Gia Voeltz",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-800",
+      "LOCATIONCODE": "Princeton_site",
+      "SUPORGNAME": "Dr. Clifford Brangwynne Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-810",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "Dr. Julie Theriot Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-820",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Stephen Liberles Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-821",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Luciano Marraffini Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-830",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Ralph DeBerardinis Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-840",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "Dr. Beth Stevens Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-841",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "Dr. Zachary Lippman Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-842",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Thomas Bernhardt",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-843",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Multi Media Strategy",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1988",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-845",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Elizabeth Sattely Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-847",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Software Solutions",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "Scientific Computing",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-848",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Landcare",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005470",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-849",
+      "LOCATIONCODE": "UMass_site",
+      "SUPORGNAME": "Dr. Nikolaus Grigorieff Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-850",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Procure to Pay Systems",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "BusinessSystems",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-851",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "HQ HR Business Partnership",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1964",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-853",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Molecular Tools and Imaging",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "093001",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-854",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Computation and Theory",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "093001",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-860",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "GENIE Screening",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093421",
+      "LCEMPID": "J0462",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-864",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Site, Supply & Service Team",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1404",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-867",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Vivarium Services",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "Animal Services and Molecular Biology",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-868",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Veterinary Services",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "Animal Services and Molecular Biology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-869",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Vivarium Facilities",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "Animal Services and Molecular Biology",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-871",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Surgery",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1583",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-872",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "GENIE Data Analysis",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093421",
+      "LCEMPID": "J0462",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-873",
+      "LOCATIONCODE": "UT_Austin_site",
+      "SUPORGNAME": "Dr. Keiko Torii Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-875",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Hanna Gray Fellows Program",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1867",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-876",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Operations Systems & Processes",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Technology_Systems_Management",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-877",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Culinary; BOH",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093055",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-878",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Food & Beverage; FOH",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093055",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-879",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Fitness Center",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-909",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-880",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Abraham Beyene Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "60983",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-882",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Christine Jacobs-Wagner Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-883",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "PSP  HQ",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1157",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-884",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "PSP Janelia",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1157",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-886",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Feng Zhang Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-890",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Accounts Payable",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005420",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-891",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Payroll",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005420",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-893",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Carsen Stringer Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "68188",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-894",
+      "LOCATIONCODE": "Whitehead_site",
+      "SUPORGNAME": "Dr. Jonathan Weissman Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-896",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Alison Tebo Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "67095",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-897",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Edward Boyden Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-899",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Kayvon Pedram Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "60983",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-900",
+      "LOCATIONCODE": "Whitehead_site",
+      "SUPORGNAME": "Dr. Yukiko Yamashita Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-901",
+      "LOCATIONCODE": "Duke_site",
+      "SUPORGNAME": "Dr. Sheng-Yang He Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-902",
+      "LOCATIONCODE": "Univ_Cal_San_Diego_site",
+      "SUPORGNAME": "Dr. Loren Looger Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-903",
+      "LOCATIONCODE": "Univ_Cal_San_Diego_site",
+      "SUPORGNAME": "Dr. Scott Sternson Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-904",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "FIB-SEM Technology",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "50742",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-906",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Total Rewards Program Delivery",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005451",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-907",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Facilities Operations",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "Operations",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-908",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Risk and Compliance",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005400",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-909",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Operations - Administration",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "Operations",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-910",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Sue Ann Koay Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-911",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Robert Johnson Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "61037",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-912",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Gowan Tervo Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "J0290",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-916",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Operations Capabilities",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Technology_Systems_Management",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-918",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Compensation",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005450",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-927",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Hazardous Materials Management Team",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-698",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-937",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Doris Tsao Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-938",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Emily Dennis Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "J0389",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-948",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "CellMap",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "61037",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-949",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Open Chemistry",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "60983",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-959",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Personnel, Benefits, and Litigation",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005300",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-969",
+      "LOCATIONCODE": "Fred_Huthcinson_site",
+      "SUPORGNAME": "Dr. Trevor Bedford Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-970",
+      "LOCATIONCODE": "Fred_Huthcinson_site",
+      "SUPORGNAME": "Dr. Frederick Matsen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-971",
+      "LOCATIONCODE": "Johns_Hopkins_site",
+      "SUPORGNAME": "Dr. Xin Chen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-972",
+      "LOCATIONCODE": "Univ_Utah_site",
+      "SUPORGNAME": "Dr. Nels Elde Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-973",
+      "LOCATIONCODE": "Univ_Cal_San_Diego_site",
+      "SUPORGNAME": "Dr. Elizabeth Villa Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-974",
+      "LOCATIONCODE": "Duke_site",
+      "SUPORGNAME": "Dr. Cagla Eroglu Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-975",
+      "LOCATIONCODE": "Harvard_A&S_site",
+      "SUPORGNAME": "Dr. Cassandra Extavour Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-976",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Daniel Kronauer Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-977",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Flow Cytometry",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1946",
+      "LCEMPID": "65132",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-978",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Daniel Mucida Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-979",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Vincent Tagliabracci Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-980",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Chenghua Gu Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-982",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Tech Support - JRC",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-983",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-983",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Technology Support Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "IT_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-984",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Virtual Events Experience Support",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-909",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-985",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Public Markets",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005355",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-986",
+      "LOCATIONCODE": "UCLA_site",
+      "SUPORGNAME": "Dr. Steve Smale Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-989",
+      "LOCATIONCODE": "Duke_site",
+      "SUPORGNAME": "Dr. Kafui Dzirasa Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-990",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Vanessa Ruta Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-991",
+      "LOCATIONCODE": "Salk_site",
+      "SUPORGNAME": "Dr. Kay Tye Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-999",
+      "LOCATIONCODE": "Princeton_site",
+      "SUPORGNAME": "Dr. Martin Jonikas Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-9-781",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Investment Capabilities",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Technology_Systems_Management",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Tangled_Bank_&_Public_Media",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Tangled Bank Studios",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "005100",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Tech_Supp",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Tech Support - HQ",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-983",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Technology_Systems_Management",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Technology and Systems Management",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "Operations",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "TERMINATED_CW",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Terminated Contingent Workers",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "TERMINATED_TOP",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "TERMINATED_EE",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Terminated Employees",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "TERMINATED_TOP",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "TERMINATED_TOP",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "All Terminated Workers",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": null,
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "001825",
+      "LOCATIONCODE": "Univ_Mich_site",
+      "SUPORGNAME": "Dr. James Bardwell Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "001826",
+      "LOCATIONCODE": "Univ_Mich_site",
+      "SUPORGNAME": "Dr. Arul Chinnaiyan Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "002001",
+      "LOCATIONCODE": "Johns_Hopkins_site",
+      "SUPORGNAME": "SOO Johns Hopkins",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1354",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "002119",
+      "LOCATIONCODE": "Johns_Hopkins_site",
+      "SUPORGNAME": "Dr. Jeremy Nathans Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "002126",
+      "LOCATIONCODE": "Johns_Hopkins_site",
+      "SUPORGNAME": "Dr. Bert Vogelstein Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "002129",
+      "LOCATIONCODE": "Johns_Hopkins_site",
+      "SUPORGNAME": "Dr. Rachel Green Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "002131",
+      "LOCATIONCODE": "Johns_Hopkins_site",
+      "SUPORGNAME": "Dr. Robert Siliciano Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "002133",
+      "LOCATIONCODE": "Johns_Hopkins_site",
+      "SUPORGNAME": "Dr. Geraldine Seydoux Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "002134",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Duojia Pan Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "002135",
+      "LOCATIONCODE": "Johns_Hopkins_site",
+      "SUPORGNAME": "Dr. Xinzhong Dong Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003001",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "SOO Univ of California - Berkeley",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1355",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003061",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Robert Tjian Lab (Berkeley)",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003065",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Randy Schekman Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003069",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Barbara Meyer Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003071",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Carlos Bustamante Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003073",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Eva Nogales Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003076",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Jennifer Doudna Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003081",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Michael Eisen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003082",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Yang Dan Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003085",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Krishna Niyogi Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003086",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Andrew Dillin Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003087",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Nicole King Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003088",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Michael Rape Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003089",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Russell Vance Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003090",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Britt Glaunsinger Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "003091",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Andreas Martin Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005100",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Office of the President",
+      "SUPORGSUBTYPE": "Company",
+      "SUPERIORSUPORG": "HHMI_TOP",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005150",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Science",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "005100",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005300",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "General Counsel",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "005100",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005313",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Advisor",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005450",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005317",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Head Investment Counsel",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005300",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005318",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Legal Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005300",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005319",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Deputy General Counsel",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005300",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005354",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Private Markets",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005355",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005355",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Investments",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "005100",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005357",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Investment Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005355",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005400",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Finance",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "Operations",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005401",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Financial Planning and Analysis",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005400",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005420",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Financial Operations & Reporting",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005400",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005424",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Treasury Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005400",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005425",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "General Accounting",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005420",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005429",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Tax",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005400",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005440",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Procurement",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005400",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005441",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Travel Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-909",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005450",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "People and Culture",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "Operations",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005451",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Total Rewards",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005450",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005459",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "People Strategy",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005450",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005470",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Facilities Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-907",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005473",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Food Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Hospitality_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005474",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Office Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005470",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005481",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Data Integrations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-916",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005483",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Collaboration Capabilities",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-916",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "005610",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Conference Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Campus_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "006001",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "SOO Harvard Medical School",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1355",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "006171",
+      "LOCATIONCODE": "Brigham_site",
+      "SUPORGNAME": "Dr. Stephen Elledge Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "006173",
+      "LOCATIONCODE": "Brigham_site",
+      "SUPORGNAME": "Dr. Matthew Waldor Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "007001",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "SOO Children's Boston",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1355",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "007176",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "Dr. Stuart Orkin Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "007179",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "Dr. Leonard Zon Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "007180",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "Dr. Fredrick Alt Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "007189",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "Dr. Elizabeth Engle Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "007190",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "Dr. Christopher Walsh Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "007191",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "Dr. Yi Zhang Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "008079",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Norbert Perrimon Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "008177",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Constance Cepko Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "008183",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Tom Rapoport Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "008184",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Stephen Harrison Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "008190",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Bernardo Sabatini Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "008193",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Danesh Moazed Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "008196",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Rachel Wilson Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "008198",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. David Ginty Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "008199",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Johannes Walter Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "008200",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. David Reich Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "009187",
+      "LOCATIONCODE": "Massachusetts_GH_site",
+      "SUPORGNAME": "Dr. Bruce Walker Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "009188",
+      "LOCATIONCODE": "Massachusetts_GH_site",
+      "SUPORGNAME": "Dr. Daniel Haber Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "009192",
+      "LOCATIONCODE": "Massachusetts_GH_site",
+      "SUPORGNAME": "Dr. Vamsi Mootha Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "010087",
+      "LOCATIONCODE": "Harvard_A&S_site",
+      "SUPORGNAME": "Dr. Catherine Dulac Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "010089",
+      "LOCATIONCODE": "Harvard_A&S_site",
+      "SUPORGNAME": "Dr. David Liu Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "010090",
+      "LOCATIONCODE": "Harvard_A&S_site",
+      "SUPORGNAME": "Dr. Xiaowei Zhuang Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "010100",
+      "LOCATIONCODE": "Harvard_A&S_site",
+      "SUPORGNAME": "Dr. Sean Eddy Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "010101",
+      "LOCATIONCODE": "Harvard_A&S_site",
+      "SUPORGNAME": "Dr. Pardis Sabeti Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "011001",
+      "LOCATIONCODE": "Univ_Chi_site",
+      "SUPORGNAME": "SOO Univ of Chicago",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1355",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "011872",
+      "LOCATIONCODE": "Univ_Chi_site",
+      "SUPORGNAME": "Dr. Chuan He Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "012001",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "SOO Univ of Texas, Southwestern - Dallas",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1354",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "012220",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. David Mangelsdorf Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "012225",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Helen Hobbs Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "012226",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Michael Rosen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "012227",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Zhijian Chen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "012229",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Youxing Jiang Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "012231",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Lora Hooper Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "012234",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Sean Morrison Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "012236",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Joshua Mendell Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "012237",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Kim Orth Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "014258",
+      "LOCATIONCODE": "Duke_site",
+      "SUPORGNAME": "Dr. R. J. Lefkowitz Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "014294",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Erich Jarvis Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "014297",
+      "LOCATIONCODE": "Duke_site",
+      "SUPORGNAME": "Dr. Philip Benfey Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "014298",
+      "LOCATIONCODE": "Duke_site",
+      "SUPORGNAME": "Dr. Xinnian Dong Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "015322",
+      "LOCATIONCODE": "Baylor_site",
+      "SUPORGNAME": "Dr. Huda Zoghbi Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "016914",
+      "LOCATIONCODE": "UCLA_site",
+      "SUPORGNAME": "Dr. Steve Jacobsen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "016918",
+      "LOCATIONCODE": "UCLA_site",
+      "SUPORGNAME": "Dr. Leonid Kruglyak Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "019001",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "SOO Yale",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1354",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "019422",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "Dr. Richard Flavell Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "019429",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "Dr. Pietro De Camilli Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "019440",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "Dr. Ruslan Medzhitov Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "019441",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "Dr. Anna Marie Pyle Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "019447",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "Dr. Akiko Iwasaki Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "019448",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "Dr. John MacMicking Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "020453",
+      "LOCATIONCODE": "Columbia_site",
+      "SUPORGNAME": "Dr. Richard Axel Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "020468",
+      "LOCATIONCODE": "Columbia_site",
+      "SUPORGNAME": "Dr. Oliver Hobert Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "020471",
+      "LOCATIONCODE": "Columbia_site",
+      "SUPORGNAME": "Dr. Charles Zuker Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "020474",
+      "LOCATIONCODE": "Columbia_site",
+      "SUPORGNAME": "Dr. Michael Shadlen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021001",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "SOO - Rockefeller",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1354",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021926",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Jeffrey Friedman Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021930",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Michel Nussenzweig Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021938",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. A. J. Hudspeth Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021939",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Roderick MacKinnon Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021940",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Michael O'Donnell Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021942",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Elaine Fuchs Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021943",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Robert Darnell Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021946",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Leslie Vosshall Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021948",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Jean-Laurent Casanova Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021949",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Jue Chen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "021952",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Paul Bieniasz Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022001",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "SOO Stanford",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1355",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022514",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Roeland Nusse Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022521",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. David Kingsley Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022522",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Krasnow Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022524",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Axel Brunger Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022527",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Kenan Garcia Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022529",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Liqun Luo Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022531",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Thomas Sudhof Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022534",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Mark Schnitzer Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022535",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Kang Shen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022537",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Karl Deisseroth Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022538",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Tirin Moore Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022539",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Dominique Bergmann Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022544",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Carolyn Bertozzi Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "022546",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Joanna Wysocka Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "023569",
+      "LOCATIONCODE": "Univ_Penn_site",
+      "SUPORGNAME": "Dr. Amita Sehgal-Field Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "024670",
+      "LOCATIONCODE": "Univ_Utah_site",
+      "SUPORGNAME": "Dr. Bradley Cairns Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "024672",
+      "LOCATIONCODE": "Univ_Utah_site",
+      "SUPORGNAME": "Dr. Erik Jorgensen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "024673",
+      "LOCATIONCODE": "Univ_Utah_site",
+      "SUPORGNAME": "Dr. Jared Rutter Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "025001",
+      "LOCATIONCODE": "Univ_Cal_San_Diego_site",
+      "SUPORGNAME": "SOO Univ of California - San Diego",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1355",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "025968",
+      "LOCATIONCODE": "Univ_Cal_San_Diego_site",
+      "SUPORGNAME": "Dr. Susan Ackerman Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "026001",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "SOO Univ of California - San Francisco",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1354",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "026712",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Lily Jan & Dr. Yuh Jan Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "026734",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Richard Locksley Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "026738",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Jason Cyster Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "026741",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Kevan Shokat Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "026753",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Roland Mullins Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "026754",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Michael Brainard Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "026755",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Yifan Cheng Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "026756",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Loren Frank Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "026757",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Massimo Scanziani Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "027756",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "Dr. Richard Palmiter Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "027779",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "Dr. David Baker Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "027780",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "Dr. Evan Eichler Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "027782",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "Dr. Ning Zheng Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "027786",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "Dr. Joseph Mougous Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "027787",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "Dr. Jay Shendure Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "030001",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "SOO MIT",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1355",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "030520",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Susumu Tonegawa Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "030522",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. H. Robert Horvitz Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "030533",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Stephen Bell Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "030542",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Sangeeta Bhatia Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "030543",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Catherine Drennan Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "030546",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Michael Laub Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "041101",
+      "LOCATIONCODE": "Univ_COL_site",
+      "SUPORGNAME": "Dr. Thomas Cech Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "041113",
+      "LOCATIONCODE": "Univ_COL_site",
+      "SUPORGNAME": "Dr. Roy Parker Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "041114",
+      "LOCATIONCODE": "Univ_COL_site",
+      "SUPORGNAME": "Dr. Karolin Schnizer-Luger Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "044101",
+      "LOCATIONCODE": "Carnegie_site",
+      "SUPORGNAME": "Dr. Allan Spradling Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "047100",
+      "LOCATIONCODE": "California_Inst_site",
+      "SUPORGNAME": "Dr. David Anderson Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "047106",
+      "LOCATIONCODE": "California_Inst_site",
+      "SUPORGNAME": "Dr. Douglas Rees Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "047112",
+      "LOCATIONCODE": "California_Inst_site",
+      "SUPORGNAME": "Dr. Michael Elowitz Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "047114",
+      "LOCATIONCODE": "California_Inst_site",
+      "SUPORGNAME": "Dr. Elliot Meyerowitz Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "048105",
+      "LOCATIONCODE": "Princeton_site",
+      "SUPORGNAME": "Dr. Bonnie Bassler Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "048108",
+      "LOCATIONCODE": "Princeton_site",
+      "SUPORGNAME": "Dr. Carlos Brody Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "050101",
+      "LOCATIONCODE": "Brandeis_site",
+      "SUPORGNAME": "Dr. Michael Rosbash Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "052104",
+      "LOCATIONCODE": "Salk_site",
+      "SUPORGNAME": "Dr. Joanne Chory Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "052111",
+      "LOCATIONCODE": "Salk_site",
+      "SUPORGNAME": "Dr. Joseph Ecker Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "053105",
+      "LOCATIONCODE": "Cold_Spring_site",
+      "SUPORGNAME": "Dr. Leemor Joshua-Tor Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "053106",
+      "LOCATIONCODE": "Cold_Spring_site",
+      "SUPORGNAME": "Dr. Robert Martienssen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "054103",
+      "LOCATIONCODE": "Indiana_site",
+      "SUPORGNAME": "Dr. Craig Pikaard Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "056102",
+      "LOCATIONCODE": "Univ_Oregon_site",
+      "SUPORGNAME": "Dr. Chris Doe Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "057103",
+      "LOCATIONCODE": "NYU_site",
+      "SUPORGNAME": "Dr. Dan Littman Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "057108",
+      "LOCATIONCODE": "NYU_site",
+      "SUPORGNAME": "Dr. Michele Pagano Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "057113",
+      "LOCATIONCODE": "NYU_site",
+      "SUPORGNAME": "Dr. Evgeny Nudler Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "059100",
+      "LOCATIONCODE": "Fred_Huthcinson_site",
+      "SUPORGNAME": "Dr. Steven Henikoff Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "059109",
+      "LOCATIONCODE": "Fred_Huthcinson_site",
+      "SUPORGNAME": "Dr. Harmit Singh Malik Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "059111",
+      "LOCATIONCODE": "Fred_Huthcinson_site",
+      "SUPORGNAME": "Dr. Sue Biggins Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "062108",
+      "LOCATIONCODE": "Memorial_Sloan_site",
+      "SUPORGNAME": "Dr. Charles Sawyers Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "062109",
+      "LOCATIONCODE": "Memorial_Sloan_site",
+      "SUPORGNAME": "Dr. Scott Keeney Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "062110",
+      "LOCATIONCODE": "Memorial_Sloan_site",
+      "SUPORGNAME": "Dr. Alexander Rudensky Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "062111",
+      "LOCATIONCODE": "Memorial_Sloan_site",
+      "SUPORGNAME": "Dr. Jennifer Zallen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "062112",
+      "LOCATIONCODE": "Memorial_Sloan_site",
+      "SUPORGNAME": "Dr. Scott Lowe Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "062113",
+      "LOCATIONCODE": "Memorial_Sloan_site",
+      "SUPORGNAME": "Dr. Christopher Lima Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "065102",
+      "LOCATIONCODE": "Cornell_site",
+      "SUPORGNAME": "Dr. Michelle Wang Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "065103",
+      "LOCATIONCODE": "Weill_Cornell_Med",
+      "SUPORGNAME": "Dr. Olga Boudker Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "067103",
+      "LOCATIONCODE": "Univ_Wis_site",
+      "SUPORGNAME": "Dr. Edwin Chapman Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "068104",
+      "LOCATIONCODE": "UMass_site",
+      "SUPORGNAME": "Dr. Phillip Zamore Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "068107",
+      "LOCATIONCODE": "UMass_site",
+      "SUPORGNAME": "Dr. Job Dekker Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "074105",
+      "LOCATIONCODE": "Oregon_Health_site",
+      "SUPORGNAME": "Dr. James Gouaux Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "076100",
+      "LOCATIONCODE": "UMD_Baltimore_site",
+      "SUPORGNAME": "Dr. Michael Summers Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "079102",
+      "LOCATIONCODE": "Univ_IL_site",
+      "SUPORGNAME": "Dr. Willem van der Donk Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "079103",
+      "LOCATIONCODE": "Univ_Wis_site",
+      "SUPORGNAME": "Dr. Phillip Newmark Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "085101",
+      "LOCATIONCODE": "Pennsylvania_State_site",
+      "SUPORGNAME": "Dr. Squire Booker Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "088100",
+      "LOCATIONCODE": "Dana-Farber_site",
+      "SUPORGNAME": "Dr. William Kaelin Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "088104",
+      "LOCATIONCODE": "Dana-Farber_site",
+      "SUPORGNAME": "Dr. David Pellman Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093001",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Research Campus",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "005100",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093021",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Business Management",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005401",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093026",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Children's Learning Lab",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-909",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093030",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Information Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1505",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093035",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Facilities",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-907",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093053",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Unified Communications and A/V Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "IT_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093055",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Campus Services Administration",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Campus_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093059",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Campus Life",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-909",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093061",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Conference Support & Housing",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093055",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093070",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Scientific Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093001",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093073",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Stockroom",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1514",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093080",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Innovation Management",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1505",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093091",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Invertebrate Shared Resource",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "Animal Services and Molecular Biology",
+      "LCEMPID": "68190",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093093",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Electron Microscopy",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1506",
+      "LCEMPID": "68209",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093094",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Stem Cell & Primary Culture",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1946",
+      "LCEMPID": "65132",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093095",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Integrative Imaging",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1381",
+      "LCEMPID": "68188",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093096",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Histology",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "Animal Services and Molecular Biology",
+      "LCEMPID": "68190",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093097",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Experimental Technology (jET)",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093070",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093100",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Media Prep",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "Animal Services and Molecular Biology",
+      "LCEMPID": "68190",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093101",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Transgenics",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1946",
+      "LCEMPID": "65132",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093102",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "High Performance Computing",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093103",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Cryo Electron Microscopy",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1506",
+      "LCEMPID": "68209",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093104",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Viral Tools",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1946",
+      "LCEMPID": "65132",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093105",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Quantitative Genomics",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1946",
+      "LCEMPID": "65132",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093180",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Student and Postdoc Programs",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093188",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093182",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Conference Programs",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093188",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093186",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Scientific Recruitment & Training",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-658",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093188",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Scientific Programs and Training",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093001",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093202",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Eric Betzig Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Group_Leader_Lab_Head",
+      "LCEMPID": "J0389",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093205",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Gerry Rubin Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "J0462",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093211",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Alla Karpova Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2064",
+      "LCEMPID": "J0290",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093219",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "David Stern Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2064",
+      "LCEMPID": "53189",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093224",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Nelson Spruston Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Group_Leader_Lab_Head",
+      "LCEMPID": "J0290",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093225",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Glenn Turner Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2064",
+      "LCEMPID": "62610",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093226",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Jennifer Lippincott-Schwartz Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "J0389",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093297",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Harald Hess Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "50742",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093298",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Tim Harris Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Group_Leader_Lab_Head",
+      "LCEMPID": "50742",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093303",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Michael Reiser Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "62610",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093305",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Vivek Jayaraman Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "62610",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093307",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Joshua Dudman Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "61037",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093310",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Luke Lavis Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "60983",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093318",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Philipp Keller Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "51870",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093319",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Kristin Branson Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "51870",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093327",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Misha Ahrens Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "62610",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093331",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Stephan Saalfeld Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "61037",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093332",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Sandro Romani Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "66725",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093333",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Srini Turaga Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093334",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Eric Schreiter Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "67095",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093335",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Ann Hermundstad Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "50742",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093416",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Project Pipeline Support",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "53189",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093421",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "GENIE Project",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "J0462",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093426",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Project Technical Resources",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "53189",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093430",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Descending Interneuron Intersection",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093432",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "MouseLight",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "50742",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093433",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Advanced Imaging Center",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1381",
+      "LCEMPID": "68188",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093436",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Connectomics Annotation",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093416",
+      "LCEMPID": "51870",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093490",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Team Projects",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093001",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "093510",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Zhe Liu Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "53189",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "098102",
+      "LOCATIONCODE": "UNC_site",
+      "SUPORGNAME": "Dr. Jeff Dangl Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "108100",
+      "LOCATIONCODE": "Univ_Cal_Davis_site",
+      "SUPORGNAME": "Dr. Neil Hunter Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "108102",
+      "LOCATIONCODE": "Univ_Cal_Davis_site",
+      "SUPORGNAME": "Dr. Jorge Dubcovsky Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "115100",
+      "LOCATIONCODE": "Scripps_site",
+      "SUPORGNAME": "Dr. Ardem Patapoutian Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "116524",
+      "LOCATIONCODE": "Whitehead_site",
+      "SUPORGNAME": "Dr. David Page Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "116536",
+      "LOCATIONCODE": "Whitehead_site",
+      "SUPORGNAME": "Dr. David Bartel Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "116547",
+      "LOCATIONCODE": "Whitehead_site",
+      "SUPORGNAME": "Dr. Peter Reddien Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Allyson_Sgro_Lab",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Allyson Sgro Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "53189",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Animal Services and Molecular Biology",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Animal and Biological Services",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093070",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Banquet_Services",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Banquet Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Hospitality_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "BusinessSystems",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Business Systems Capabilities",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-916",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Campus_Guests",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Campus Guests",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-909",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Campus_Services",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Hospitality Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-909",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Chie_Satou_Lab",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Chie Satou Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "50742",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Compliance",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Compliance",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005357",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Conference_Svcs_Admin",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Conference Services Administration",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005610",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Education_Outreach",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Education Outreach",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1988",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Educational Media Projects & Operations",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Educational Media-Spanish",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Education_Outreach",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Electrical Engineering",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Electrical Engineering",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093097",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Electromechanics_and_Fabrication",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Electromechanics",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093097",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Erin O'Shea Lab",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Erin O'Shea Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Group_Leader_Lab_Head",
+      "LCEMPID": "50742",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Facilities_Engineering",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Facilities Engineering",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093035",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "FlyEM Project and Software",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "FlyEM Project and Software",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "FP&A_HQ",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "FP&A - HQ",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005401",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Group_Leader_Lab_Head",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Group Leader/Lab Head",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "093001",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "HHMI_TOP",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "HHMI - Howard Hughes Medical Institute",
+      "SUPORGSUBTYPE": "Company",
+      "SUPERIORSUPORG": null,
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Hospitality_Services",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Culinary Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Campus_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Institutional_Security",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Institutional Security",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-907",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Investigator_Lab_Head",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Investigator Lab Heads",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "005150",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Investigator_Reviews",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Investigator Reviews",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1868",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Investigator_Services",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Science Operations Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1986",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Investment_Analytics",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Investment Analytics",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-9-781",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Investment_Finance_and_Admin",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Investment Finance and Administration",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005357",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Investment_Fund_Services",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Investment Fund Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005357",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "IT_Services",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "IT Infrastructure and Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Technology_Systems_Management",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Janelia_Construction",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Construction",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093035",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Janelia_HRBP",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia HR Business Partnership",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1964",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Janelia_Security",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Security",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Institutional_Security",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "JLL",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "JLL",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093035",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Lab Coordinator Team 1",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Lab Administration Team 1",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1514",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Lab Coordinator Team 2",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Lab Administration Team 2",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1514",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "LTD",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Leave of Absence LTD/STD",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": null,
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Operations",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Operations",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "005100",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Optomechanics",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Advanced Optics",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093097",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "P_C_Operations",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "P&C Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Science_HRBP",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "PwCAudit",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "PwC Audit Team",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-908",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "PwCCore",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "PwC Core Audit Team",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "PwCAudit",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "PwCInvestments",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "PwC Investments Team",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "PwCAudit",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "PwCIT",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "PwC IT Team",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "PwCAudit",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Science_Admin",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Science Admin",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1986",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Science_Business_Mgmt",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Science Business Management",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005401",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Science_Capabilities",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Science Capabilities",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Technology_Systems_Management",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Science_HRBP",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "HR Transformation",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005450",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Scientific Computing",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Scientific Computing",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093070",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "Software_Engineering",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Software Engineering",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "Scientific Computing",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_Brigham_Womens",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - Brigham and Women's",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_Children_Boston",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "SOO - Children's Boston",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_Harvard_Medical_School",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - Harvard Medical School",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_Johns_Hopkins",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - Johns Hopkins",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_Mass_Institute_of_Technology",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - Massachusetts Institute of Technology",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_Memorial_Sloan_Ket",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "SOO - Memorial Sloan Kettering Cancer Center",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_Rockefeller",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - Rockefeller",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_Stanford",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - Stanford",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_UC_Berkeley",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - UC Berkeley",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_UC_San_Diego",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - UC San Diego",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_UC_San_Francisco",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - UC San Francisco",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_University_of_Chicago",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - University of Chicago",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_University_of_Wash",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "SOO - University of Washington",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_UT_Southwestern",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - UT Southwestern",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SOO_Yale_University",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SOO - Yale University",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Investigator_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1000",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Visa Administration",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Science_HRBP",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1009",
+      "LOCATIONCODE": "Icahn_Scl_of_Medicine_MtSinai",
+      "SUPORGNAME": "Dr. Ian Maze Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1010",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Kristy Red-Horse Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1012",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "Dr. Sun Hur Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1013",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Benjamin Tu Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1015",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "Dr. David Veesler Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1019",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Cushman and Wakefield",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005470",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1020",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Jakob Voigts Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "66725",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1029",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Michelle Monje-Deisseroth Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1030",
+      "LOCATIONCODE": "California_Inst_site",
+      "SUPORGNAME": "Dr. Mikhail Shapiro Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1039",
+      "LOCATIONCODE": "Harvard_A&S_site",
+      "SUPORGNAME": "Dr. Emily Balskus Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1040",
+      "LOCATIONCODE": "Harvard_THChan_Sch_Pub_Hlth",
+      "SUPORGNAME": "Dr. Flaminia Catteruccia Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1041",
+      "LOCATIONCODE": "Arizona_State_Univ",
+      "SUPORGNAME": "Dr. John McCutcheon Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1042",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Gregory Barton Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1046",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Diana Bautista Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1047",
+      "LOCATIONCODE": "Beth_Israel_site",
+      "SUPORGNAME": "Dr. Shingo Kajimura Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1048",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Health & Welfare Programs",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005451",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1051",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Recruiting Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005459",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1052",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Grants & Business Management",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Science_Business_Mgmt",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1053",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. David Savage Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1054",
+      "LOCATIONCODE": "Univ_TX_Hlth_Sci_Ctr_San_Ant",
+      "SUPORGNAME": "Dr. Reuben Harris Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1063",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Baker Tilly Internal Audit Team",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-908",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1073",
+      "LOCATIONCODE": "Memorial_Sloan_site",
+      "SUPORGNAME": "Dr. Dana Pe'er Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1074",
+      "LOCATIONCODE": "Univ_of_VA",
+      "SUPORGNAME": "Dr. Jochen Zimmer Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1076",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Vivarium Training and Projects",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-867",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1077",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Mass Spectrometry",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1946",
+      "LCEMPID": "65132",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1087",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SEA Research",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1107",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1089",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Jiefu Li Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "66725",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1090",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Shaohe Wang Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "66725",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1091",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Anoj Ilanges Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "66725",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1092",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Meng Wang Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "68209",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1093",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Yin Liu Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1094",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Isabel Espinosa-Medina Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1095",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Hari Shroff Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "68190",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1096",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Integrative Imaging Technologies",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093095",
+      "LCEMPID": "68188",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1098",
+      "LOCATIONCODE": "Univ_Chi_site",
+      "SUPORGNAME": "Dr. Jack Szostak Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1099",
+      "LOCATIONCODE": "Univ_Mich_site",
+      "SUPORGNAME": "Dr. Tzumin Lee Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1100",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Residential Life",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093059",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1101",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Freeman Hrabowski Scholars Program",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1867",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1103",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Educational Media Content Creation",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1988",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1104",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Assessment and Learning Design",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1988",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1105",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Educational Media Production",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-843",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1107",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SEA",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1705",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1109",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Business Systems Risk and Compliance",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1991",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1110",
+      "LOCATIONCODE": "Memorial_Sloan_site",
+      "SUPORGNAME": "Dr. Tobias Walther Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1111",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Rhiju Das Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1112",
+      "LOCATIONCODE": "Dana-Farber_site",
+      "SUPORGNAME": "Dr. Cigall Kadoch Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1113",
+      "LOCATIONCODE": "Columbia_site",
+      "SUPORGNAME": "Dr. Gwyneth Card Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1114",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Daniel Feliciano Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1115",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Legal Operations Support",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005318",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1116",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Molecular and Cellular Genomics",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1946",
+      "LCEMPID": "65132",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1129",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "AI/Web Development",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Science_Capabilities",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1142",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "IT Security",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1991",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1143",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Identity and Access Management",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1991",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1144",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Finance Technology",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "BusinessSystems",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1145",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "People Technology",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "BusinessSystems",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1157",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Purchasing",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005440",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1179",
+      "LOCATIONCODE": "Beth_Israel_site",
+      "SUPORGNAME": "Dr. Albert Lee Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1180",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Video Production",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-843",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1181",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Professional Development - HS",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Education_Outreach",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1189",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Network Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "IT_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1200",
+      "LOCATIONCODE": "Univ_Penn_site",
+      "SUPORGNAME": "Dr. Blanton Tolbert Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1209",
+      "LOCATIONCODE": "Univ_of_Miami",
+      "SUPORGNAME": "Dr. Danny Reinberg Lab - Miami",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1219",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Applications Engineering",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "093097",
+      "LCEMPID": "J0462",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1229",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Facilities Project Management",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005470",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1239",
+      "LOCATIONCODE": "Columbia_site",
+      "SUPORGNAME": "Dr. Ishmail Abdus-Saboor Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1240",
+      "LOCATIONCODE": "Baylor_site",
+      "SUPORGNAME": "Dr. Kara Marshall Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1241",
+      "LOCATIONCODE": "Princeton_site",
+      "SUPORGNAME": "Dr. Gerald Carter Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1242",
+      "LOCATIONCODE": "Princeton_site",
+      "SUPORGNAME": "Dr. Sarah Kocher Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1243",
+      "LOCATIONCODE": "Child_Hosp_of_Phila",
+      "SUPORGNAME": "Dr. Mustafa Mir Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1244",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Molly Schumer Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1245",
+      "LOCATIONCODE": "Univ_Cal_San_Diego_site",
+      "SUPORGNAME": "Dr. Sonya Neal Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1246",
+      "LOCATIONCODE": "California_Inst_site",
+      "SUPORGNAME": "Dr. Rebecca Voorhees Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1247",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "Dr. Patrick Mitchell Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1248",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "Dr. Claudia Moreno Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1249",
+      "LOCATIONCODE": "Cold_Spring_site",
+      "SUPORGNAME": "Dr. Lucas Cheadle Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1250",
+      "LOCATIONCODE": "Columbia_site",
+      "SUPORGNAME": "Dr. Bianca Marlin Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1251",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "Dr. Trevor Sorrells Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1252",
+      "LOCATIONCODE": "Univ_of_Alab_at_Birmingham",
+      "SUPORGNAME": "Dr. Haosheng Sun Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1253",
+      "LOCATIONCODE": "Univ_Chi_site",
+      "SUPORGNAME": "Dr. Juan Mendoza Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1254",
+      "LOCATIONCODE": "Univ_Wis_site",
+      "SUPORGNAME": "Dr. Judith Simcox Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1255",
+      "LOCATIONCODE": "Harvard_THChan_Sch_Pub_Hlth",
+      "SUPORGNAME": "Dr. Kizzmekia Corbett Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1256",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Josefina del Marmol Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1257",
+      "LOCATIONCODE": "Duke_site",
+      "SUPORGNAME": "Dr. Chantell Evans Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1258",
+      "LOCATIONCODE": "UCLA_site",
+      "SUPORGNAME": "Dr. D'Juan Farmer Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1259",
+      "LOCATIONCODE": "UCLA_site",
+      "SUPORGNAME": "Dr. Lena Pernas Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1260",
+      "LOCATIONCODE": "California_Inst_site",
+      "SUPORGNAME": "Dr. David Van Valen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1261",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Walter Gonzalez Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1262",
+      "LOCATIONCODE": "Massachusetts_GH_site",
+      "SUPORGNAME": "Dr. Hernandez Moura Silva Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1263",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Seychelle Vos Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1269",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Angela Phillips Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1270",
+      "LOCATIONCODE": "Cornell_site",
+      "SUPORGNAME": "Dr. Elizabeth Johnson Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1271",
+      "LOCATIONCODE": "Cornell_site",
+      "SUPORGNAME": "Dr. Madineh Sedigh-Sarvestani Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1272",
+      "LOCATIONCODE": "Harvard_A&S_site",
+      "SUPORGNAME": "Dr. Kara McKinley Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1279",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "Dr. Taekjip Ha Lab (Boston)",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1289",
+      "LOCATIONCODE": "Vanderbilt_Univ_Med_Ctr",
+      "SUPORGNAME": "Dr. Mariana Byndloss Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1309",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Recruiting",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005459",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1319",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "HQ Recruiting",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005459",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1320",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Alejandro Aguilera Castrejon Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "51870",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1329",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "JRC UCAV Engineering",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093053",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1330",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Moises Exposito Alonso Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1339",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Platform Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "IT_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1340",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "HQ UCAV Engineering",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093053",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1349",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Adriane Otopalik Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1350",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Science HR Business Partnership - East",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Science_HRBP",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1351",
+      "LOCATIONCODE": "Univ_Cal_San_Diego_site",
+      "SUPORGNAME": "Science HR Business Partnership - West",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Science_HRBP",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1352",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Immortalized Cell Line Culture",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1946",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1353",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Molecular Genomics",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1946",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1354",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Field A",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Investigator_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1355",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Field B",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Investigator_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1364",
+      "LOCATIONCODE": "Memorial_Sloan_site",
+      "SUPORGNAME": "SOO - Memorial Sloan Kettering Cancer Center",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1354",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1365",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "SOO - University of Washington",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1354",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1366",
+      "LOCATIONCODE": "Brigham_site",
+      "SUPORGNAME": "SOO - Brigham and Women's Hospital",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1355",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1367",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Theory Fellow - Ling-Qi Zhang",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "51870",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1368",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Theory Fellow - Tosif Ahamed",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "51870",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1378",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Theory Fellow - Michele Nardin",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "51870",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1379",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Science and Training Support Staff",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093186",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1381",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Advanced Imaging",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093070",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1382",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Housekeeping",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005610",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1392",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Pritchard",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005474",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1393",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Investment Reporting",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005357",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1394",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Func-E-Worm",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "68209",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1404",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Site Supply Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-907",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1405",
+      "LOCATIONCODE": "Univ_Chi_site",
+      "SUPORGNAME": "Dr. Hening Lin Lab - U of Chicago",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1406",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Science Administration",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005150",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1416",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Cryo-ET Sample Preparation",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093103",
+      "LCEMPID": "68209",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1426",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Tax Compliance",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005429",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1436",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Production, Post Production, & Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Tangled_Bank_&_Public_Media",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1437",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Production & Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1436",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1438",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Post Production",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1436",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1439",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "General Counsel Internship",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005300",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1446",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Marketing, Communications, & Impact",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Tangled_Bank_&_Public_Media",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1447",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Digital Media & Impact",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1446",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1448",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Communications & Impact",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1446",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1456",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia-Loudoun County Resident Summer Interns",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "093180",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1466",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Cech Fellows, Janelia",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "093180",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1476",
+      "LOCATIONCODE": "Columbia_site",
+      "SUPORGNAME": "Dr. Dmitriy Aronov Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1477",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Jim Collins Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1478",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Lisa Giocomo Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1479",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Steve Flavell Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1480",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "Dr. Valentina Greco Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1481",
+      "LOCATIONCODE": "Univ_Cal_Santa_Cruz_site",
+      "SUPORGNAME": "Dr. Carrie Partch Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1482",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Susan Shao Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1486",
+      "LOCATIONCODE": "Univ_Cal_Davis_site",
+      "SUPORGNAME": "Dr. Siobhan Brady Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1487",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Jose Dinneny Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1488",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Gene Li Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1489",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Mehrdad Jazayeri Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1490",
+      "LOCATIONCODE": "Salk_site",
+      "SUPORGNAME": "Dr. Janelle Ayres Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1500",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Steve McCarroll Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1501",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Gabriel Victora Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1502",
+      "LOCATIONCODE": "Boston_site",
+      "SUPORGNAME": "Dr. Vijay Sankaran Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1503",
+      "LOCATIONCODE": "Princeton_site",
+      "SUPORGNAME": "Dr. Ilana Witten Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1504",
+      "LOCATIONCODE": "Scripps_site",
+      "SUPORGNAME": "Dr. Darrell Irvine  Lab - Scripps",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1505",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Innovation and External Relations to Janelia Innovations & Open Science",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093070",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1506",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "CryoEM & Electron Microscopy",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093070",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1514",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Lab Administration & Stockroom",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093070",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1515",
+      "LOCATIONCODE": "Dana-Farber_site",
+      "SUPORGNAME": "Dr. Edward Chouchani Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1516",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Open Science Implementation",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-671",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1517",
+      "LOCATIONCODE": "Univ_of_Mass_Amherst",
+      "SUPORGNAME": "Dr. Lil Fritz-Laylin Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1525",
+      "LOCATIONCODE": "Washington_Univ_site",
+      "SUPORGNAME": "Dr. Dave Pagliarini Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1527",
+      "LOCATIONCODE": "Whitehead_site",
+      "SUPORGNAME": "Dr. Mary Gehring Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1536",
+      "LOCATIONCODE": "Columbia_site",
+      "SUPORGNAME": "Dr. Samuel Sternberg Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1537",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Jonathan Abraham Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1549",
+      "LOCATIONCODE": "Scripps_site",
+      "SUPORGNAME": "Dr. Li Ye Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1550",
+      "LOCATIONCODE": "California_Inst_site",
+      "SUPORGNAME": "Dr. Andre Hoelz Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1569",
+      "LOCATIONCODE": "Scripps_site",
+      "SUPORGNAME": "Dr. Dorothee Kern Lab - Scripps",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1570",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "AI Initiative",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1571",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Michael Yartsev Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1572",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "David Wong-Campos Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "61037",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1583",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Vivarium Surgery & Behavior Resources",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-867",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1593",
+      "LOCATIONCODE": "Johns_Hopkins_site",
+      "SUPORGNAME": "Dr. Shan Sockanathan Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1603",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Investigator Competitions",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1868",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1604",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Strategic Program, Project, and Change Management",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "Operations",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1605",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Strategic Change Management",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1604",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1614",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Leadership Communications and External Relations",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "Operations",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1624",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Lisanne Schulze Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "65132",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1634",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Mojtaba Tavakoli Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "67095",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1644",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Open Science Assessment",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-671",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1654",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "AI Initiative, Scientific Computing",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "Scientific Computing",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1664",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Editorial Development and Production",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Tangled_Bank_&_Public_Media",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1665",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "PTR-Bioimage Analysis",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093426",
+      "LCEMPID": "53189",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1674",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Marketing & Digital Communications",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1694",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1676",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Science Communications",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1684",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1684",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Employee and Science Communications",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1694",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1694",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Marketing and Internal Communications",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "Operations",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1705",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Science Education",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "005100",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1706",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Success in Science",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1705",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1707",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Gilliam Fellows Program",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1867",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1708",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Science Leadership & Lab Culture Program",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1986",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1724",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "CryoEM Acquisition",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "093103",
+      "LCEMPID": "68209",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1734",
+      "LOCATIONCODE": "Univ_Penn_site",
+      "SUPORGNAME": "Dr. Squire Booker Lab - U of Penn",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1744",
+      "LOCATIONCODE": "Weill_Cornell_Med",
+      "SUPORGNAME": "Dr. Samara Reck-Peterson Lab - Weill Cornell Med",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1754",
+      "LOCATIONCODE": "Harvard_A&S_site",
+      "SUPORGNAME": "Dr. Angela DePace Lab - Harvard University",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1764",
+      "LOCATIONCODE": "Whitehead_site",
+      "SUPORGNAME": "Dr. Ron Vale Lab - Whitehead",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1774",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "Dr. Joseph Mougous Lab - Yale",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1784",
+      "LOCATIONCODE": "Univ_Utah_site",
+      "SUPORGNAME": "Dr. Moriel Zelikowsky Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1794",
+      "LOCATIONCODE": "Cold_Spring_site",
+      "SUPORGNAME": "Dr. Corina Amor Vegas Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1795",
+      "LOCATIONCODE": "Columbia_site",
+      "SUPORGNAME": "Dr. Mustafa Aydogan Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1804",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "AI Initiative, Project Teams",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1805",
+      "LOCATIONCODE": "California_Inst_site",
+      "SUPORGNAME": "Dr. Viviana Gradinaru Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1806",
+      "LOCATIONCODE": "Princeton_site",
+      "SUPORGNAME": "Dr. Christina Kim Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1814",
+      "LOCATIONCODE": "Stowers_site",
+      "SUPORGNAME": "Dr. Kamena Kostova Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1824",
+      "LOCATIONCODE": "Rutgers_site",
+      "SUPORGNAME": "Dr. Natasha O¿Brown Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1834",
+      "LOCATIONCODE": "Columbia_site",
+      "SUPORGNAME": "Dr. Vikram Gadagkar Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1835",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Aquatics Husbandry & Systems",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-762",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1836",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Aquatics Transgenics & Technical Services",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-762",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1845",
+      "LOCATIONCODE": "Harvard_Medical_site",
+      "SUPORGNAME": "Dr. Lucas Farnung Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1846",
+      "LOCATIONCODE": "Univ_Wash_site",
+      "SUPORGNAME": "Dr. Alison Feder Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1847",
+      "LOCATIONCODE": "UMass_site",
+      "SUPORGNAME": "Dr. Emma Watson Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1854",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Theory Fellow - Alice Wang",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1855",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Theory Fellow - Sahil Loomba",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "66725",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1856",
+      "LOCATIONCODE": "Princeton_site",
+      "SUPORGNAME": "Dr. Ai Ing Lim Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Children_Boston",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1864",
+      "LOCATIONCODE": "Univ_Cal_Davis_site",
+      "SUPORGNAME": "Dr. Theanne Griffith Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1865",
+      "LOCATIONCODE": "MIT_site",
+      "SUPORGNAME": "Dr. Whitney Henry Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Mass_Institute_of_Technology",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1866",
+      "LOCATIONCODE": "Whitehead_site",
+      "SUPORGNAME": "Dr. Sinisa Hrvatin Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Brigham_Womens",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1867",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Early Career Programs",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1406",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1868",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Investigator Program",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1406",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1874",
+      "LOCATIONCODE": "Memorial_Sloan_site",
+      "SUPORGNAME": "Dr. Chrysothemis Brown Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1884",
+      "LOCATIONCODE": "Yale_site",
+      "SUPORGNAME": "Dr. Cristina Rodriguez Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Yale_University",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1894",
+      "LOCATIONCODE": "UMass_site",
+      "SUPORGNAME": "Dr. Jessica Spinelli Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Harvard_Medical_School",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1895",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Elizabeth Wasmuth Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1905",
+      "LOCATIONCODE": "Univ_Cal_Davis_site",
+      "SUPORGNAME": "Dr. Elisa Zhang Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1914",
+      "LOCATIONCODE": "Univ_of_Calif_Santa_Barbara",
+      "SUPORGNAME": "Dr. Yang Yang Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1915",
+      "LOCATIONCODE": "Univ_Penn_site",
+      "SUPORGNAME": "Dr. Timothy Machado Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1924",
+      "LOCATIONCODE": "Scripps_site",
+      "SUPORGNAME": "Dr. Xin Jin Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Diego",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1925",
+      "LOCATIONCODE": "Univ_Penn_site",
+      "SUPORGNAME": "Dr. Juan Alvarez Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Memorial_Sloan_Ket",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1934",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Government and Community Relations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1614",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1944",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Theory Fellow - Jingyi Liu",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-854",
+      "LCEMPID": "53189",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1945",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "MTI Transition",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1946",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Molecular, Cellular, and Integrative Biological Services",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093070",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1954",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "AI Initiative, Janelia Experimental Technology (jET)",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "093097",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1964",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "HR Service Delivery & Partnership",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005450",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1965",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia HR Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Janelia_HRBP",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1974",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SEA Data Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1107",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1984",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Christopher Barnes Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1985",
+      "LOCATIONCODE": "Stowers_site",
+      "SUPORGNAME": "Dr. David Stern Lab - Stowers",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Chicago",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1986",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Science Strategy and Administration",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1406",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1987",
+      "LOCATIONCODE": "Stanford_site",
+      "SUPORGNAME": "Dr. Jennifer Brophy Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Stanford",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1988",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "BioInteractive",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1705",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1989",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Strategic Projects",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1604",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1990",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Applied Math",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "Scientific Computing",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-1991",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Cybersecurity",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Technology_Systems_Management",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2001",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "TSM Transition Group",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Technology_Systems_Management",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2011",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Internal Communications",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1694",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2012",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Digital Experience",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1674",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2013",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Yvette Fisher Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2023",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "SEA Biologicals Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1107",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2024",
+      "LOCATIONCODE": "UT_Southwestern_site",
+      "SUPORGNAME": "Dr. Jean-Laurant Casanova Lab ¿ UT Southwestern",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2033",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Sarah Kocher Lab - Berkeley",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2043",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Filipa Rijo-Ferreira Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2044",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "AI Accelerator",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1604",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Biology",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "093001",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2064",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Group Leader/Lab Head Transition",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "Group_Leader_Lab_Head",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2065",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Visiting Scientist Transition",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-658",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2073",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Hanna Martens Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2083",
+      "LOCATIONCODE": "Rockefeller_site",
+      "SUPORGNAME": "Dr. Steve Bonilla Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Rockefeller",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-2093",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Richard Lincoln Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-658",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Science Programs",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093188",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-670",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Paul Tillberg Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-853",
+      "LCEMPID": "53189",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-671",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Development & Strategy",
+      "SUPORGSUBTYPE": "Division",
+      "SUPERIORSUPORG": "005100",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-677",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Facilities",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005470",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-678",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "HQ Fitness Center",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Campus_Services",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-679",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "HQ Security",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Institutional_Security",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-680",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "CBSI",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005470",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-687",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Pathway",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Science_Capabilities",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-688",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "New Valley Media",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Science_Capabilities",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-689",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Computational Methods",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "Scientific Computing",
+      "LCEMPID": "65836",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-695",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Janelia Facilities Contractors",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "093035",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-698",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Environmental Health & Safety",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-907",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-723",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Marius Pachitariu Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "68188",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-741",
+      "LOCATIONCODE": "UCLA_site",
+      "SUPORGNAME": "Dr. Tamir Gonen Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-742",
+      "LOCATIONCODE": "Baylor_site",
+      "SUPORGNAME": "Dr. Jeff Magee Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UT_Southwestern",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-745",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Educational Outreach Events",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "Education_Outreach",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-750",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Yoshi Aso Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-2063",
+      "LCEMPID": "J0462",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-761",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Breeding & Husbandry",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-867",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-762",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Aquatics",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-867",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-763",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Behavior & Experimental Support",
+      "SUPORGSUBTYPE": "Shared_Resources",
+      "SUPERIORSUPORG": "SUPERVISORY_ORGANIZATION-3-1583",
+      "LCEMPID": "64407",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-765",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "JLL Administration",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "JLL",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-766",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "JLL Grounds and Estate",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "JLL",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-767",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "JLL Janitorial Services",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "JLL",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-768",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "JLL Operations",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "JLL",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-775",
+      "LOCATIONCODE": "UMD_College_Park_site",
+      "SUPORGNAME": "Dr. Sean Carroll Lab - College Park",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_Johns_Hopkins",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-777",
+      "LOCATIONCODE": "HQ_site",
+      "SUPORGNAME": "Supplier Relationship",
+      "SUPORGSUBTYPE": "Department",
+      "SUPERIORSUPORG": "005440",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-779",
+      "LOCATIONCODE": "Univ_Cal_Berkeley_site",
+      "SUPORGNAME": "Dr. Eric Betzig",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_Berkeley",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-789",
+      "LOCATIONCODE": "Janelia_site",
+      "SUPORGNAME": "Tool Translation Team",
+      "SUPORGSUBTYPE": "Janelia_Team_Project",
+      "SUPERIORSUPORG": "093490",
+      "LCEMPID": "60983",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-790",
+      "LOCATIONCODE": "Fred_Huthcinson_site",
+      "SUPORGNAME": "Dr. Jesse Bloom Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_University_of_Wash",
+      "LCEMPID": "",
+      "Status": "Active"
+    },
+    {
+      "SUPORGCODE": "SUPERVISORY_ORGANIZATION-3-791",
+      "LOCATIONCODE": "Univ_Cal_San_Fran_site",
+      "SUPORGNAME": "Dr. Zachary Knight Lab",
+      "SUPORGSUBTYPE": "Lab",
+      "SUPERIORSUPORG": "SOO_UC_San_Francisco",
+      "LCEMPID": "",
+      "Status": "Active"
+    }
+  ]
+}
