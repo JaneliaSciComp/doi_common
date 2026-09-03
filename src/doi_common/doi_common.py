@@ -10,6 +10,7 @@
       get_author_counts
       get_author_details
       get_author_list
+      get_bibtex
       get_citation_count
       get_doi_record
       get_dois_by_author
@@ -70,6 +71,7 @@ pyalex.config.api_key = os.environ["OPENALEX_API_KEY"]
 INSENSITIVE = {'locale': 'en', 'strength': 1}
 
 BIOXIV_API = "https://api.biorxiv.org/details/biorxiv/"
+CROSSREF_WORKS_URL = "https://api.crossref.org/works/"
 DIMENSIONS_URL = "https://metrics-api.dimensions.ai/doi/"
 DIS_URL = "https://dis.int.janelia.org/"
 ELIFE_CC_URL = "https://api.elifesciences.org//metrics/article/"
@@ -1031,6 +1033,29 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text', project_ma
     if auth_list:
         return  ', '.join(auth_list) + punc + last
     return None
+
+
+def get_bibtex(doi):
+    ''' Return the BibTeX record for a DOI, from Crossref's content transform
+        endpoint. Crossref serves BibTeX for any Crossref-registered DOI. A
+        DataCite DOI is not available this way and returns "" - its only route
+        is doi.org content negotiation, which browsers cannot use because the
+        DataCite response carries no Access-Control-Allow-Origin header.
+        Keyword arguments:
+          doi: DOI
+        Returns:
+          BibTeX text, or "" if it could not be retrieved
+    '''
+    if not doi:
+        return ""
+    try:
+        resp = requests.get(f"{CROSSREF_WORKS_URL}{doi}/transform/application/x-bibtex",
+                            timeout=10)
+    except Exception:
+        return ""
+    if resp.status_code != 200:
+        return ""
+    return resp.text.strip()
 
 
 def get_citation_count(doi, source='dimensions', datacite=False):
