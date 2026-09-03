@@ -1,6 +1,7 @@
 ''' doi_common.py
     Library of routines for parsing and interpreting DOI/ORCID records.
     Callable read functions:
+      acting_user
       add_doi_process
       convert_pubmed
       doi_api_url
@@ -67,6 +68,14 @@ import jrc_common.jrc_common as JRC
 OPENALEX_EMAIL = "svirskasr@hhmi.org"
 pyalex.config.email = OPENALEX_EMAIL
 pyalex.config.api_key = os.environ["OPENALEX_API_KEY"]
+
+# Environment variables Jenkins (and CI runners generally) export into a job.
+# Their presence means the run was scheduled, whatever OS account the agent uses
+# - a Jenkins agent normally runs as "jenkins" rather than root, so the account
+# name on its own is not a reliable signal.
+NONINTERACTIVE_ENV = ('JENKINS_URL', 'BUILD_NUMBER', 'BUILD_TAG', 'CI')
+# Logins that name a service rather than a person.
+SERVICE_ACCOUNTS = {'root', 'jenkins', 'nobody', 'daemon', 'www-data'}
 
 INSENSITIVE = {'locale': 'en', 'strength': 1}
 
@@ -485,13 +494,43 @@ def _plos_journal_slug(doi):
 # * Callable read functions                                                    *
 # ******************************************************************************
 
+def acting_user():
+    ''' Determine the login to record on a processing event, or None if the run
+        does not appear to be a person's. An unattended run (a nightly sync, a
+        Jenkins job) has no operator worth recording, and the service account it
+        happens to use is noise, so its events are stored without a user - which
+        is how the unattended programs have always written them. Never raises:
+        a run that cannot be identified is treated as automated rather than
+        being allowed to fail the processing write.
+        Keyword arguments:
+          None
+        Returns:
+          Login name, or None for an automated run
+    '''
+    if any(os.environ.get(var) for var in NONINTERACTIVE_ENV):
+        return None
+    try:
+        user = getpass.getuser()
+    except Exception:
+        # No passwd entry for this uid. That is what a container handed an
+        # arbitrary uid looks like - Jenkins' docker agent passes -u <uid>, and
+        # OpenShift assigns one - so it means automated, not broken.
+        return None
+    if getattr(os, 'getuid', lambda: -1)() == 0:
+        return None
+    return None if (not user or user.lower() in SERVICE_ACCOUNTS) else user
+
+
 def add_doi_process(doi, action=None, coll=None, notes=None):
-    ''' Add a DOI to the dois_to_process collection
+    ''' Append a processing event for a DOI to the given collection. The
+        program and version are read from the calling module, and the user (if
+        any) from the run itself, so a caller supplies only what is specific to
+        the event.
         Keyword arguments:
           doi: DOI
-          action: action
-          coll: collection
-          notes: notes
+          action: action performed
+          coll: collection to append to (the processing collection)
+          notes: optional free text describing the event
         Returns:
           None
     '''
@@ -505,7 +544,9 @@ def add_doi_process(doi, action=None, coll=None, notes=None):
         payload['version'] = ver
     if notes is not None:
         payload['notes'] = notes
-    payload['user'] = getpass.getuser()
+    user = acting_user()
+    if user is not None:
+        payload['user'] = user
     try:
         coll.update_one({'type': 'doi', 'key': doi},
                         {'$push': {'processes': payload}}, upsert=True)
