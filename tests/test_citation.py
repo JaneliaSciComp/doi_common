@@ -7,7 +7,8 @@
 from unittest.mock import patch
 import types
 
-from doi_common.doi_common import CITATION_STYLES, _clean_citation, get_citation
+from doi_common.doi_common import CITATION_STYLES, _clean_citation, get_bibtex, \
+     get_citation
 
 
 class TestCleanCitation:
@@ -111,3 +112,48 @@ class TestGetCitation:
     def test_every_offered_style_maps_to_a_slug(self):
         assert set(CITATION_STYLES) == {'apa', 'ama', 'nature', 'cell', 'chicago'}
         assert all(v and isinstance(v, str) for v in CITATION_STYLES.values())
+
+
+class TestGetBibtex:
+    ''' BibTeX now comes from whichever registrar owns the DOI. '''
+
+    @staticmethod
+    def _call(doi, datacite=False, status=200, text='@article{x}', headers=None):
+        resp = types.SimpleNamespace(
+            status_code=status, text=text, encoding='ISO-8859-1',
+            headers=headers if headers is not None else {'content-type': 'application/x-bibtex'})
+        with patch('doi_common.doi_common.is_datacite', return_value=datacite), \
+             patch('doi_common.doi_common.requests.get', return_value=resp) as get:
+            out = get_bibtex(doi)
+        return out, (get.call_args[0][0] if get.call_args else None), resp
+
+    def test_a_crossref_doi_uses_the_transform_endpoint(self):
+        _, url, _ = self._call('10.1111/jmi.13400')
+        assert url == \
+            'https://api.crossref.org/works/10.1111/jmi.13400/transform/application/x-bibtex'
+
+    def test_a_datacite_doi_uses_datacites_bibtex_route(self):
+        _, url, _ = self._call('10.25378/janelia.7613747', datacite=True)
+        assert url == \
+            'https://api.datacite.org/application/x-bibtex/10.25378/janelia.7613747'
+
+    def test_the_result_is_stripped_but_not_otherwise_touched(self):
+        # BibTeX is a record, not prose: the citation cleanups must not run on it
+        out, _, _ = self._call('10.1/a', text='  @misc{a, title = {1. <i>x</i> &amp; y}}  ')
+        assert out == '@misc{a, title = {1. <i>x</i> &amp; y}}'
+
+    def test_utf8_is_forced_when_no_charset_is_declared(self):
+        _, _, resp = self._call('10.1/a')
+        assert resp.encoding == 'utf-8'
+
+    def test_an_empty_doi_returns_empty(self):
+        assert get_bibtex('') == ''
+
+    def test_a_non_200_returns_empty(self):
+        out, _, _ = self._call('10.1/a', status=404)
+        assert out == ''
+
+    def test_a_network_failure_returns_empty(self):
+        with patch('doi_common.doi_common.is_datacite', return_value=False), \
+             patch('doi_common.doi_common.requests.get', side_effect=OSError('down')):
+            assert get_bibtex('10.1/a') == ''
