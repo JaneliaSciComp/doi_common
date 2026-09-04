@@ -11,6 +11,7 @@
       get_author_counts
       get_author_details
       get_author_list
+      get_citation
       get_bibtex
       get_citation_count
       get_doi_record
@@ -51,6 +52,7 @@
 from datetime import datetime
 import getpass
 import gzip
+import html
 import inspect
 import io
 import json
@@ -81,6 +83,17 @@ INSENSITIVE = {'locale': 'en', 'strength': 1}
 
 BIOXIV_API = "https://api.biorxiv.org/details/biorxiv/"
 CROSSREF_WORKS_URL = "https://api.crossref.org/works/"
+DATACITE_BIBLIOGRAPHY_URL = "https://api.datacite.org/text/x-bibliography/"
+# CSL styles offered for a formatted citation, mapped to the slug doi.org knows.
+# Deliberately a fixed set: the resolver rejects an unknown slug with a 406, and
+# these are the styles a Janelia author is asked for. Note "vancouver" and the
+# CSE styles are NOT served by the resolver; american-medical-association is the
+# Vancouver-family stand-in.
+CITATION_STYLES = {'apa': 'apa',
+                   'ama': 'american-medical-association',
+                   'nature': 'nature',
+                   'cell': 'cell',
+                   'chicago': 'chicago-author-date'}
 DIMENSIONS_URL = "https://metrics-api.dimensions.ai/doi/"
 DIS_URL = "https://dis.int.janelia.org/"
 ELIFE_CC_URL = "https://api.elifesciences.org//metrics/article/"
@@ -1097,6 +1110,69 @@ def get_bibtex(doi):
     if resp.status_code != 200:
         return ""
     return resp.text.strip()
+
+
+def _clean_citation(text):
+    ''' Tidy a formatted citation from the DOI resolver.
+        Three artifacts have to go. The resolver renders a numbered bibliography,
+        so an entry arrives as "1.Aaron J, ..." or "[1]F. Bhinderwala ..."; the
+        american-medical-association style emits an empty editor placeholder
+        (", ed.") for every Crossref DOI, even one whose record carries no editor
+        key at all; and DataCite output contains HTML entities and italic tags.
+        Keyword arguments:
+          text: citation as returned by the resolver
+        Returns:
+          Cleaned citation
+    '''
+    text = re.sub(r'^\s*(?:\[\d+\]|\d+\.)\s*', '', text)
+    # Only the empty placeholder, which always follows the title's full stop. A
+    # genuine editor renders as "Smith J, ed." and is left alone.
+    text = text.replace('. , ed. ', '. ')
+    text = re.sub(r'<[^>]+>', '', text)
+    text = html.unescape(text)
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+def get_citation(doi, style='apa'):
+    ''' Return a DOI formatted in one of the CITATION_STYLES, from its own
+        registrar's formatter. Works for both registrars, unlike get_bibtex,
+        which is Crossref-only. Meant to be called server-side: the formatters
+        send no Access-Control-Allow-Origin header, so a browser cannot use them.
+        The formatters are rate limited and answer 429 under load, reported as ""
+        like any other failure, so callers should fetch on demand rather than
+        eagerly.
+        Keyword arguments:
+          doi: DOI
+          style: key from CITATION_STYLES
+        Returns:
+          Formatted citation, or "" if it could not be retrieved
+    '''
+    if not doi or style not in CITATION_STYLES:
+        return ""
+    # Ask each registrar's own formatter rather than going through the doi.org
+    # resolver. It is one hop fewer, it splits the rate limit across two hosts,
+    # and DataCite's formatter serves the whole CSL style repository where
+    # Crossref's serves a subset - "vancouver" and the CSE styles are available
+    # for a DataCite DOI but not a Crossref one.
+    if is_datacite(doi):
+        url = f"{DATACITE_BIBLIOGRAPHY_URL}{doi}"
+    else:
+        url = f"{CROSSREF_WORKS_URL}{doi}/transform"
+    try:
+        resp = requests.get(url,
+                            headers={'Accept': "text/x-bibliography; "
+                                               f"style={CITATION_STYLES[style]}"},
+                            timeout=10)
+    except Exception:
+        return ""
+    if resp.status_code != 200:
+        return ""
+    # HTTP defaults text/* to ISO-8859-1, and requests honours that, so an
+    # accented author name would arrive as mojibake unless the charset is
+    # stated. Both formatters answer in UTF-8.
+    if not resp.encoding or 'charset' not in resp.headers.get('content-type', ''):
+        resp.encoding = 'utf-8'
+    return _clean_citation(resp.text)
 
 
 def get_citation_count(doi, source='dimensions', datacite=False):
