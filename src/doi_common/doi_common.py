@@ -84,6 +84,7 @@ INSENSITIVE = {'locale': 'en', 'strength': 1}
 BIOXIV_API = "https://api.biorxiv.org/details/biorxiv/"
 CROSSREF_WORKS_URL = "https://api.crossref.org/works/"
 DATACITE_BIBLIOGRAPHY_URL = "https://api.datacite.org/text/x-bibliography/"
+DATACITE_BIBTEX_URL = "https://api.datacite.org/application/x-bibtex/"
 # CSL styles offered for a formatted citation, mapped to the slug doi.org knows.
 # Deliberately a fixed set: the resolver rejects an unknown slug with a 406, and
 # these are the styles a Janelia author is asked for. Note "vancouver" and the
@@ -1090,11 +1091,12 @@ def get_author_list(rec, orcid=False, style='dis', returntype='text', project_ma
 
 
 def get_bibtex(doi):
-    ''' Return the BibTeX record for a DOI, from Crossref's content transform
-        endpoint. Crossref serves BibTeX for any Crossref-registered DOI. A
-        DataCite DOI is not available this way and returns "" - its only route
-        is doi.org content negotiation, which browsers cannot use because the
-        DataCite response carries no Access-Control-Allow-Origin header.
+    ''' Return the BibTeX record for a DOI, from its own registrar. Crossref
+        serves it from the content transform endpoint and DataCite from its
+        bibtex route, so both registrars are covered - this used to be Crossref
+        only, on the grounds that a browser could not reach DataCite's for want
+        of an Access-Control-Allow-Origin header, which stopped applying once
+        callers moved server-side.
         Keyword arguments:
           doi: DOI
         Returns:
@@ -1102,13 +1104,21 @@ def get_bibtex(doi):
     '''
     if not doi:
         return ""
+    if is_datacite(doi):
+        url = f"{DATACITE_BIBTEX_URL}{doi}"
+    else:
+        url = f"{CROSSREF_WORKS_URL}{doi}/transform/application/x-bibtex"
     try:
-        resp = requests.get(f"{CROSSREF_WORKS_URL}{doi}/transform/application/x-bibtex",
+        resp = requests.get(url, headers={'Accept': 'application/x-bibtex'},
                             timeout=10)
     except Exception:
         return ""
     if resp.status_code != 200:
         return ""
+    # As get_citation: HTTP defaults text/* to ISO-8859-1, so an accented author
+    # would arrive as mojibake unless the charset is stated.
+    if not resp.encoding or 'charset' not in resp.headers.get('content-type', ''):
+        resp.encoding = 'utf-8'
     return resp.text.strip()
 
 
