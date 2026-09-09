@@ -175,3 +175,53 @@ class TestNameMatchCollation:
     def test_insensitive_ignores_case_and_accents_only(self):
         from doi_common.doi_common import INSENSITIVE
         assert INSENSITIVE == {'locale': 'en', 'strength': 1}
+
+
+class TestTidyName:
+    ''' Only marks that carry no meaning in a name are touched. '''
+
+    def test_collapses_a_doubled_space(self):
+        from doi_common.doi_common import tidy_name
+        assert tidy_name('Brian  P.') == 'Brian P.'
+
+    def test_removes_an_embedded_newline(self):
+        from doi_common.doi_common import tidy_name
+        assert tidy_name('Jonathan\nB.') == 'Jonathan B.'
+
+    def test_maps_typographic_hyphens_to_ascii(self):
+        from doi_common.doi_common import tidy_name
+        assert tidy_name('Hung‐Hsiang') == 'Hung-Hsiang'
+        assert tidy_name('Tsung‑Li') == 'Tsung-Li'
+
+    def test_maps_curly_apostrophes_to_ascii(self):
+        from doi_common.doi_common import tidy_name
+        assert tidy_name('O’Connor') == "O'Connor"
+
+    def test_drops_zero_width_characters(self):
+        from doi_common.doi_common import tidy_name
+        assert tidy_name('Ann​Marie') == 'AnnMarie'
+
+    def test_trims(self):
+        from doi_common.doi_common import tidy_name
+        assert tidy_name('  Ann ') == 'Ann'
+
+    def test_does_not_invent_a_missing_space(self):
+        # inserting one would be a guess, so this stays reported rather than matched
+        from doi_common.doi_common import tidy_name
+        assert tidy_name('David L.Stern') == 'David L.Stern'
+
+    def test_does_not_touch_accents(self):
+        # the collation handles those; stripping them here would widen the match
+        from doi_common.doi_common import tidy_name
+        assert tidy_name('Plaçais') == 'Plaçais'
+
+    def test_does_not_remove_punctuation(self):
+        from doi_common.doi_common import tidy_name
+        assert tidy_name('G.M. Rubin') == 'G.M. Rubin'
+
+    def test_the_lookup_uses_the_tidied_name(self):
+        import inspect
+        import doi_common.doi_common as mod
+        branch = inspect.getsource(mod._add_single_author_jrc).split("if payload.get('family'):")[1]
+        assert 'tidy_name(' in branch
+        assert branch.count('collation=INSENSITIVE') == 2
