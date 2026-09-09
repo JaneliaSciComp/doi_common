@@ -3,6 +3,7 @@
     Callable read functions:
       acting_user
       add_doi_process
+      authorship_gaps
       convert_pubmed
       doi_api_url
       get_abstract
@@ -1183,6 +1184,77 @@ def get_citation(doi, style='apa'):
     if not resp.encoding or 'charset' not in resp.headers.get('content-type', ''):
         resp.encoding = 'utf-8'
     return _clean_citation(resp.text)
+
+
+def authorship_gaps(coll, relation='both'):
+    ''' Find DOIs credited differently from a linked record for the same work.
+        Two records can be linked as a preprint and its published version
+        (jrc_preprint) or as versions of one deposit (figshare mints a DOI per
+        version, so "...v2" and its stem are one record split in two). Either
+        way the two describe the same work, so one crediting an author the other
+        does not is a contradiction, not an inference: no affiliation or name
+        matching is involved, and the partner record already establishes that
+        the person is a Janelian.
+        Shared by the /dois_authorship_mismatch report and the tool that applies
+        the fix, so that the two cannot disagree about what needs fixing.
+        Reads the collection once into a doi -> credited map. The comparisons
+        are all DOI-to-DOI, so querying per partner would be thousands of round
+        trips for the same answer.
+        Keyword arguments:
+          coll: dois collection
+          relation: 'preprint', 'version', or 'both'
+        Returns:
+          list of dicts with doi, relation, missing (employee IDs) and partners,
+          sorted by DOI. A DOI linked both ways appears once per relation.
+    '''
+    if relation not in ('preprint', 'version', 'both'):
+        raise Exception(f"Unknown relation {relation}")
+    credited = {}
+    preprints = {}
+    try:
+        for row in coll.find({}, {"_id": 0, "doi": 1, "jrc_author": 1, "jrc_preprint": 1}):
+            credited[row['doi']] = set(row.get('jrc_author') or [])
+            if row.get('jrc_preprint'):
+                preprints[row['doi']] = row['jrc_preprint'] \
+                    if isinstance(row['jrc_preprint'], list) else [row['jrc_preprint']]
+    except Exception as err:
+        raise err
+    gaps = []
+    if relation in ('preprint', 'both'):
+        for doi, related in preprints.items():
+            missing = set()
+            partners = set()
+            for other in related:
+                other = str(other).lower()
+                if other not in credited:
+                    continue
+                gap = credited[other] - credited[doi]
+                if gap:
+                    missing |= gap
+                    partners.add(other)
+            if missing:
+                gaps.append({'doi': doi, 'relation': 'preprint',
+                             'missing': sorted(missing), 'partners': sorted(partners)})
+    if relation in ('version', 'both'):
+        groups = {}
+        for doi in credited:
+            stem = doi.rsplit('.v', 1)[0] if re.search(r'\.v\d+$', doi) else doi
+            groups.setdefault(stem, set()).add(doi)
+        for members in groups.values():
+            if len(members) < 2:
+                continue
+            union = set()
+            for doi in members:
+                union |= credited[doi]
+            for doi in members:
+                missing = union - credited[doi]
+                if not missing:
+                    continue
+                partners = {other for other in members
+                            if other != doi and credited[other] & missing}
+                gaps.append({'doi': doi, 'relation': 'version',
+                             'missing': sorted(missing), 'partners': sorted(partners)})
+    return sorted(gaps, key=lambda g: (g['doi'], g['relation']))
 
 
 def get_citation_count(doi, source='dimensions', datacite=False):
