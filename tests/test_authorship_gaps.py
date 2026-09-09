@@ -102,3 +102,70 @@ class TestRelationFilter:
     def test_results_are_ordered(self):
         out = gaps(self.DOCS)
         assert out == sorted(out, key=lambda g: (g['doi'], g['relation']))
+
+
+class FakeOrcid:
+    def __init__(self, docs):
+        self.docs = docs
+
+    def find(self, _query=None, _projection=None):
+        return list(self.docs)
+
+
+class FakeDois:
+    def __init__(self, docs):
+        self.docs = docs
+
+    def find(self, _query=None, _projection=None):
+        return [d for d in self.docs if d.get('jrc_author') is not None]
+
+
+def mismatches(authors, roster, **kw):
+    from doi_common.doi_common import name_mismatches
+    dois = [{'doi': 'd/1', 'jrc_author': ['1'],
+             'author': [{'given': g, 'family': f} for g, f in authors]}]
+    people = [{'given': [g], 'family': [f], 'employeeId': e, **extra}
+              for g, f, e, extra in roster]
+    return name_mismatches(FakeDois(dois), FakeOrcid(people), **kw)
+
+
+class TestNameMismatches:
+    ROSTER = [('Joshua T.', 'Dudman', 'J0090', {}),
+              ('Ann', 'M Hermundstad', '111', {}),
+              ('Loren', 'Looger', '222', {'alumni': True})]
+
+    def test_an_exact_name_is_not_reported(self):
+        assert mismatches([('Joshua T.', 'Dudman')], self.ROSTER) == []
+
+    def test_a_misspelling_is_reported_as_spelling(self):
+        out = mismatches([('Joshua T.', 'Dudmann')], self.ROSTER)
+        assert len(out) == 1
+        assert out[0]['kind'] == 'spelling'
+        assert out[0]['roster'] == 'Joshua T. Dudman'
+        assert out[0]['employeeId'] == 'J0090'
+        assert 95 < out[0]['score'] < 100
+
+    def test_a_doubled_space_is_reported_as_punctuation(self):
+        out = mismatches([('Ann ', ' M Hermundstad')], self.ROSTER)
+        assert out and out[0]['kind'] == 'punctuation'
+        assert out[0]['score'] == 100.0
+
+    def test_case_and_accents_are_not_reported(self):
+        # the author matcher's collation resolves these for itself
+        assert mismatches([('JOSHUA T.', 'DUDMAN')], self.ROSTER) == []
+
+    def test_alumni_are_flagged_not_hidden(self):
+        out = mismatches([('Loren', 'Loogerr')], self.ROSTER)
+        assert out and out[0]['alumni'] is True
+
+    def test_an_unrelated_name_is_not_reported(self):
+        assert mismatches([('Wolfgang', 'Amadeus')], self.ROSTER) == []
+
+    def test_the_cutoff_is_honoured(self):
+        loose = mismatches([('Joshua T.', 'Dudmenn')], self.ROSTER, cutoff=60)
+        tight = mismatches([('Joshua T.', 'Dudmenn')], self.ROSTER, cutoff=99)
+        assert loose and not tight
+
+    def test_results_are_ordered_by_kind_then_score(self):
+        out = mismatches([('Joshua T.', 'Dudmann'), ('Ann ', ' M Hermundstad')], self.ROSTER)
+        assert [r['kind'] for r in out] == ['punctuation', 'spelling']
