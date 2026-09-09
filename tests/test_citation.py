@@ -157,3 +157,21 @@ class TestGetBibtex:
         with patch('doi_common.doi_common.is_datacite', return_value=False), \
              patch('doi_common.doi_common.requests.get', side_effect=OSError('down')):
             assert get_bibtex('10.1/a') == ''
+
+
+class TestNameMatchCollation:
+    ''' The roster is queried case- and accent-insensitively, so a name typeset
+        by the publisher still resolves. '''
+
+    def test_the_name_lookup_is_collated(self):
+        import doi_common.doi_common as mod
+        import inspect
+        src = inspect.getsource(mod._add_single_author_jrc)
+        # both the find_one and its count must carry the collation, or a name
+        # would match while duplicate_name was computed from a stricter query
+        name_branch = src.split("if payload.get('family'):")[1]
+        assert name_branch.count('collation=INSENSITIVE') == 2
+
+    def test_insensitive_ignores_case_and_accents_only(self):
+        from doi_common.doi_common import INSENSITIVE
+        assert INSENSITIVE == {'locale': 'en', 'strength': 1}

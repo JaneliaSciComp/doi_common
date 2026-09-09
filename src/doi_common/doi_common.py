@@ -226,7 +226,8 @@ def _add_single_author_jrc(payload, coll):
                 break
     if payload.get('orcid'):
         try:
-            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
+            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']},
+                                       collation=INSENSITIVE)
             row = coll.find_one({"orcid": payload['orcid']})
         except Exception as err:
             raise err
@@ -239,9 +240,17 @@ def _add_single_author_jrc(payload, coll):
         _adjust_payload(payload, row)
     if payload.get('family'):
         try:
-            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
+            # Collated so that case and accents do not defeat the match. The
+            # paper is what the publisher typeset - "CEDRIC ALLIER",
+            # "Pierre-Yves Placais" with a cedilla, "Nicolas Frankel" with an
+            # acute - while the roster holds one plain form, and an exact query
+            # left those authors uncredited. Strength 1 ignores case and accents
+            # only; it cannot conflate two genuinely different names.
+            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']},
+                                       collation=INSENSITIVE)
             row = coll.find_one({"given": payload['given'],
-                                 "family": payload['family']})
+                                 "family": payload['family']},
+                                collation=INSENSITIVE)
         except Exception as err:
             raise err
         if row and not payload.get('match'):
