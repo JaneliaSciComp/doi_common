@@ -200,6 +200,32 @@ def _adjust_payload(payload, row):
             payload[rname] = row[rname]
 
 
+def tidy_name(text):
+    ''' Clean a name of the incidental marks a publisher's deposit picks up, so
+        that it can be compared with the roster.
+        Only characters that carry no meaning in a name are touched: runs of
+        whitespace are collapsed, zero-width characters dropped, and the
+        typographic dashes and quotes a typesetter substitutes are mapped back to
+        their ASCII forms. Nothing is removed, so "Brian  P." becomes "Brian P."
+        and matches a roster that holds it that way, while "David L.Stern" is
+        left alone - inserting a space there would be a guess.
+        A collation cannot do this: it weights characters, so it can equate an
+        accented letter with a plain one, but a doubled space is an extra
+        character and no weighting removes it.
+        Keyword arguments:
+          text: name as deposited
+        Returns:
+          Cleaned name
+    '''
+    text = unicodedata.normalize('NFKC', str(text))
+    text = re.sub(r'[\u200b-\u200f\ufeff]', '', text)
+    for typographic, plain in (('\u2010', '-'), ('\u2011', '-'), ('\u2012', '-'),
+                               ('\u2013', '-'), ('\u2014', '-'), ('\u2018', "'"),
+                               ('\u2019', "'"), ('\u02bc', "'")):
+        text = text.replace(typographic, plain)
+    return re.sub(r'\s+', ' ', text).strip()
+
+
 def _add_single_author_jrc(payload, coll):
     ''' Update groups and affiliations in author detail
         Keyword arguments:
@@ -241,17 +267,18 @@ def _add_single_author_jrc(payload, coll):
                 payload['duplicate_name'] = True
         _adjust_payload(payload, row)
     if payload.get('family'):
+        # Tidied and collated between them these cover what a deposit does to a
+        # name without changing it: the collation handles case and accents
+        # ("CEDRIC ALLIER", "Pierre-Yves Placais" with a cedilla), tidy_name the
+        # incidental marks ("Brian  P." with a doubled space, a U+2010 hyphen).
+        # The payload keeps what the publisher wrote, since that is what the
+        # author lists display; only the lookup uses the cleaned form.
+        given = tidy_name(payload.get('given') or '')
+        family = tidy_name(payload['family'])
         try:
-            # Collated so that case and accents do not defeat the match. The
-            # paper is what the publisher typeset - "CEDRIC ALLIER",
-            # "Pierre-Yves Placais" with a cedilla, "Nicolas Frankel" with an
-            # acute - while the roster holds one plain form, and an exact query
-            # left those authors uncredited. Strength 1 ignores case and accents
-            # only; it cannot conflate two genuinely different names.
-            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']},
+            cnt = coll.count_documents({"given": given, "family": family},
                                        collation=INSENSITIVE)
-            row = coll.find_one({"given": payload['given'],
-                                 "family": payload['family']},
+            row = coll.find_one({"given": given, "family": family},
                                 collation=INSENSITIVE)
         except Exception as err:
             raise err
