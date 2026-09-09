@@ -4,6 +4,7 @@
       acting_user
       add_doi_process
       authorship_gaps
+      name_mismatches
       convert_pubmed
       doi_api_url
       get_abstract
@@ -62,6 +63,7 @@ import os
 import re
 import tarfile
 import time
+import unicodedata
 import xml.etree.ElementTree as ET
 import pyalex
 import requests
@@ -226,7 +228,8 @@ def _add_single_author_jrc(payload, coll):
                 break
     if payload.get('orcid'):
         try:
-            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
+            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']},
+                                       collation=INSENSITIVE)
             row = coll.find_one({"orcid": payload['orcid']})
         except Exception as err:
             raise err
@@ -239,9 +242,17 @@ def _add_single_author_jrc(payload, coll):
         _adjust_payload(payload, row)
     if payload.get('family'):
         try:
-            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']})
+            # Collated so that case and accents do not defeat the match. The
+            # paper is what the publisher typeset - "CEDRIC ALLIER",
+            # "Pierre-Yves Placais" with a cedilla, "Nicolas Frankel" with an
+            # acute - while the roster holds one plain form, and an exact query
+            # left those authors uncredited. Strength 1 ignores case and accents
+            # only; it cannot conflate two genuinely different names.
+            cnt = coll.count_documents({"given": payload['given'], "family": payload['family']},
+                                       collation=INSENSITIVE)
             row = coll.find_one({"given": payload['given'],
-                                 "family": payload['family']})
+                                 "family": payload['family']},
+                                collation=INSENSITIVE)
         except Exception as err:
             raise err
         if row and not payload.get('match'):
@@ -1255,6 +1266,105 @@ def authorship_gaps(coll, relation='both'):
                 gaps.append({'doi': doi, 'relation': 'version',
                              'missing': sorted(missing), 'partners': sorted(partners)})
     return sorted(gaps, key=lambda g: (g['doi'], g['relation']))
+
+
+def _fold_name(text):
+    ''' Reduce a name to letters, digits and single spaces, without case or
+        accents, so that typesetting differences do not distinguish two spellings
+        of the same name.
+        Keyword arguments:
+          text: name
+        Returns:
+          Folded name
+    '''
+    text = unicodedata.normalize('NFKD', str(text))
+    text = ''.join(c for c in text if not unicodedata.combining(c))
+    return re.sub(r'\s+', ' ', re.sub(r'[^a-z0-9]', ' ', text.lower())).strip()
+
+
+def name_mismatches(doi_coll, orcid_coll, cutoff=88):
+    ''' Find author names on Janelia DOIs that nearly, but not exactly, match
+        somebody on the roster.
+        An author is only credited when their name resolves against the roster,
+        so a name the publisher rendered differently leaves real work
+        uncredited, and no amount of affiliation checking recovers it. Two
+        kinds turn up, and they want different handling, so each is labelled:
+          "punctuation" - identical once case, accents and punctuation are
+            folded away, e.g. a U+2010 hyphen for a space, or a newline inside
+            the given name. The person is on the roster under this very name.
+          "spelling" - genuinely different, e.g. "Joshua T. Dudmann" for
+            "Joshua T. Dudman", or a given name that differs ("Steve" for
+            "Steven"). These need a person to decide.
+        Names that already match the roster exactly, or that match once case and
+        accents are folded (which the author matcher now does for itself), are
+        not reported.
+        Keyword arguments:
+          doi_coll: dois collection
+          orcid_coll: orcid collection
+          cutoff: minimum similarity for a "spelling" candidate
+        Returns:
+          list of dicts with name, roster, kind, score, employeeId, alumni, dois
+    '''
+    # Imported here rather than at module scope: rapidfuzz is needed by this one
+    # function, and every sync program imports this library. A top-level import
+    # would stop them all starting anywhere it is absent - as it is in the API's
+    # own environment.
+    from rapidfuzz import fuzz as rf_fuzz, process as rf_process, utils as rf_utils
+    exact = set()
+    collated = {}
+    folded = {}
+    try:
+        rows = orcid_coll.find({}, {"given": 1, "family": 1, "employeeId": 1, "alumni": 1})
+    except Exception as err:
+        raise err
+    for row in rows:
+        for given in row.get('given') or []:
+            for family in row.get('family') or []:
+                name = f"{given} {family}".strip()
+                exact.add(name)
+                stripped = ''.join(c for c in unicodedata.normalize('NFKD', name)
+                                   if not unicodedata.combining(c)).lower()
+                collated.setdefault(stripped, (name, row))
+                folded.setdefault(_fold_name(name), (name, row))
+    seen = {}
+    try:
+        drows = doi_coll.find({"jrc_author": {"$exists": True}},
+                              {"_id": 0, "doi": 1, "author": 1, "creators": 1})
+    except Exception as err:
+        raise err
+    for drow in drows:
+        for auth in drow.get('author') or drow.get('creators') or []:
+            family = auth.get('family') or auth.get('familyName') or ''
+            if not family:
+                continue
+            given = auth.get('given') or auth.get('givenName') or ''
+            name = f"{given} {family}".strip()
+            if name in exact:
+                continue
+            seen.setdefault(name, set()).add(drow['doi'])
+    out = []
+    keys = list(collated)
+    for name, dois in seen.items():
+        stripped = ''.join(c for c in unicodedata.normalize('NFKD', name)
+                           if not unicodedata.combining(c)).lower()
+        if stripped in collated:
+            # The author matcher's collation already resolves this one.
+            continue
+        if _fold_name(name) in folded:
+            roster, row = folded[_fold_name(name)]
+            kind, score = 'punctuation', 100.0
+        else:
+            hit = rf_process.extractOne(name.lower(), keys, scorer=rf_fuzz.ratio,
+                                        processor=rf_utils.default_process,
+                                        score_cutoff=cutoff)
+            if not hit:
+                continue
+            roster, row = collated[hit[0]]
+            kind, score = 'spelling', round(hit[1], 1)
+        out.append({'name': name, 'roster': roster, 'kind': kind, 'score': score,
+                    'employeeId': row.get('employeeId'), 'alumni': bool(row.get('alumni')),
+                    'dois': sorted(dois)})
+    return sorted(out, key=lambda r: (r['kind'], -r['score'], r['name']))
 
 
 def get_citation_count(doi, source='dimensions', datacite=False):
