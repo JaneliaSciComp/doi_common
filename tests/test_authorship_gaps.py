@@ -166,6 +166,15 @@ class TestNameMismatches:
         tight = mismatches([('Joshua T.', 'Dudmenn')], self.ROSTER, cutoff=99)
         assert loose and not tight
 
+    def test_the_default_cutoff_rejects_a_one_letter_difference_in_a_short_name(self):
+        # "Michelle Hu" vs "Michelle Du" scores about 91: two people, not a typo
+        roster = [('Michelle', 'Du', '900', {})]
+        assert mismatches([('Michelle', 'Hu')], roster) == []
+        assert mismatches([('Michelle', 'Hu')], roster, cutoff=88) != []
+
+    def test_the_default_cutoff_keeps_a_typo_in_a_longer_name(self):
+        assert mismatches([('Joshua T.', 'Dudmann')], self.ROSTER) != []
+
     def test_results_are_ordered_by_kind_then_score(self):
         out = mismatches([('Joshua T.', 'Dudmann'), ('Ann ', ' M Hermundstad')], self.ROSTER)
         assert [r['kind'] for r in out] == ['punctuation', 'spelling']
