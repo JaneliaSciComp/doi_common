@@ -1282,7 +1282,7 @@ def _fold_name(text):
     return re.sub(r'\s+', ' ', re.sub(r'[^a-z0-9]', ' ', text.lower())).strip()
 
 
-def name_mismatches(doi_coll, orcid_coll, cutoff=88):
+def name_mismatches(doi_coll, orcid_coll, cutoff=95):
     ''' Find author names on Janelia DOIs that nearly, but not exactly, match
         somebody on the roster.
         An author is only credited when their name resolves against the roster,
@@ -1301,7 +1301,14 @@ def name_mismatches(doi_coll, orcid_coll, cutoff=88):
         Keyword arguments:
           doi_coll: dois collection
           orcid_coll: orcid collection
-          cutoff: minimum similarity for a "spelling" candidate
+          cutoff: minimum similarity for a "spelling" candidate. 95 by default:
+                  a single substitution in a short name scores about 91 -
+                  "Michelle Hu" against "Michelle Du" is 90.9 - and those are
+                  usually two people rather than one misspelled, so a lower
+                  cutoff fills the report with pairs a reader has to reject.
+                  95 still catches a genuine typo in a longer name ("Joshua T.
+                  Dudmann" for "Joshua T. Dudman" scores just under 97), and
+                  takes the list from 366 candidates to 48
         Returns:
           list of dicts with name, roster, kind, score, employeeId, alumni, dois
     '''
