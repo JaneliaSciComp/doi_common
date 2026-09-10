@@ -145,8 +145,10 @@ class TestNameMismatches:
         assert out[0]['employeeId'] == 'J0090'
         assert 95 < out[0]['score'] < 100
 
-    def test_a_doubled_space_is_reported_as_punctuation(self):
-        out = mismatches([('Ann ', ' M Hermundstad')], self.ROSTER)
+    def test_a_punctuation_difference_the_matcher_cannot_fix_is_reported(self):
+        # a missing space: tidy_name will not insert one, so this stays listed.
+        # a doubled space would not appear here - the matcher resolves it.
+        out = mismatches([('Ann', 'M.Hermundstad')], self.ROSTER)
         assert out and out[0]['kind'] == 'punctuation'
         assert out[0]['score'] == 100.0
 
@@ -176,5 +178,17 @@ class TestNameMismatches:
         assert mismatches([('Joshua T.', 'Dudmann')], self.ROSTER) != []
 
     def test_results_are_ordered_by_kind_then_score(self):
-        out = mismatches([('Joshua T.', 'Dudmann'), ('Ann ', ' M Hermundstad')], self.ROSTER)
+        out = mismatches([('Joshua T.', 'Dudmann'), ('Ann', 'M.Hermundstad')], self.ROSTER)
         assert [r['kind'] for r in out] == ['punctuation', 'spelling']
+
+    def test_a_name_the_matcher_now_tidies_is_not_reported(self):
+        # tidy_name collapses the doubled space, so the matcher resolves this
+        # for itself and reporting it would send a curator after finished work
+        roster = [('Brian P.', 'English', '800', {})]
+        assert mismatches([('Brian  P.', 'English')], roster) == []
+
+    def test_a_name_needing_an_inserted_space_is_still_reported(self):
+        # tidy_name deliberately will not invent a space, so this stays listed
+        roster = [('David L', 'Stern', '801', {})]
+        out = mismatches([('David', 'L.Stern')], roster)
+        assert out and out[0]['kind'] == 'punctuation'
