@@ -225,3 +225,17 @@ class TestTidyName:
         branch = inspect.getsource(mod._add_single_author_jrc).split("if payload.get('family'):")[1]
         assert 'tidy_name(' in branch
         assert branch.count('collation=INSENSITIVE') == 2
+
+    def test_a_list_passes_through_untouched(self):
+        # the roster holds lists of name variants, and the matcher is reached
+        # with one whenever an orcid document is matched against its own
+        # collection. Mongo matches an array field against an equal array, so
+        # stringifying it here matched nothing and put "Not in database" on
+        # every person page for someone with no ORCID.
+        from doi_common.doi_common import tidy_name
+        assert tidy_name(['Marrella']) == ['Marrella']
+        assert tidy_name(['Maiz-Brito', 'Maiz Brito']) == ['Maiz-Brito', 'Maiz Brito']
+
+    def test_none_passes_through(self):
+        from doi_common.doi_common import tidy_name
+        assert tidy_name(None) is None
