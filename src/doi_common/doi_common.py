@@ -1295,6 +1295,19 @@ def authorship_gaps(coll, relation='both'):
     return sorted(gaps, key=lambda g: (g['doi'], g['relation']))
 
 
+def _fold_case(text):
+    ''' Lowercase a name and strip its accents - what the roster collation
+        equates, and so what must be set aside before asking whether a name is
+        still outstanding.
+        Keyword arguments:
+          text: name
+        Returns:
+          Folded name
+    '''
+    return ''.join(c for c in unicodedata.normalize('NFKD', str(text))
+                   if not unicodedata.combining(c)).lower()
+
+
 def _fold_name(text):
     ''' Reduce a name to letters, digits and single spaces, without case or
         accents, so that typesetting differences do not distinguish two spellings
@@ -1322,9 +1335,10 @@ def name_mismatches(doi_coll, orcid_coll, cutoff=95):
           "spelling" - genuinely different, e.g. "Joshua T. Dudmann" for
             "Joshua T. Dudman", or a given name that differs ("Steve" for
             "Steven"). These need a person to decide.
-        Names that already match the roster exactly, or that match once case and
-        accents are folded (which the author matcher now does for itself), are
-        not reported.
+        A name the author matcher can already resolve is not reported, or the
+        report would send a curator after work that is done: that means an exact
+        match, one the collation reaches (case and accents), and one tidy_name
+        reaches (a doubled space, a typographic hyphen).
         Keyword arguments:
           doi_coll: dois collection
           orcid_coll: orcid collection
@@ -1356,10 +1370,13 @@ def name_mismatches(doi_coll, orcid_coll, cutoff=95):
             for family in row.get('family') or []:
                 name = f"{given} {family}".strip()
                 exact.add(name)
-                stripped = ''.join(c for c in unicodedata.normalize('NFKD', name)
-                                   if not unicodedata.combining(c)).lower()
-                collated.setdefault(stripped, (name, row))
+                collated.setdefault(_fold_case(name), (name, row))
                 folded.setdefault(_fold_name(name), (name, row))
+    # Keyed by the tidied form as well, since the matcher tidies before looking
+    # up and a name it now resolves must not be reported as outstanding.
+    tidied = {}
+    for key in list(collated):
+        tidied.setdefault(_fold_case(tidy_name(key)), collated[key])
     seen = {}
     try:
         drows = doi_coll.find({"jrc_author": {"$exists": True}},
@@ -1375,12 +1392,15 @@ def name_mismatches(doi_coll, orcid_coll, cutoff=95):
             name = f"{given} {family}".strip()
             if name in exact:
                 continue
+            # The matcher queries given and family separately, so tidy them the
+            # same way rather than the joined string.
+            if _fold_case(f"{tidy_name(given)} {tidy_name(family)}".strip()) in tidied:
+                continue
             seen.setdefault(name, set()).add(drow['doi'])
     out = []
     keys = list(collated)
     for name, dois in seen.items():
-        stripped = ''.join(c for c in unicodedata.normalize('NFKD', name)
-                           if not unicodedata.combining(c)).lower()
+        stripped = _fold_case(name)
         if stripped in collated:
             # The author matcher's collation already resolves this one.
             continue
