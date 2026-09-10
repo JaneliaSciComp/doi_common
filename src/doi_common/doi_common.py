@@ -984,8 +984,14 @@ def get_author_details(rec, coll=None):
             if len(pubmed_aff) != len(author):
                 pubmed_aff = []
         except Exception as err:
-            print(err)
-            raise err
+            # PubMed only ever upgrades a match that other evidence already
+            # made, so losing it costs an affiliation on some authors. Raising
+            # took the whole author list with it, and with it every page and
+            # program that asks for one: an eutils outage turned a DOI page
+            # into an error. Degrade instead.
+            LLOGGER.warning(f"Could not get PubMed affiliations for "
+                            f"{rec['jrc_pmid']}: {err}")
+            pubmed_aff = []
     # Generate author details
     for auth in author:
         payload = {}
