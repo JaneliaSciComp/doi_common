@@ -212,11 +212,19 @@ def tidy_name(text):
         A collation cannot do this: it weights characters, so it can equate an
         accented letter with a plain one, but a doubled space is an extra
         character and no weighting removes it.
+        A value that is not a string is returned untouched - see below.
         Keyword arguments:
           text: name as deposited
         Returns:
-          Cleaned name
+          Cleaned name, or the input unchanged if it is not a string
     '''
+    if not isinstance(text, str):
+        # A roster record holds lists of name variants, and this function is
+        # reached with one whenever an orcid document is matched against its own
+        # collection (get_single_author_details). Mongo matches an array field
+        # against an equal array, so passing it through keeps that working;
+        # stringifying it produced "['Marrella']" and matched nothing.
+        return text
     text = unicodedata.normalize('NFKC', str(text))
     text = re.sub(r'[\u200b-\u200f\ufeff]', '', text)
     for typographic, plain in (('\u2010', '-'), ('\u2011', '-'), ('\u2012', '-'),
