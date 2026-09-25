@@ -94,10 +94,38 @@ def test_is_preprint():
     assert is_preprint(rec)
     rec = get_doi_record('10.2139/ssrn.3232155', COLL_DOIS)
     assert is_preprint(rec)
+    # DataCite types a handful of arXiv postings resourceTypeGeneral "Text"
+    # instead of "Preprint", so the prefix decides for those too.
+    rec = get_doi_record('10.48550/arxiv.1406.1476', COLL_DOIS)
+    assert rec and rec['types']['resourceTypeGeneral'] == 'Text'
+    assert is_preprint(rec)
+    # the ordinary arXiv typing still works through the type test
+    rec = get_doi_record('10.48550/arxiv.1208.5264', COLL_DOIS)
+    assert rec and rec['types']['resourceTypeGeneral'] == 'Preprint'
+    assert is_preprint(rec)
     # 10.1101 is Cold Spring Harbor Laboratory Press, which registers bioRxiv
     # and its own journals; a CSH Protocols article is not a preprint.
     rec = get_doi_record('10.1101/pdb.top78', COLL_DOIS)
     assert rec and not is_preprint(rec)
+
+
+def test_cshl_journals_are_not_preprints():
+    """10.1101 is the one preprint-server prefix that cannot go in
+    PREPRINT_PREFIXES: Cold Spring Harbor Laboratory Press registers bioRxiv
+    under it alongside six of its own journals. Listing the prefix would recast
+    all of them as preprints, so one article from each journal is pinned here."""
+    for doi in ('10.1101/cshperspect.a005686',   # CSH Perspectives in Biology
+                '10.1101/pdb.prot065532',        # CSH Protocols
+                '10.1101/sqb.2010.75.057',       # CSH Symposia on Quant. Biology
+                '10.1101/gad.177428.111',        # Genes & Development
+                '10.1101/gr.115402.110',         # Genome Research
+                '10.1101/lm.024471.111'):        # Learning & Memory
+        rec = get_doi_record(doi, COLL_DOIS)
+        assert rec, doi
+        assert not is_preprint(rec), doi
+    # while a bioRxiv posting under the same prefix still reads as one
+    rec = get_doi_record('10.1101/2022.07.20.500311', COLL_DOIS)
+    assert is_preprint(rec)
 
 
 def test_short_citation():
@@ -133,7 +161,8 @@ def test_journal_and_preprint_are_exclusive():
     """Crossref types some SSRN postings as journal-article with no subtype, so
     without a guard a record satisfies both predicates and gets counted twice."""
     for doi in ('10.2139/ssrn.3330557', '10.7554/elife.98405',
-                '10.1101/2022.07.20.500311', '10.1101/pdb.top78'):
+                '10.48550/arxiv.1406.1476', '10.1101/2022.07.20.500311',
+                '10.1101/pdb.top78'):
         rec = get_doi_record(doi, COLL_DOIS)
         assert rec, doi
         assert not (is_journal(rec) and is_preprint(rec)), doi
