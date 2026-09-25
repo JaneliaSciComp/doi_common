@@ -2385,12 +2385,19 @@ def is_journal(rec):
 
 # Preprint-server DOI prefixes whose records the registrar sometimes types as
 # something else. Crossref types 13 of our SSRN records as journal-article with
-# no subtype, so the type test alone reports them as journal articles - which
+# no subtype, and DataCite types 6 of our arXiv records resourceTypeGeneral
+# "Text" rather than "Preprint", so the type test alone misses them - which
 # blocked add_preprint.py, mislabelled them in the UI, and kept
-# update_preprints.py from ever seeing them. A 10.2139/ssrn DOI is a preprint
-# whatever the type says. 10.1101 is deliberately absent: it belongs to Cold
-# Spring Harbor Laboratory Press, which registers bioRxiv AND its own journals.
-PREPRINT_PREFIXES = ('10.2139/ssrn',)
+# update_preprints.py from ever seeing them. A DOI under one of these prefixes
+# is a preprint whatever the type says.
+#
+# Only prefixes a preprint server registers EXCLUSIVELY belong here. 10.2139 is
+# SSRN's and 10.48550 is arXiv's, so every DOI beneath them is a posting by
+# construction. 10.1101 is deliberately absent: it belongs to Cold Spring Harbor
+# Laboratory Press, which registers bioRxiv AND its own journals, and listing it
+# would recast 44 CSH Protocols, Genes & Development, Genome Research and
+# Learning & Memory articles as preprints.
+PREPRINT_PREFIXES = ('10.2139/ssrn', '10.48550/arxiv')
 
 
 def is_preprint(rec):
