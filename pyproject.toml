@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 [project]
 name = "doi_common"
-version = "73.13.0"
+version = "73.14.0"
 authors = [
   { name="Rob Svirskas", email="svirskasr@hhmi.org" },
 ]
@@ -11,6 +11,12 @@ description = "Library of common DOI- and ORCID-related functions for Python"
 readme = "README.md"
 requires-python = ">=3.7"
 dependencies = [ "numpy", "pyalex", "rapidfuzz" ]
+
+# pip install -e '.[test]' then: python3 -m pytest tests -q
+# The suite reads production MongoDB through jrc_common, so it needs that
+# package and network access to the Janelia config server.
+[project.optional-dependencies]
+test = [ "pytest", "jrc_common" ]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
