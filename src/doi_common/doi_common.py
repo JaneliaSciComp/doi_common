@@ -2367,6 +2367,11 @@ def is_journal(rec):
         Returns:
           True or False
     '''
+    # A record cannot be both: Crossref types some SSRN postings as
+    # journal-article with no subtype, which would otherwise satisfy the test
+    # below as well as is_preprint().
+    if is_preprint(rec):
+        return False
     # Crossref
     if ('type' in rec) and (rec['type'] == 'journal-article') \
        and (('subtype' not in rec) or (not rec['subtype'])):
@@ -2376,6 +2381,16 @@ def is_journal(rec):
        and (rec['types']['resourceTypeGeneral'] == 'DataPaper'):
         return True
     return False
+
+
+# Preprint-server DOI prefixes whose records the registrar sometimes types as
+# something else. Crossref types 13 of our SSRN records as journal-article with
+# no subtype, so the type test alone reports them as journal articles - which
+# blocked add_preprint.py, mislabelled them in the UI, and kept
+# update_preprints.py from ever seeing them. A 10.2139/ssrn DOI is a preprint
+# whatever the type says. 10.1101 is deliberately absent: it belongs to Cold
+# Spring Harbor Laboratory Press, which registers bioRxiv AND its own journals.
+PREPRINT_PREFIXES = ('10.2139/ssrn',)
 
 
 def is_preprint(rec):
@@ -2392,7 +2407,9 @@ def is_preprint(rec):
     if ('types' in rec) and ('resourceTypeGeneral' in rec['types']) \
        and (rec['types']['resourceTypeGeneral'] == 'Preprint'):
         return True
-    return False
+    # Preprint servers the registrar mistyped
+    doi = str(rec.get('doi') or rec.get('DOI') or '').lower()
+    return any(doi.startswith(pre) for pre in PREPRINT_PREFIXES)
 
 
 def is_version(row):
