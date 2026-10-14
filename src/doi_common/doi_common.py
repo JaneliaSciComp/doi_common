@@ -683,6 +683,49 @@ def _flatten_xml_text(node):
     return str(node)
 
 
+def _ack_from_elsevier_xml(doi):
+    ''' Acknowledgement text from an Elsevier article's XML
+
+        Elsevier puts it in one of two places: a tail <ce:acknowledgment>, or a
+        body <ce:section role="acknowledgement">. Both are taken, and the text
+        is gathered with iter() so nested inline markup - funder names,
+        cross-references, italicised terms - is preserved rather than only the
+        element's direct text.
+
+        The section title ("Acknowledgments") and any label are skipped, or
+        every stored acknowledgement would begin with its own heading.
+        Keyword arguments:
+          doi: DOI
+        Returns:
+          Acknowledgement text, or '' if the article has none
+    '''
+    try:
+        xmlstr = get_doi_record(doi, source='elsevier', content='xml')
+    except Exception as err:
+        LLOGGER.warning(f"Elsevier XML unavailable for {doi}: {err}")
+        return ''
+    if not xmlstr:
+        return ''
+    try:
+        root = ET.fromstring(xmlstr)
+    except Exception as err:
+        LLOGGER.warning(f"Could not parse Elsevier XML for {doi}: {err}")
+        return ''
+    skip = ('section-title', 'label')
+    elements = list(root.findall('.//{*}acknowledgment'))
+    elements += [sec for sec in root.findall('.//{*}section')
+                 if sec.get('role') == 'acknowledgement']
+    parts = []
+    for elem in elements:
+        for node in elem.iter():
+            local = node.tag.rsplit('}', 1)[-1]
+            if node.text and local not in skip:
+                parts.append(node.text)
+            if node.tail:
+                parts.append(node.tail)
+    return re.sub(r'\s+', ' ', ' '.join(parts)).strip()
+
+
 def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=None,
                          plos_rec=None):
     ''' Generate acknowledgements
@@ -709,32 +752,48 @@ def get_acknowledgements(doi, pmcid=None, elife_rec=None, els_rec=None, pmc_rec=
             if acktext:
                 return acktext, 'eLife'
     elif '10.1016' in doi or els_rec:
-        if not els_rec:
-            els_rec = get_doi_record(doi, source='elsevier')
-        otext = ((els_rec or {}).get('full-text-retrieval-response') or {}).get('originalText')
-        article = {}
-        if isinstance(otext, dict):   # a string means no entitled full text
-            doc = otext.get('xocs:doc') or {}
-            serial = doc.get('xocs:serial-item') or {} if isinstance(doc, dict) else {}
-            if isinstance(serial, dict):
-                article = serial.get('article') or {}
-        # Gather every acknowledgement region and flatten each RECURSIVELY so nested
-        # inline text (funder names, cross-refs, embedded terms) is preserved: body
-        # <ce:section role="acknowledgement"> paragraphs plus any tail
-        # <ce:acknowledgment>. The old code kept only one paragraph's direct #text,
-        # dropping nested text - so funders and embedded terms went missing.
-        parts = []
-        body = article.get('body') if isinstance(article, dict) else None
-        sections = (body.get('ce:sections') or {}).get('ce:section') if isinstance(body, dict) else None
-        if isinstance(sections, dict):
-            sections = [sections]
-        for sec in sections or []:
-            if isinstance(sec, dict) and sec.get('@role') == 'acknowledgement':
-                parts.append(_flatten_xml_text(sec.get('ce:para')))
-        tail = article.get('tail') if isinstance(article, dict) else None
-        if isinstance(tail, dict) and tail.get('ce:acknowledgment'):
-            parts.append(_flatten_xml_text(tail['ce:acknowledgment']))
-        acktext = re.sub(r'\s+', ' ', ' '.join(parts)).strip()
+        # Two shapes, because Elsevier serves two. A caller that already holds a
+        # JSON record gets the dict walk below; fetching it ourselves asks for
+        # XML instead.
+        #
+        # The JSON form returns originalText as a flattened STRING for many
+        # articles - including openaccess=Full ones - and the dict walk then
+        # finds nothing, which the old comment read as "no entitled full text".
+        # It is not: the same article in text/xml carries a real
+        # <ce:acknowledgment>. All 54 Janelia Elsevier DOIs lacking an
+        # acknowledgement came back empty this way, fell through to the PMC
+        # backstop, and were refused there as non-OA - twice wrong, since
+        # Elsevier had the text and the articles were open access.
+        acktext = ''
+        if els_rec:
+            otext = (els_rec.get('full-text-retrieval-response') or {}).get('originalText')
+            article = {}
+            if isinstance(otext, dict):
+                doc = otext.get('xocs:doc') or {}
+                serial = doc.get('xocs:serial-item') or {} if isinstance(doc, dict) else {}
+                if isinstance(serial, dict):
+                    article = serial.get('article') or {}
+            # Gather every acknowledgement region and flatten each RECURSIVELY so
+            # nested inline text (funder names, cross-refs, embedded terms) is
+            # preserved: body <ce:section role="acknowledgement"> paragraphs plus
+            # any tail <ce:acknowledgment>. The old code kept only one paragraph's
+            # direct #text, dropping nested text - so funders and embedded terms
+            # went missing.
+            parts = []
+            body = article.get('body') if isinstance(article, dict) else None
+            sections = (body.get('ce:sections') or {}).get('ce:section') \
+                       if isinstance(body, dict) else None
+            if isinstance(sections, dict):
+                sections = [sections]
+            for sec in sections or []:
+                if isinstance(sec, dict) and sec.get('@role') == 'acknowledgement':
+                    parts.append(_flatten_xml_text(sec.get('ce:para')))
+            tail = article.get('tail') if isinstance(article, dict) else None
+            if isinstance(tail, dict) and tail.get('ce:acknowledgment'):
+                parts.append(_flatten_xml_text(tail['ce:acknowledgment']))
+            acktext = re.sub(r'\s+', ' ', ' '.join(parts)).strip()
+        if not acktext:
+            acktext = _ack_from_elsevier_xml(doi)
         if acktext:
             return acktext, 'Elsevier'
     elif 'arxiv' in doi.lower():
