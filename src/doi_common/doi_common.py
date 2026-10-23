@@ -940,7 +940,7 @@ def parse_elsevier_authors(rec):
     # Find the head element (using wildcard namespace to handle any namespace)
     head = root.find('.//{*}head')
     if head is None:
-        print("No head element found in the XML")
+        LLOGGER.debug(f"No head element found in the Elsevier XML for {rec['doi']}")
         return None
     # Find the author-group element
     author_group = head.find('{*}author-group')
