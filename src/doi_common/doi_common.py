@@ -1988,6 +1988,9 @@ def get_incoming_citations(doi, source='openalex'):
 
 def get_journal(rec, full=True, name_only=False):
     ''' Generate a journal name
+        The name is HTML-unescaped: Crossref sends some container titles with the
+        entity still in them ("Genes &amp; Development"), and this is what
+        jrc_journal is built from.
         Keyword arguments:
           rec: data record
           full: adds journal and page
@@ -2020,6 +2023,7 @@ def get_journal(rec, full=True, name_only=False):
             journal = 'ChemRxiv'
         else:
             return None
+        journal = html.unescape(journal)
         year = get_publishing_date(rec)
         if year == 'unknown':
             return None
@@ -2041,6 +2045,9 @@ def get_journal(rec, full=True, name_only=False):
         journal = 'Janelia Research Campus (non-publication)'
     elif rec.get('publisher'):
         journal = rec['publisher']
+        # DataCite can send publisher as an object; only a string is unescaped
+        if isinstance(journal, str):
+            journal = html.unescape(journal)
     else:
         return None
     if name_only:
