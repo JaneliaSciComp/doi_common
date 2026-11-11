@@ -1,4 +1,4 @@
-''' get_journal: names are HTML-unescaped.
+''' get_journal: names are HTML-unescaped and their whitespace is collapsed.
 
     Crossref sends some container titles with the entity still in them, and both
     update_dois.py (dois) and update_ack_records.py (external_dois) store
@@ -7,7 +7,7 @@
     database or network.
 '''
 
-from doi_common.doi_common import get_journal
+from doi_common.doi_common import clean_journal_name, get_journal
 
 
 def _crossref(**fields):
@@ -59,3 +59,29 @@ def test_only_one_level_of_escaping_is_removed():
     ''' A doubly escaped name is left with one level, not guessed at. '''
     rec = _crossref(**{'container-title': ['A &amp;amp; B']})
     assert get_journal(rec, name_only=True) == 'A &amp; B'
+
+
+def test_a_line_break_inside_the_name_becomes_a_space():
+    ''' ACS sent "ACS Central\\nScience" for 10.1021/acscentsci.7b00247. '''
+    rec = _crossref(**{'container-title': ['ACS Central\nScience']})
+    assert get_journal(rec, name_only=True) == 'ACS Central Science'
+
+
+def test_an_entity_and_a_line_break_together():
+    ''' 10.1021/cbmi.6c00054 had both. '''
+    rec = _crossref(**{'container-title': ['Chemical &amp; Biomedical\nImaging']})
+    assert get_journal(rec, name_only=True) == 'Chemical & Biomedical Imaging'
+
+
+def test_runs_of_whitespace_and_the_ends_are_cleaned():
+    assert clean_journal_name('  Cell\t  Reports \r\n') == 'Cell Reports'
+    assert clean_journal_name('Cell&#160;Reports') == 'Cell Reports'     # no-break space
+
+
+def test_a_datacite_publisher_is_cleaned_too():
+    assert get_journal(_datacite(publisher='Zenodo\n'), name_only=True) == 'Zenodo'
+
+
+def test_clean_journal_name_passes_through_anything_but_a_string():
+    for value in (None, {'name': 'Zenodo'}, ['Nature']):
+        assert clean_journal_name(value) == value

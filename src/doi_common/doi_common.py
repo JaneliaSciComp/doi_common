@@ -1986,10 +1986,24 @@ def get_incoming_citations(doi, source='openalex'):
     return []
 
 
+def clean_journal_name(name):
+    ''' Clean a journal name as a registrar sent it: remove one level of HTML
+        entities ("Genes &amp; Development") and collapse whitespace, including line
+        breaks inside the name ("ACS Central\nScience"), to single spaces.
+        Keyword arguments:
+          name: journal name
+        Returns:
+          Cleaned name (anything that is not a string is returned unchanged)
+    '''
+    if not isinstance(name, str):
+        return name
+    return re.sub(r'\s+', ' ', html.unescape(name)).strip()
+
+
 def get_journal(rec, full=True, name_only=False):
     ''' Generate a journal name
-        The name is HTML-unescaped: Crossref sends some container titles with the
-        entity still in them ("Genes &amp; Development"), and this is what
+        The name is cleaned with clean_journal_name: registrars send some container
+        titles with an HTML entity or a line break still in them, and this is what
         jrc_journal is built from.
         Keyword arguments:
           rec: data record
@@ -2023,7 +2037,7 @@ def get_journal(rec, full=True, name_only=False):
             journal = 'ChemRxiv'
         else:
             return None
-        journal = html.unescape(journal)
+        journal = clean_journal_name(journal)
         year = get_publishing_date(rec)
         if year == 'unknown':
             return None
@@ -2044,10 +2058,8 @@ def get_journal(rec, full=True, name_only=False):
     elif rec['doi'].startswith('10.6084/') and rec.get('publisher', '') == 'figshare':
         journal = 'Janelia Research Campus (non-publication)'
     elif rec.get('publisher'):
-        journal = rec['publisher']
-        # DataCite can send publisher as an object; only a string is unescaped
-        if isinstance(journal, str):
-            journal = html.unescape(journal)
+        # DataCite can send publisher as an object, which is returned unchanged
+        journal = clean_journal_name(rec['publisher'])
     else:
         return None
     if name_only:
